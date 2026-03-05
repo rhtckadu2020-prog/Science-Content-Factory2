@@ -11,7 +11,7 @@ import {
 const API_KEY = process.env.GEMINI_API_KEY;
 if (!API_KEY) { console.error("GEMINI_API_KEY not set!"); process.exit(1); }
 
-const MODEL_NAME = "gemini-1.5-flash";
+const MODEL_NAME = "gemini-2.0-flash";
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 function loadPdf(filePath) {
