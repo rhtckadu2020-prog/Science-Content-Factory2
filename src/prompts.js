@@ -384,15 +384,3 @@ export {
   getHtmlSlidesPrompt,
   getMcqPrompt,
 };
-```
-
----
-
-## Output Structure
-```
-output/
-├── 1_smart_note.md      ← සම්පූර්ණ study notes
-├── 2_assessment.md      ← MCQ + exam paper
-├── 3_slides.html        ← Browser presentation
-├── 4_video_script.md    ← TTS-ready script
-└── 5_audio.wav          ← Auto-generated audio
