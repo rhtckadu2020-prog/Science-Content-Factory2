@@ -1,67 +1,134 @@
-// src/index.js
-require('dotenv').config();
-const fs = require('fs');
-const path = require('path');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { getSmartNotePrompt, getVideoScriptPrompt, getHtmlSlidesPrompt, getMcqPrompt } = require('./prompts');
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { readFileSync } from "fs";
+import { writeFileSync, mkdirSync } from "fs";
+import { join } from "path";
 
-// Configuration
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-// Note: අපි කතා කරපු "Flash Lite" මොඩලය ආවම මෙතන නම වෙනස් කරන්න.
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+// --- Configuration ---
+const API_KEY = process.env.GEMINI_API_KEY;
 
-async function generateContent() {
-    try {
-        console.log("🚀 Starting E-Learning Content Generation...");
-
-        // 1. Read Input File
-        const inputPath = path.join(__dirname, '../input/lesson.txt');
-        if (!fs.existsSync(inputPath)) throw new Error("Input file not found!");
-        const content = fs.readFileSync(inputPath, 'utf-8');
-        console.log("✅ Input file read successfully.");
-
-        // Ensure output directory exists
-        const outputDir = path.join(__dirname, '../output');
-        if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
-
-        // --- STEP 1: Smart Note ---
-        console.log("⏳ Generating Smart Note...");
-        const result1 = await model.generateContent(getSmartNotePrompt(content));
-        const smartNote = result1.response.text();
-        fs.writeFileSync(path.join(outputDir, '1_SmartNote.txt'), smartNote);
-        console.log("✅ Smart Note Saved.");
-
-        // --- STEP 2: Video Script ---
-        console.log("⏳ Generating Video Script...");
-        const result2 = await model.generateContent(getVideoScriptPrompt(content, smartNote));
-        const videoScript = result2.response.text();
-        fs.writeFileSync(path.join(outputDir, '2_VideoScript.txt'), videoScript);
-        console.log("✅ Video Script Saved.");
-
-        // --- STEP 3: HTML Slides ---
-        console.log("⏳ Generating HTML Slides...");
-        const result3 = await model.generateContent(getHtmlSlidesPrompt(content, smartNote, videoScript));
-        const htmlSlides = result3.response.text();
-        // Extract HTML only if wrapped in backticks
-        const cleanHtml = htmlSlides.replace(/```html|```/g, '');
-        fs.writeFileSync(path.join(outputDir, '3_Slides.html'), cleanHtml);
-        console.log("✅ HTML Slides Saved.");
-
-        // --- STEP 4: MCQ JSON ---
-        console.log("⏳ Generating MCQs...");
-        const result4 = await model.generateContent(getMcqPrompt(content));
-        const mcqJson = result4.response.text();
-        // Extract JSON only
-        const cleanJson = mcqJson.replace(/```json|```/g, '');
-        fs.writeFileSync(path.join(outputDir, '4_Assessment.json'), cleanJson);
-        console.log("✅ MCQs Saved.");
-
-        console.log("🎉 All tasks completed successfully! Check the 'output' folder.");
-
-    } catch (error) {
-        console.error("❌ Error:", error);
-        process.exit(1);
-    }
+if (!API_KEY) {
+  console.error("❌ GEMINI_API_KEY environment variable is not set!");
+  process.exit(1);
 }
 
-generateContent();
+// ✅ 2025 වර්ෂයට නිවැරදිම Free Tier Model
+// gemini-1.5-flash → වේගවත්, නොමිලේ, ඉහළ rate limit
+const MODEL_NAME = "gemini-1.5-flash";
+
+const genAI = new GoogleGenerativeAI(API_KEY);
+
+async function generateContent(lessonText) {
+  console.log("🤖 Gemini AI සම්බන්ධ කරනවා...");
+  console.log(`📌 Model: ${MODEL_NAME}`);
+
+  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+
+  const prompt = `
+ඔබ ප්‍රවීණ E-Learning Content Designer කෙනෙකුය.
+පහත lesson text එක පදනම් කරගෙන, Sinhala භාෂාවෙන් structured learning content package එකක් සාදන්න.
+
+## Lesson Content:
+${lessonText}
+
+## ඔබ සෑදිය යුතු දේ:
+
+### 1. සාරාංශය (Summary)
+- ප්‍රධාන කරුණු 5ක් bullet points ලෙස
+
+### 2. MCQ ප්‍රශ්න (Multiple Choice Questions)
+- ප්‍රශ්න 5ක් සාදන්න
+- සෑම ප්‍රශ්නයකටම පිළිතුරු 4ක් (A, B, C, D)
+- නිවැරදි පිළිතුර සහ ඒ ඇයිද යන පැහැදිලි කිරීම
+
+### 3. Flashcards
+- Key terms 5ක් සඳහා Term → Definition format එකෙන්
+
+### 4. ව්‍යායාම (Practice Activity)
+- Students ට කළ හැකි practical activity එකක්
+
+JSON format නොඅවශ්‍යයි. Clear headings සමඟ readable text format එකෙන් දෙන්න.
+`;
+
+  try {
+    console.log("⏳ AI content generate කරනවා... (ටිකක් ඉන්න)");
+    
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    
+    console.log("✅ Content සාර්ථකව generate විය!");
+    return text;
+    
+  } catch (error) {
+    if (error.message.includes("404")) {
+      console.error("❌ 404 දෝෂය: Model name වැරදියි.");
+      console.error(`   භාවිතා කළ model: ${MODEL_NAME}`);
+      console.error("   විසඳුම: 'gemini-1.5-flash' model name නිවැරදිද?");
+    } else if (error.message.includes("403")) {
+      console.error("❌ 403 දෝෂය: API Key වලංගු නැත.");
+      console.error("   https://aistudio.google.com/app/apikey වෙතින් නව key ගන්න.");
+    } else if (error.message.includes("429")) {
+      console.error("❌ 429 දෝෂය: Rate limit exceeded.");
+      console.error("   ටිකක් රැඳී නැවත උත්සාහ කරන්න.");
+    } else {
+      console.error("❌ නොදන්නා දෝෂයක්:", error.message);
+    }
+    throw error;
+  }
+}
+
+async function main() {
+  console.log("🏭 Content Factory Starting...");
+  console.log("================================");
+  
+  // Input file කියවීම
+  let lessonText;
+  try {
+    lessonText = readFileSync("input/lesson.txt", "utf-8");
+    console.log(`📖 Lesson file කියෙව්වා (${lessonText.length} characters)`);
+  } catch (err) {
+    console.error("❌ input/lesson.txt ගොනුව සොයාගත නොහැකිය!");
+    process.exit(1);
+  }
+  
+  if (!lessonText.trim()) {
+    console.error("❌ lesson.txt ගොනුව හිස්ය!");
+    process.exit(1);
+  }
+  
+  // Content generate කිරීම
+  const generatedContent = await generateContent(lessonText);
+  
+  // Output save කිරීම
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const outputDir = "output";
+  
+  try {
+    mkdirSync(outputDir, { recursive: true });
+  } catch (err) {
+    // Directory දැනටමත් ඇත
+  }
+  
+  const outputPath = join(outputDir, `content_${timestamp}.md`);
+  
+  const finalContent = `# Generated E-Learning Content
+**Generated at:** ${new Date().toLocaleString("si-LK")}
+**Source:** input/lesson.txt
+**Model:** ${MODEL_NAME}
+
+---
+
+${generatedContent}
+`;
+
+  writeFileSync(outputPath, finalContent, "utf-8");
+  
+  console.log("================================");
+  console.log(`✅ Content සාර්ථකව save විය: ${outputPath}`);
+  console.log("🎉 Content Factory සාර්ථකව නිමවිය!");
+}
+
+main().catch((error) => {
+  console.error("💥 Fatal Error:", error.message);
+  process.exit(1);
+});
