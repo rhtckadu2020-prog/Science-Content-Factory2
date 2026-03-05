@@ -1,13 +1,16 @@
 {
-  "name": "gemini-elearning-bot",
+  "name": "content-factory",
   "version": "1.0.0",
-  "description": "Automated E-Learning Content Generator",
+  "description": "AI-powered E-Learning Content Factory",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "node src/index.js"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.14.0",
-    "dotenv": "^16.4.5"
+    "@google/generative-ai": "^0.21.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
