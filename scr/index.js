@@ -8,7 +8,7 @@ const { getSmartNotePrompt, getVideoScriptPrompt, getHtmlSlidesPrompt, getMcqPro
 // Configuration
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // Note: අපි කතා කරපු "Flash Lite" මොඩලය ආවම මෙතන නම වෙනස් කරන්න.
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); 
+const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite" });
 
 async function generateContent() {
     try {
