@@ -63,6 +63,8 @@ function createWavBuffer(pcmData) {
   const dataSize = pcmData.length;
   const headerSize = 44;
   const buffer = Buffer.alloc(headerSize + dataSize);
+  const ttsScript = script.slice(0, 4000); // First 4000 chars only
+  const wavBuffer = await callTtsModel(ttsScript);
 
   buffer.write("RIFF", 0);
   buffer.writeUInt32LE(36 + dataSize, 4);
@@ -104,6 +106,7 @@ async function callTtsModel(scriptText) {
 
   const pcmBuffer = Buffer.from(audioPart.inlineData.data, "base64");
   return createWavBuffer(pcmBuffer);
+  // Step 5 ට ඉහළින් add කරන්න
 }
 
 // ── Main Pipeline ──────────────────────────────────────────────
