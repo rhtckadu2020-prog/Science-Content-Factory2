@@ -6,7 +6,7 @@ import { getSmartNotePrompt, getVideoScriptPrompt, getHtmlSlidesPrompt, getMcqPr
 const API_KEY = process.env.GEMINI_API_KEY;
 if (!API_KEY) { console.error("GEMINI_API_KEY not set!"); process.exit(1); }
 
-const TEXT_MODEL = "gemini-3.1-flash-lite";
+const TEXT_MODEL = "gemini-2.5-flash";
 const TTS_MODEL  = "gemini-2.5-flash-preview-tts";
 const ai = new GoogleGenAI({ apiKey: API_KEY });
 
