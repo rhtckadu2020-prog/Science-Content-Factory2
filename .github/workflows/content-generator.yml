@@ -1,38 +1,48 @@
-name: E-Learning Bot Generator
+name: 🏭 Content Factory
 
 on:
+  # Manual trigger
+  workflow_dispatch:
+  
+  # Schedule: සෑම දිනකම UTC 00:00 (Sri Lanka 05:30)
+  schedule:
+    - cron: '0 0 * * *'
+  
+  # Lesson file වෙනස් වූ විට auto-trigger
   push:
     paths:
-      - 'input/**'  # Input ෆෝල්ඩරයට යමක් දැම්මොත් විතරක් රන් කරන්න
-  workflow_dispatch: # Button එක ඔබලත් රන් කරන්න පුළුවන්
+      - 'input/lesson.txt'
 
 jobs:
   generate-content:
-    runs-on: ubuntu-22.04
+    name: Generate E-Learning Content
+    runs-on: ubuntu-latest
+    
     permissions:
-      contents: write # Output එක ආපහු Save කරන්න අවසර දීම
-
+      contents: write
+    
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Content Generator
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: 📦 Install Dependencies
+        run: npm ci
+      
+      - name: 🤖 Generate Content
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: node scr/index.js
-
-      - name: Commit and Push Results
+        run: node src/index.js
+      
+      - name: 📤 Save Output to Repository
         run: |
-          git config --global user.name "GitHub Action Bot"
-          git config --global user.email "actions@github.com"
-          git add output/*
-          git commit -m "🚀 Generated Content for Lesson" || echo "No changes to commit"
+          git config --local user.email "action@github.com"
+          git config --local user.name "Content Factory Bot"
+          git add output/
+          git diff --staged --quiet || git commit -m "🤖 Auto-generated content: $(date +'%Y-%m-%d %H:%M')"
           git push
