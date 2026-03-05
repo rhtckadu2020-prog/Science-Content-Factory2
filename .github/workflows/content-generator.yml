@@ -27,7 +27,7 @@ jobs:
       - name: Run Content Generator
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: node src/index.js
+        run: node scr/index.js
 
       - name: Commit and Push Results
         run: |
