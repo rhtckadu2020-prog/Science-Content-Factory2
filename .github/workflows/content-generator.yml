@@ -1,48 +1,42 @@
 name: 🏭 Content Factory
 
 on:
-  # Manual trigger
   workflow_dispatch:
-  
-  # Schedule: සෑම දිනකම UTC 00:00 (Sri Lanka 05:30)
   schedule:
     - cron: '0 0 * * *'
-  
-  # Lesson file වෙනස් වූ විට auto-trigger
   push:
     paths:
-      - 'input/lesson.txt'
+      - 'input/Grade10_Lesson1.pdf'
 
 jobs:
   generate-content:
     name: Generate E-Learning Content
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: write
-    
+
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
-      
+
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-      
+
       - name: 📦 Install Dependencies
         run: npm install
-      
+
       - name: 🤖 Generate Content
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node src/index.js
-      
+
       - name: 📤 Save Output to Repository
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Content Factory Bot"
           git add output/
-          git diff --staged --quiet || git commit -m "🤖 Auto-generated content: $(date +'%Y-%m-%d %H:%M')"
+          git diff --staged --quiet || git commit -m "🤖 Auto-generated: $(date +'%Y-%m-%d %H:%M')"
           git push
