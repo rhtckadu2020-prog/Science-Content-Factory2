@@ -1,178 +1,95 @@
 import { GoogleGenAI } from "@google/genai";
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
-import {
-  getSmartNotePrompt,
-  getVideoScriptPrompt,
-  getHtmlSlidesPrompt,
-  getMcqPrompt,
-} from "./prompts.js";
+import { getSmartNotePrompt, getVideoScriptPrompt, getHtmlSlidesPrompt, getMcqPrompt } from "./prompts.js";
 
-// ── Config ─────────────────────────────────────────────────────
 const API_KEY = process.env.GEMINI_API_KEY;
 if (!API_KEY) { console.error("GEMINI_API_KEY not set!"); process.exit(1); }
 
-const TEXT_MODEL = "gemini-3.1-flash-lite";   // 500 RPD free
-const TTS_MODEL  = "gemini-2.5-flash-preview-tts"; // 10 RPD free
-
+const TEXT_MODEL = "gemini-3.1-flash-lite";
+const TTS_MODEL  = "gemini-2.5-flash-preview-tts";
 const ai = new GoogleGenAI({ apiKey: API_KEY });
 
-// ── PDF Load ───────────────────────────────────────────────────
 function loadPdf(filePath) {
-  try {
-    const buffer = readFileSync(filePath);
-    console.log("PDF loaded: " + (buffer.length / 1024).toFixed(1) + " KB");
-    return buffer.toString("base64");
-  } catch {
-    console.error("File not found: " + filePath);
-    process.exit(1);
-  }
+  const buffer = readFileSync(filePath);
+  console.log("PDF: " + (buffer.length / 1024).toFixed(1) + " KB");
+  return buffer.toString("base64");
 }
 
-// ── Text Generation (PDF + Prompt) ─────────────────────────────
-async function callTextModel(prompt, pdfBase64 = null) {
-  const contents = [];
+function createWav(pcm) {
+  const sr = 24000, ch = 1, bps = 16;
+  const h = Buffer.alloc(44);
+  h.write("RIFF", 0); h.writeUInt32LE(36 + pcm.length, 4);
+  h.write("WAVE", 8); h.write("fmt ", 12);
+  h.writeUInt32LE(16, 16); h.writeUInt16LE(1, 20);
+  h.writeUInt16LE(ch, 22); h.writeUInt32LE(sr, 24);
+  h.writeUInt32LE(sr * ch * bps / 8, 28); h.writeUInt16LE(ch * bps / 8, 32);
+  h.writeUInt16LE(bps, 34); h.write("data", 36);
+  h.writeUInt32LE(pcm.length, 40);
+  return Buffer.concat([h, pcm]);
+}
 
-  if (pdfBase64) {
-    contents.push({
-      role: "user",
-      parts: [
-        { inlineData: { mimeType: "application/pdf", data: pdfBase64 } },
-        { text: prompt }
-      ]
-    });
-  } else {
-    contents.push({ role: "user", parts: [{ text: prompt }] });
-  }
-
-  const response = await ai.models.generateContent({
+async function textGen(prompt, pdf) {
+  const parts = [];
+  if (pdf) parts.push({ inlineData: { mimeType: "application/pdf", data: pdf } });
+  parts.push({ text: prompt });
+  const res = await ai.models.generateContent({
     model: TEXT_MODEL,
-    contents: contents,
+    contents: [{ role: "user", parts }]
   });
-
-  return response.text;
+  return res.text;
 }
 
-// ── TTS: WAV file header හදන function ─────────────────────────
-function createWavBuffer(pcmData) {
-  const sampleRate = 24000;   // Gemini TTS default
-  const numChannels = 1;
-  const bitsPerSample = 16;
-  const byteRate = sampleRate * numChannels * (bitsPerSample / 8);
-  const blockAlign = numChannels * (bitsPerSample / 8);
-  const dataSize = pcmData.length;
-  const headerSize = 44;
-  const buffer = Buffer.alloc(headerSize + dataSize);
-  const ttsScript = script.slice(0, 4000); // First 4000 chars only
-  const wavBuffer = await callTtsModel(ttsScript);
-
-  buffer.write("RIFF", 0);
-  buffer.writeUInt32LE(36 + dataSize, 4);
-  buffer.write("WAVE", 8);
-  buffer.write("fmt ", 12);
-  buffer.writeUInt32LE(16, 16);
-  buffer.writeUInt16LE(1, 20);
-  buffer.writeUInt16LE(numChannels, 22);
-  buffer.writeUInt32LE(sampleRate, 24);
-  buffer.writeUInt32LE(byteRate, 28);
-  buffer.writeUInt16LE(blockAlign, 32);
-  buffer.writeUInt16LE(bitsPerSample, 34);
-  buffer.write("data", 36);
-  buffer.writeUInt32LE(dataSize, 40);
-  pcmData.copy(buffer, 44);
-
-  return buffer;
-}
-
-// ── TTS Generation ─────────────────────────────────────────────
-async function callTtsModel(scriptText) {
-  const response = await ai.models.generateContent({
+async function ttsGen(text) {
+  const res = await ai.models.generateContent({
     model: TTS_MODEL,
-    contents: [{ role: "user", parts: [{ text: scriptText }] }],
+    contents: [{ role: "user", parts: [{ text: text.slice(0, 4000) }] }],
     config: {
       responseModalities: ["AUDIO"],
-      speechConfig: {
-        voiceConfig: {
-          prebuiltVoiceConfig: { voiceName: "Aoede" }
-        }
-      }
+      speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Aoede" } } }
     }
   });
-
-  const audioPart = response.candidates[0].content.parts[0];
-  if (!audioPart?.inlineData?.data) {
-    throw new Error("TTS response හිස්ය — audio data නැත");
-  }
-
-  const pcmBuffer = Buffer.from(audioPart.inlineData.data, "base64");
-  return createWavBuffer(pcmBuffer);
-  // Step 5 ට ඉහළින් add කරන්න
+  const part = res.candidates[0].content.parts[0];
+  if (!part?.inlineData?.data) throw new Error("No audio data");
+  return createWav(Buffer.from(part.inlineData.data, "base64"));
 }
 
-// ── Main Pipeline ──────────────────────────────────────────────
 async function main() {
-  console.log("Content Factory Starting...");
-  console.log("================================");
+  console.log("=== Content Factory Starting ===");
 
-  const pdfBase64 = loadPdf("input/Grade10_Lesson1.pdf");
-  const outputDir = "output";
-  mkdirSync(outputDir, { recursive: true });
+  const pdf = loadPdf("input/Grade10_Lesson1.pdf");
+  mkdirSync("output", { recursive: true });
 
-  // ── Step 1: Smart Note ────────────────────────────────────────
-  console.log("\nStep 1/5: Smart Note generating...");
-  const smartNote = await callTextModel(
-    getSmartNotePrompt("[PDF content above]"), pdfBase64
-  );
-  writeFileSync(join(outputDir, "1_smart_note.md"), smartNote, "utf-8");
-  console.log("  1_smart_note.md saved");
+  console.log("\n[1/5] Smart Note...");
+  const smartNote = await textGen(getSmartNotePrompt("[PDF above]"), pdf);
+  writeFileSync(join("output", "1_smart_note.md"), smartNote, "utf-8");
+  console.log("  saved: 1_smart_note.md");
 
-  // ── Step 2: MCQ Assessment ────────────────────────────────────
-  console.log("\nStep 2/5: MCQ Assessment generating...");
-  const mcq = await callTextModel(
-    getMcqPrompt("[PDF content above]"), pdfBase64
-  );
-  writeFileSync(join(outputDir, "2_assessment.md"), mcq, "utf-8");
-  console.log("  2_assessment.md saved");
+  console.log("\n[2/5] MCQ Assessment...");
+  const mcq = await textGen(getMcqPrompt("[PDF above]"), pdf);
+  writeFileSync(join("output", "2_assessment.md"), mcq, "utf-8");
+  console.log("  saved: 2_assessment.md");
 
-  // ── Step 3: HTML Slides ───────────────────────────────────────
-  console.log("\nStep 3/5: HTML Slides generating...");
-  const slides = await callTextModel(
-    getHtmlSlidesPrompt("[PDF above]", smartNote, ""), pdfBase64
-  );
-  writeFileSync(join(outputDir, "3_slides.html"), slides, "utf-8");
-  console.log("  3_slides.html saved");
+  console.log("\n[3/5] HTML Slides...");
+  const slides = await textGen(getHtmlSlidesPrompt("[PDF above]", smartNote, ""), pdf);
+  writeFileSync(join("output", "3_slides.html"), slides, "utf-8");
+  console.log("  saved: 3_slides.html");
 
-  // ── Step 4: Video Script ──────────────────────────────────────
-  console.log("\nStep 4/5: Video Script generating...");
-  const script = await callTextModel(
-    getVideoScriptPrompt("[PDF above]", smartNote), pdfBase64
-  );
-  writeFileSync(join(outputDir, "4_video_script.md"), script, "utf-8");
-  console.log("  4_video_script.md saved");
+  console.log("\n[4/5] Video Script...");
+  const script = await textGen(getVideoScriptPrompt("[PDF above]", smartNote), pdf);
+  writeFileSync(join("output", "4_video_script.md"), script, "utf-8");
+  console.log("  saved: 4_video_script.md");
 
-  // ── Step 5: TTS Audio ─────────────────────────────────────────
-  console.log("\nStep 5/5: TTS Audio generating...");
-  console.log("  (Script -> Audio conversion, ටිකක් ඉන්න...)");
+  console.log("\n[5/5] TTS Audio...");
   try {
-    const wavBuffer = await callTtsModel(script);
-    writeFileSync(join(outputDir, "5_audio.wav"), wavBuffer);
-    console.log("  5_audio.wav saved (" + (wavBuffer.length / 1024).toFixed(1) + " KB)");
-  } catch (ttsErr) {
-    console.warn("  TTS warning: " + ttsErr.message);
-    console.warn("  Audio skip කළා — අනෙක් files සාර්ථකයි");
+    const wav = await ttsGen(script);
+    writeFileSync(join("output", "5_audio.wav"), wav);
+    console.log("  saved: 5_audio.wav (" + (wav.length / 1024).toFixed(1) + " KB)");
+  } catch (e) {
+    console.warn("  TTS skipped: " + e.message);
   }
 
-  console.log("\n================================");
-  console.log("Output files:");
-  console.log("  1_smart_note.md");
-  console.log("  2_assessment.md");
-  console.log("  3_slides.html");
-  console.log("  4_video_script.md");
-  console.log("  5_audio.wav");
-  console.log("All done!");
+  console.log("\n=== All Done! ===");
 }
 
-main().catch((err) => {
-  console.error("Fatal Error: " + err.message);
-  process.exit(1);
-});
+main().catch(e => { console.error("Fatal: " + e.message); process.exit(1); });
