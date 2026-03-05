@@ -10,6 +10,10 @@ const TEXT_MODEL = "gemini-2.5-flash";
 const TTS_MODEL  = "gemini-2.5-flash-preview-tts";
 const ai = new GoogleGenAI({ apiKey: API_KEY });
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function loadPdf(filePath) {
   const buffer = readFileSync(filePath);
   console.log("PDF: " + (buffer.length / 1024).toFixed(1) + " KB");
@@ -60,26 +64,39 @@ async function main() {
   const pdf = loadPdf("input/Grade10_Lesson1.pdf");
   mkdirSync("output", { recursive: true });
 
+  // Step 1
   console.log("\n[1/5] Smart Note...");
   const smartNote = await textGen(getSmartNotePrompt("[PDF above]"), pdf);
   writeFileSync(join("output", "1_smart_note.md"), smartNote, "utf-8");
   console.log("  saved: 1_smart_note.md");
+  console.log("  waiting 40s...");
+  await sleep(40000);
 
+  // Step 2
   console.log("\n[2/5] MCQ Assessment...");
   const mcq = await textGen(getMcqPrompt("[PDF above]"), pdf);
   writeFileSync(join("output", "2_assessment.md"), mcq, "utf-8");
   console.log("  saved: 2_assessment.md");
+  console.log("  waiting 40s...");
+  await sleep(40000);
 
+  // Step 3
   console.log("\n[3/5] HTML Slides...");
   const slides = await textGen(getHtmlSlidesPrompt("[PDF above]", smartNote, ""), pdf);
   writeFileSync(join("output", "3_slides.html"), slides, "utf-8");
   console.log("  saved: 3_slides.html");
+  console.log("  waiting 40s...");
+  await sleep(40000);
 
+  // Step 4
   console.log("\n[4/5] Video Script...");
   const script = await textGen(getVideoScriptPrompt("[PDF above]", smartNote), pdf);
   writeFileSync(join("output", "4_video_script.md"), script, "utf-8");
   console.log("  saved: 4_video_script.md");
+  console.log("  waiting 40s...");
+  await sleep(40000);
 
+  // Step 5
   console.log("\n[5/5] TTS Audio...");
   try {
     const wav = await ttsGen(script);
