@@ -1,0 +1,1260 @@
+```html
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ජීවයේ රසායනික පදනම - Grade 10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      /* Light Mode Variables */
+      --primary-color: #667eea;
+      --secondary-color: #764ba2;
+      --accent-color: #f093fb;
+      --success-color: #4CAF50;
+      --warning-color: #FF9800;
+      --background-color: #f0f2f5;
+      --card-background-color: #ffffff;
+      --text-color: #333;
+      --heading-color: #222;
+      --border-color: #e0e0e0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --highlight-bg: #e6e9f5; /* Light primary for highlights */
+      --quiz-correct-bg: #d4edda; /* Light success for quiz reveal */
+      --quiz-correct-text: #155724; /* Dark success for quiz reveal */
+      --quiz-incorrect-bg: #f8d7da; /* Light red for incorrect */
+      --quiz-incorrect-text: #721c24; /* Dark red for incorrect */
+    }
+
+    /* Dark Mode Variables */
+    body.dark-mode {
+      --background-color: #2c2c2c;
+      --card-background-color: #3a3a3a;
+      --text-color: #e0e0e0;
+      --heading-color: #f0f0f0;
+      --border-color: #555;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --highlight-bg: #4a4d6b; /* Darker primary for highlights */
+      --quiz-correct-bg: #28a745; /* Darker success for quiz reveal */
+      --quiz-correct-text: #fff; /* Light text for quiz reveal */
+      --quiz-incorrect-bg: #dc3545; /* Dark red for incorrect */
+      --quiz-incorrect-text: #f8d7da; /* Lighter red for incorrect */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans Sinhala', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow: hidden; /* Hide scrollbars for presentation */
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--heading-color);
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    h1 { font-size: 3.5rem; }
+    h2 { font-size: 2.5rem; }
+    h3 { font-size: 1.8rem; }
+    p, li { font-size: 1.1rem; }
+
+    .presentation-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      overflow: hidden; /* Important for slide transitions */
+    }
+
+    .slide {
+      flex: 0 0 100vw; /* Each slide takes full viewport width */
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5vh 8vw;
+      background-color: var(--card-background-color);
+      box-shadow: var(--shadow-color) 0 4px 12px;
+      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(100vw); /* Initially off-screen to the right */
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .slide.active {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+      z-index: 10;
+    }
+
+    .slide.prev {
+      transform: translateX(-100vw);
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .slide-content {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      overflow-y: auto; /* Enable scroll for content if it overflows */
+      max-height: 90vh; /* Limit height to prevent full slide overflow */
+      padding: 10px; /* Padding for scrollable content */
+      scrollbar-width: thin; /* Firefox */
+      scrollbar-color: var(--primary-color) var(--background-color);
+    }
+    .slide-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    .slide-content::-webkit-scrollbar-track {
+        background: var(--background-color);
+        border-radius: 10px;
+    }
+    .slide-content::-webkit-scrollbar-thumb {
+        background-color: var(--primary-color);
+        border-radius: 10px;
+        border: 2px solid var(--background-color);
+    }
+
+
+    .slide-content h2 {
+      margin-bottom: 3vh;
+    }
+
+    /* Specific Slide Styles */
+    #title-slide {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: #fff;
+    }
+    #title-slide h1, #title-slide p {
+      color: #fff;
+    }
+    #title-slide h1 {
+      font-size: 5rem;
+      margin-bottom: 2vh;
+      animation: titleEntrance 1s ease-out forwards;
+      opacity: 0;
+    }
+    #title-slide p {
+      font-size: 1.8rem;
+      animation: subtitleEntrance 1.2s ease-out 0.3s forwards;
+      opacity: 0;
+    }
+
+    @keyframes titleEntrance {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes subtitleEntrance {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .objective-list {
+      list-style: none;
+      text-align: left;
+      margin-top: 3vh;
+      padding-left: 0;
+    }
+    .objective-list li {
+      margin-bottom: 1.5vh;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: bulletEntrance 0.5s ease-out forwards;
+    }
+    /* Animation delays are set via JS for dynamic control */
+    .objective-list li i {
+      margin-right: 15px;
+      color: var(--primary-color);
+      font-size: 1.5em;
+      min-width: 30px;
+    }
+    @keyframes bulletEntrance {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .concept-box {
+      background-color: var(--card-background-color);
+      border-radius: 12px;
+      padding: 3vh 4vw;
+      margin-bottom: 2.5vh;
+      text-align: left;
+      box-shadow: var(--shadow-color) 0 2px 8px;
+    }
+    .concept-box h3 {
+      color: var(--primary-color);
+      margin-bottom: 1.5vh;
+    }
+    .concept-box p {
+      margin-bottom: 1vh;
+    }
+    .concept-box .example-box {
+      background-color: var(--highlight-bg);
+      border-left: 5px solid var(--accent-color);
+      padding: 1.5vh 2vw;
+      margin-top: 2vh;
+      border-radius: 8px;
+      font-style: italic;
+      color: var(--text-color);
+    }
+    .concept-box .memory-tip {
+      background-color: var(--accent-color);
+      color: #fff;
+      padding: 1vh 1.5vw;
+      margin-top: 2vh;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    /* Pie chart for Concept 1 */
+    .pie-chart-container {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #F44336 0% 65%, /* Oxygen */
+        #FFEB3B 65% 83%, /* Carbon */
+        #4CAF50 83% 93%, /* Hydrogen */
+        #2196F3 93% 96%, /* Nitrogen */
+        #9C27B0 96% 100% /* Other */
+      );
+      margin: 20px auto;
+      position: relative;
+    }
+
+    .pie-chart-legend {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .pie-chart-legend li {
+      display: flex;
+      align-items: center;
+      margin: 5px 10px;
+      font-size: 0.9em;
+    }
+    .pie-chart-legend li::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 5px;
+      border-radius: 2px;
+      vertical-align: middle;
+    }
+    .pie-chart-legend li:nth-child(1)::before { background-color: #F44336; }
+    .pie-chart-legend li:nth-child(2)::before { background-color: #FFEB3B; }
+    .pie-chart-legend li:nth-child(3)::before { background-color: #4CAF50; }
+    .pie-chart-legend li:nth-child(4)::before { background-color: #2196F3; }
+    .pie-chart-legend li:nth-child(5)::before { background-color: #9C27B0; }
+
+
+    .diagram-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 3vh;
+    }
+
+    .diagram-item {
+        background-color: var(--highlight-bg);
+        border-radius: 10px;
+        padding: 20px;
+        flex: 1;
+        min-width: 250px;
+        max-width: 300px;
+        text-align: center;
+        box-shadow: var(--shadow-color) 0 2px 5px;
+    }
+
+    .diagram-item h4 {
+        color: var(--secondary-color);
+        margin-bottom: 10px;
+    }
+
+    .diagram-item ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .diagram-item ul li {
+        margin-bottom: 5px;
+        font-size: 0.95em;
+    }
+    
+    .structure-representation {
+        font-family: monospace;
+        background-color: var(--highlight-bg);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px auto;
+        display: inline-block;
+        font-size: 1em;
+        line-height: 1.5;
+        white-space: pre; /* Preserves whitespace and line breaks */
+        text-align: left;
+    }
+
+    .structure-representation .key {
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+    .structure-representation .bond {
+        color: var(--accent-color);
+    }
+    .structure-representation .group {
+        color: var(--secondary-color);
+    }
+
+    .data-table-container {
+      width: 100%;
+      overflow-x: auto; /* Allow horizontal scrolling on small screens */
+      margin-top: 20px;
+      -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto;
+      font-size: 0.95em;
+      text-align: left;
+      min-width: 600px; /* Ensure table is wide enough for content */
+    }
+    .data-table th, .data-table td {
+      border: 1px solid var(--border-color);
+      padding: 12px 15px;
+    }
+    .data-table th {
+      background-color: var(--primary-color);
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+    }
+    .data-table tr:nth-child(even) {
+      background-color: var(--highlight-bg);
+    }
+    .data-table tbody tr:hover {
+      background-color: rgba(var(--primary-color), 0.1);
+    }
+
+    .mind-map {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .mind-map-node {
+        background-color: var(--card-background-color);
+        border-radius: 15px;
+        padding: 15px 25px;
+        box-shadow: var(--shadow-color) 0 4px 10px;
+        font-weight: 600;
+        text-align: center;
+        position: relative;
+        transition: transform 0.2s ease;
+    }
+    .mind-map-node:hover {
+        transform: translateY(-5px);
+    }
+
+    .mind-map-center {
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: #fff;
+        font-size: 1.8em;
+        padding: 20px 30px;
+        border-radius: 25px;
+    }
+
+    .mind-map-level {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .mind-map-level-2 .mind-map-node {
+        background-color: var(--highlight-bg);
+        color: var(--heading-color);
+        border: 1px solid var(--primary-color);
+    }
+    .mind-map-level-3 .mind-map-node {
+        background-color: var(--card-background-color);
+        color: var(--text-color);
+        border: 1px dashed var(--accent-color);
+        font-weight: 400;
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
+
+    /* Exam Tips */
+    .exam-tip-box {
+      background-color: var(--highlight-bg);
+      border-left: 5px solid var(--accent-color);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .exam-tip-box h3 {
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .exam-tip-box h3 i {
+      margin-right: 10px;
+      font-size: 1.2em;
+    }
+
+    .important-points .point {
+      background-color: var(--success-color);
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
+      box-shadow: var(--shadow-color) 0 2px 5px;
+    }
+    .important-points .point i {
+      margin-right: 10px;
+      font-size: 1.5em;
+    }
+
+    .connections-box {
+        background-color: var(--highlight-bg);
+        border-left: 5px solid var(--secondary-color);
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+        text-align: left;
+    }
+    .connections-box h3 {
+        color: var(--secondary-color);
+    }
+    .connections-box ul {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+    .connections-box li {
+        margin-bottom: 5px;
+    }
+
+    /* Quiz */
+    .quiz-question {
+      background-color: var(--highlight-bg);
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 25px;
+      text-align: left;
+      box-shadow: var(--shadow-color) 0 4px 10px;
+    }
+    .quiz-question p {
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 1.15em;
+    }
+    .quiz-options {
+      list-style: none;
+      padding: 0;
+    }
+    .quiz-options li {
+      margin-bottom: 8px;
+      cursor: pointer;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      border: 1px solid var(--border-color);
+    }
+    .quiz-options li:hover {
+      background-color: rgba(var(--primary-color), 0.1);
+    }
+    .quiz-options li.correct {
+      background-color: var(--quiz-correct-bg);
+      color: var(--quiz-correct-text);
+      font-weight: 600;
+      border: 1px solid var(--success-color);
+    }
+    .quiz-options li.incorrect {
+        background-color: var(--quiz-incorrect-bg);
+        color: var(--quiz-incorrect-text);
+        font-weight: 600;
+        border: 1px solid #dc3545;
+    }
+    .quiz-answer-feedback {
+        margin-top: 15px;
+        font-weight: bold;
+        display: none; /* Hidden by default */
+    }
+    .quiz-answer-feedback.correct-feedback {
+        color: var(--success-color);
+    }
+    .quiz-answer-feedback.incorrect-feedback {
+        color: #dc3545; /* Default red for incorrect feedback */
+    }
+
+
+    /* Navigation Controls */
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+    }
+    .control-button {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-color) 0 4px 10px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .control-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-color) 0 6px 15px;
+      opacity: 0.9;
+    }
+    .control-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+      opacity: 0.7;
+    }
+
+    /* Slide Counter */
+    .slide-counter {
+      position: fixed;
+      bottom: 25px;
+      right: 30px;
+      background-color: var(--card-background-color);
+      color: var(--text-color);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow-color) 0 2px 5px;
+      z-index: 100;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      z-index: 101;
+      transition: width 0.3s ease-out;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--card-background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-color) 0 2px 5px;
+      z-index: 100;
+      font-size: 1.2rem;
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .theme-toggle:hover {
+      background-color: var(--highlight-bg);
+    }
+    
+    /* Fullscreen Toggle */
+    .fullscreen-toggle {
+        position: fixed;
+        top: 20px;
+        right: 80px; /* Adjust position relative to theme toggle */
+        background-color: var(--card-background-color);
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-color) 0 2px 5px;
+        z-index: 100;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .fullscreen-toggle:hover {
+        background-color: var(--highlight-bg);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 { font-size: 3rem; }
+      h2 { font-size: 2rem; }
+      h3 { font-size: 1.5rem; }
+      p, li { font-size: 1rem; }
+      .slide { padding: 4vh 5vw; }
+      #title-slide h1 { font-size: 4rem; }
+      #title-slide p { font-size: 1.5rem; }
+      .control-button { padding: 10px 20px; font-size: 1rem; }
+      .theme-toggle, .fullscreen-toggle { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 1rem;}
+      .fullscreen-toggle { right: 65px;}
+      .slide-counter { bottom: 15px; right: 15px; padding: 6px 12px; font-size: 0.85rem;}
+      .diagram-item { min-width: 100%; }
+      .mind-map-center { font-size: 1.5em; padding: 15px 20px; }
+      .mind-map-node { padding: 10px 15px; font-size: 0.9em; }
+      .data-table { min-width: 500px; font-size: 0.85em; } /* Smaller font for small screens */
+    }
+
+    /* Ensure specific styling for images in diagrams */
+    .diagram-image {
+        max-width: 100%;
+        height: auto;
+        margin-top: 15px;
+        border-radius: 8px;
+        box-shadow: var(--shadow-color) 0 2px 5px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <div class="presentation-container" id="presentationContainer">
+
+    <!-- Slide 1: Title Slide -->
+    <div class="slide" id="title-slide">
+      <div class="slide-content">
+        <h1>ජීවයේ රසායනික පදනම</h1>
+        <p>ශ්‍රේණිය: Grade 10 | විෂය: ජීව විද්‍යාව</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: Learning Objectives -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>🎯 ඉගෙනුම් අරමුණු</h2>
+        <ul class="objective-list">
+          <li><i class="fas fa-microscope"></i> ජීවීන්ගේ දේහය සෑදී ඇති මූලික රසායනික මූලද්‍රව්‍ය හා සංයෝග හඳුනාගැනීම.</li>
+          <li><i class="fas fa-dna"></i> ප්‍රධාන ජෛව අණු (කාබොහයිඩ්රේට, ප්‍රෝටීන්, ලිපිඩ, නියුක්ලෙයික් අම්ල) වර්ගීකරණය කිරීම සහ ඒවායේ කාර්යයන් පැහැදිලි කිරීම.</li>
+          <li><i class="fas fa-water"></i> ජලය, ඛනිජ ලවණ සහ විටමින් වල වැදගත්කම සහ ඒවායේ ඌනතා ලක්ෂණ විස්තර කිරීම.</li>
+          <li><i class="fas fa-flask"></i> ජීවී ද්‍රව්‍යවල ඇති කාබන්, නයිට්‍රජන්, ජලය, පිෂ්ටය, මොනොසැකරයිඩ සහ ප්‍රෝටීන් හඳුනාගැනීම සඳහා පරීක්ෂණ සිදුකිරීමට හැකිවීම.</li>
+          <li><i class="fas fa-chart-line"></i> ජෛව අණු, ජලය, ඛනිජ ලවණ හා විටමින් වල ජීවයට ඇති දායකත්වය අවබෝධ කරගැනීම.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Slide 3: Concept 1 - ජීවීන්ගේ මූලික රසායනික සංඝටක -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>💡 ජීවීන්ගේ මූලික රසායනික සංඝටක</h2>
+        <div class="concept-box">
+          <h3>පැහැදිලි කිරීම:</h3>
+          <p>සියලුම ජීවීන් විවිධ රසායනික මූලද්‍රව්‍ය හා සංයෝග වලින් සෑදී ඇත. මෙයින් කාබන් (C), හයිඩ්‍රජන් (H), ඔක්සිජන් (O) හා නයිට්‍රජන් (N) ප්‍රධාන වේ. ජීවීන්ගේ දේහය ස්කන්ධයෙන් වැඩි වශයෙන්ම ජලයෙන් සමන්විත වන අතර, ඉතිරිය කාබනික හා අකාබනික සංයෝග වේ.</p>
+          <div class="pie-chart-container"></div>
+          <ul class="pie-chart-legend">
+            <li>ඔක්සිජන් (65%)</li>
+            <li>කාබන් (18%)</li>
+            <li>හයිඩ්‍රජන් (10%)</li>
+            <li>නයිට්‍රජන් (3%)</li>
+            <li>වෙනත් (4%)</li>
+          </ul>
+          <div class="example-box">
+            <h4>නිදර්ශනය:</h4>
+            <p>අපගේ ශරීරය සෑදී ඇත්තේද අස්ථි (කැල්සියම්, පොස්ෆරස්), ජලය (60-70%), පේශි (ප්‍රෝටීන්) වැනි දේවලිනි.</p>
+          </div>
+          <div class="memory-tip">
+            <p>මතක රැකීමට: "CHON" (කාබන්, හයිඩ්‍රජන්, ඔක්සිජන්, නයිට්‍රජන්) - මේවා ජීවී දේහවල වැඩිමනක් ඇති මූලද්‍රව්‍ය 4යි.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Concept 2 - කාබොහයිඩ්රේට (Carbohydrates) -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>💡 කාබොහයිඩ්රේට (Carbohydrates)</h2>
+        <div class="concept-box">
+          <h3>පැහැදිලි කිරීම:</h3>
+          <p>කාබන්, හයිඩ්‍රජන් හා ඔක්සිජන් වලින් සමන්විත වන මේවා ජීවීන්ට ශක්තිය සපයන ප්‍රධානතම සංයෝග වේ. ප්‍රභාසංශ්ලේෂණය මඟින් ශාක මඟින් නිපදවයි. ඒවා මොනොසැකරයිඩ (සරල සීනි), ඩයිසැකරයිඩ (සීනි අණු දෙකක්) සහ පොලිසැකරයිඩ (සීනි අණු රාශියක්) ලෙස වර්ග කෙරේ.</p>
+          <div class="diagram-container">
+            <div class="diagram-item">
+              <h4>මොනොසැකරයිඩ</h4>
+              <ul>
+                <li>ග්ලූකෝස්</li>
+                <li>පෘක්ටෝස්</li>
+                <li>ගැලැක්ටෝස්</li>
+              </ul>
+            </div>
+            <div class="diagram-item">
+              <h4>ඩයිසැකරයිඩ</h4>
+              <ul>
+                <li>මෝල්ටෝස්</li>
+                <li>සුක්රෝස්</li>
+                <li>ලැක්ටෝස්</li>
+              </ul>
+            </div>
+            <div class="diagram-item">
+              <h4>පොලිසැකරයිඩ</h4>
+              <ul>
+                <li>පිෂ්ටය</li>
+                <li>සෙලියුලෝස්</li>
+                <li>ග්ලයිකොජන්</li>
+              </ul>
+            </div>
+          </div>
+          <div class="example-box">
+            <h4>නිදර්ශනය:</h4>
+            <p>අපි කන බත්, පාන්, අල, සීනි වැනි ආහාරවලින් ශරීරයට ශක්තිය ලැබෙන්නේ කාබොහයිඩ්රේට නිසයි.</p>
+          </div>
+          <div class="memory-tip">
+            <p>මතක රැකීමට: "සීනි කියන්නේ කාබෝ!" (සීනි යනු කාබොහයිඩ්රේට, එය අපට ශක්තිය දෙනවා).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Concept 3 - ප්‍රෝටීන් (Proteins) -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>💡 ප්‍රෝටීන් (Proteins)</h2>
+        <div class="concept-box">
+          <h3>පැහැදිලි කිරීම:</h3>
+          <p>කාබන්, හයිඩ්‍රජන්, ඔක්සිජන් හා නයිට්‍රජන් වලින් මූලිකවම සමන්විත වන ප්‍රෝටීන, ඇමයිනො අම්ල නම් කුඩා ඒකක රාශියක් එක්වී සෑදේ. මේවා ශරීරයේ වර්ධනයට, අළුත්වැඩියාවට, එන්සයිම හා හෝමෝන නිපදවීමට අත්‍යවශ්‍ය වේ.</p>
+          <h4>ඇමයිනො අම්ලයක දර්ශීය ව්‍යුහය:</h4>
+          <pre class="structure-representation">
+<span class="key">  R</span>
+  |
+<span class="group">NH₂</span><span class="bond">--</span><span class="key">C</span><span class="bond">--</span><span class="group">COOH</span>
+  |
+<span class="key">  H</span>
+          </pre>
+          <h4>ප්‍රධාන කාර්යයන්:</h4>
+          <ul>
+            <li>ශක්ති ප්‍රභවයක් ලෙස ක්‍රියා කිරීම.</li>
+            <li>ව්‍යුහාත්මක සංඝටක සෑදීම (පේශී, හිසකෙස්).</li>
+            <li>එන්සයිම ලෙස ක්‍රියා කිරීම (ජෛව රසායනික ප්‍රතික්‍රියා උත්ප්‍රේරණය).</li>
+            <li>හෝර්මෝන ලෙස ක්‍රියා කිරීම (ඉන්සියුලින්, වර්ධක හෝමෝන).</li>
+            <li>ප්‍රතිදේහ ලෙස ක්‍රියා කිරීම (රෝගවලින් ආරක්ෂාව).</li>
+          </ul>
+          <div class="example-box">
+            <h4>නිදර්ශනය:</h4>
+            <p>අපගේ මාංශ පේශි, හිසකෙස්, සම වැනි දේ ගොඩනැගී ඇත්තේ ප්‍රෝටීන් වලිනි. ආහාර දිරවීමට උපකාරී වන එන්සයිම ද ප්‍රෝටීන් වේ.</p>
+          </div>
+          <div class="memory-tip">
+            <p>මතක රැකීමට: "ප්‍රෝටීන් = ශරීරයේ ගොඩනැගිලි ද්‍රව්‍ය" (Bodybuilding blocks).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Concept 4 - ලිපිඩ (Lipids) -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>💡 ලිපිඩ (Lipids)</h2>
+        <div class="concept-box">
+          <h3>පැහැදිලි කිරීම:</h3>
+          <p>මේද අම්ල හා ග්ලිසරෝල් වලින් සෑදෙන ලිපිඩ, ශරීරයට දීර්ඝකාලීන ශක්තිය ගබඩා කිරීමට, ඉන්ද්‍රියයන් ආරක්ෂා කිරීමට හා ශරීර උෂ්ණත්වය පාලනය කිරීමට උපකාරී වේ. මේවා ජලයේ දිය නොවේ.</p>
+          <h4>ලිපිඩ සෑදීම:</h4>
+          <pre class="structure-representation">
+මේද අම්ල + ග්ලිසරෝල් <span class="bond">→</span> ලිපිඩ + ජලය
+          </pre>
+          <h4>ප්‍රධාන කාර්යයන්:</h4>
+          <ul>
+            <li>ශක්ති ප්‍රභවයක් ලෙස (කාබොහයිඩ්රේට වලට වඩා වැඩි ශක්තියක්).</li>
+            <li>විවිධ ව්‍යුහාත්මක සංඝටක සෑදීම (සෛල පටල).</li>
+            <li>ජල සංරක්‍ෂණය සඳහා (ශාකවල කියුටින්, සත්ත්වයන්ගේ දේහාවරණයේ මේදය).</li>
+            <li>දේහ උෂ්ණත්වය පවත්වා ගෙන යාම (තාප පරිවාරකයක් ලෙස).</li>
+            <li>අභ්‍යන්තර ඉන්ද්‍රියයවල ආරක්ෂාව.</li>
+          </ul>
+          <div class="example-box">
+            <h4>නිදර්ශනය:</h4>
+            <p>අප ආහාරයට ගන්නා පොල්තෙල්, මාගරින්, රටකජු වැනි දේවල මේද අඩංගු වන අතර, ශීතල දේශගුණයේ සතුන්ගේ සම යට ඇති මේද තට්ටුව උණුසුම රැක දෙයි.</p>
+          </div>
+          <div class="memory-tip">
+            <p>මතක රැකීමට: "තෙල් = ශක්ති ගබඩාව සහ ආරක්ෂාව" (Energy storage and protection).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Concept 5 - නියුක්ලෙයික් අම්ල (Nucleic Acids) -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>💡 නියුක්ලෙයික් අම්ල (Nucleic Acids)</h2>
+        <div class="concept-box">
+          <h3>පැහැදිලි කිරීම:</h3>
+          <p>DNA හා RNA ලෙස ප්‍රධාන ආකාර දෙකක් ඇති නියුක්ලෙයික් අම්ල, ජීවීන්ගේ ප්‍රවේණික තොරතුරු ගබඩා කර පරම්පරාවෙන් පරම්පරාවට සම්ප්‍රේෂණය කරන, ජීවී ක්‍රියා පාලනය කරන අණු වේ. ඒවා නියුක්ලියොටයිඩ නම් කුඩා ඒකක වලින් සෑදී ඇත.</p>
+          <div class="diagram-container" style="gap: 50px;">
+            <div class="diagram-item" style="max-width: 350px;">
+                <h4>නියුක්ලියොටයිඩයක්</h4>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTUwIiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjpyZ2JhKDI1NSwyNTUsMjU1LDAuMTUpO2JvcmRlci1yYWRpdXM6OHB4OyI+CiAgPHJlY3QgeD0iMTAiIHk9IjMwIiB3aWR0aD0iNTAiIGhlaWdodD0iMzAiIHJ4PSI1IiByeT0iNSIgZmlsbD0iI2YwOTNmYiIgc3Ryb2tlPSIjZGQ4MmU1IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIzNSIgeT0iNTAiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU2luaGFsYSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Tml0cm9nZW5vdXMgQmFzZTwvdGV4dD4KCiAgPHJlY3QgeD0iNzUiIHk9IjMwIiB3aWR0aD0iNTAiIGhlaWdodD0iMzAiIHJ4PSI1IiByeT0iNSIgZmlsbD0iIzY2N2VlYSIgc3Ryb2tlPSIjNDU1Y2RiIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIxMDAiIHk9IjUwIiBmb250LWZhbWlseT0iTm90byBTYW5zIFNpbmhhbGEiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBlbnRvc2UgU3VnYXI8L3RleHQ+CgogIDxyZWN0IHg9IjE0MCIgeT0iMzAiIHdpZHRoPSI1MCIgaGVpZ2h0PSIzMCIgcng9IjUiIHJ5PSI1IiBmaWxsPSIjNzY0YmEwIiBzdHJva2U9IiM1YzMyODMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDx0ZXh0IHg9IjE2NSI yeT0iNTAiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU2luaGFsYSIgZm9udC1zaXplPSIxMiIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UGhvc3BoYXRlPC90ZXh0PgoKICA8bGluZSB4MT0iNjAiIHkxPSI0NSIgeDI9Ijc1IiB5Mj0iNDUiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGxpbmUgeDE9IjEzMCIgeTE9IjQ1IiB4Mj0iMTQwIiB5Mj0iNDUiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxIi8+CgogIDx0ZXh0IHg9IjEwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iTm90byBTYW5zIFNpbmhhbGEiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk51Y2xlb3RpZGUgPSBOaXRyb2dlbm91cyBCYXNlICsgUGVudG9zZSBTYWNyICsgUGhvc3BoYXRlPC90ZXh0Pgo8L3N2Zz4=" class="diagram-image" alt="Nucleotide Diagram">
+            </div>
+            <div class="diagram-item" style="max-width: 350px;">
+                <h4>DNA අණුවේ ව්‍යුහය</h4>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjpyZ2JhKDI1NSwyNTUsMjU1LDAuMTUpO2JvcmRlci1yYWRpdXM6OHB4OyI+CiAgPGNpcmNsZSBjeD0iNjUiIGN5PSI0MCIgcj0iMTUiIGZpbGw9IiM2N2RjNzYiLz4KICA8dGV4dCB4PSI2NSI yeT0iNDUiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU2luaGFsYSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QTwvdGV4dD4KCiAgPGNpcmNsZSBjeD0iNjUiIGN5PSI3NSIgcj0iMTUiIGZpbGw9IiNmY2NkNDUiLz4KICA8dGV4dCB4PSI2NSI yeT0iODAiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU2luaGFsYSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VDwvdGV4dD4KCiAgPGNpcmNsZSBjeD0iNjUiIGN5PSIxMTAiIHI9IjE1IiBmaWxsPSIjN2Y4YmRkIi8+CiAgPHRleHQgeD0iNjUi yeT0iMTE1IiBmb250LWZhbWlseT0iTm90byBTYW5zIFNpbmhhbGEiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+CgogIDxjaXJjbGUgY3g9IjY1IiBjeT0iMTQ1IiByPSIxNSIgZmlsbD0iIzQzNzBjMyIvPgogIDx0ZXh0IHg9IjY1IiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU2luaGFsYSIgZm9udC1zaXplPSIxMiIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RzwvdGV4dD4KCiAgPHBhdGggZD0iTTEwMCAyMGMxMCwxMCwyMCwzMCwyMCw0MHMtMTAsNDAtMjAsNTBjLTEwLDEwLTIwLDMwLTIwLDQwc20tMjAsMjBsMCwzMC01LDAtNSwtMzBtMzAtMzAiIHN0cm9rZT0iIzUwNDY5ZCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHBhdGggZD0iTTEzMCAyMGMtMTAsMTAtMjAsMzAtMjAsNDBzMTAsNDAsMjAsNTBjMTAsMTAtMjAsMzAtMjAsNDBzMjAsMjBsMCwzMC01LDAtNSwtMzBtMzAtMzAiIHN0cm9rZT0iIzUwNDY5ZCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CgogIDx0ZXh0IHg9IjE3MCIyeT0iNzAiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU2luaGFsYSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+REEgPSBEaW94eXJpYm9udWNsZWljIEFjaWQ8L3RleHQ+CgogIDx0ZXh0IHg9IjE3MCIyeT0iOTAiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU2luaGFsYSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Uk5BIAogICA9IFJpYm9udWNsZWljIEFjaWQ8L3RleHQ+Cjwvc3ZnPg==" class="diagram-image" alt="DNA Structure Diagram">
+            </div>
+          </div>
+          <h4>ප්‍රධාන කාර්යයන්:</h4>
+          <ul>
+            <li>ජීවීන්ගේ ප්‍රවේණික තොරතුරු ගබඩා කිරීම හා පරම්පරාවෙන් පරම්පරාවට සම්ප්‍රේෂණය කිරීම.</li>
+            <li>සෛලයේ සියලුම ජීව ක්‍රියාවලි පාලනය.</li>
+            <li>ප්‍රෝටීන් සංස්ලේෂණයට අදාළ ක්‍රියාවලිය සඳහා වැදගත් වීම.</li>
+          </ul>
+          <div class="example-box">
+            <h4>නිදර්ශනය:</h4>
+            <p>අපගේ සෛල තුළ ඇති DNA අපගේ හිසකෙස් වල වර්ණය, ඇස් වල වර්ණය වැනි සියලුම පාරම්පරික ලක්ෂණ තීරණය කරයි.</p>
+          </div>
+          <div class="memory-tip">
+            <p>මතක රැකීමට: "DNA = ජීවී කේතය" (Life's blueprint).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Concept 6 - ජලය (Water) -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>💡 ජලය (Water)</h2>
+        <div class="concept-box">
+          <h3>පැහැදිලි කිරීම:</h3>
+          <p>ජීවීන්ගේ දේහයෙන් වැඩි කොටසක් (60-70%) ජලයෙන් සමන්විත වේ. එය ජෛව රසායනික ප්‍රතික්‍රියා සඳහා මාධ්‍යයක් ලෙස, පෝෂක පරිවහනයට, ශරීර උෂ්ණත්වය පාලනයට හා අපද්‍රව්‍ය බැහැර කිරීමට අත්‍යවශ්‍ය වේ.</p>
+          <h4>ජලයේ සුවිශේෂී ගුණ හා ජීවයට දායකත්වය:</h4>
+          <ul>
+            <li><i class="fas fa-tint"></i> <b>ඉතා හොඳ ද්‍රාවකයකි:</b> ජීව රසායනික ප්‍රතික්‍රියා සඳහා මාධ්‍යය සපයයි, අපද්‍රව්‍ය බැහැර කරයි.</li>
+            <li><i class="fas fa-temperature-high"></i> <b>ඉහළ විශිෂ්ට තාප ධාරිතාව:</b> දේහ උෂ්ණත්වය යාමනයට උපකාරී වේ.</li>
+            <li><i class="fas fa-hand-holding-water"></i> <b>අධික සංශක්ති හා ආශක්ති බල:</b> ශාකවල ජල පරිවහනයට උපකාරී වේ.</li>
+            <li><i class="fas fa-water"></i> <b>ජලයේ ඝනත්වය අයිස්වල ඝනත්වයට වඩා වැඩි වීම:</b> ජලජ ජීවීන්ට ජීවත්වීමට පරිසරය සකසයි.</li>
+          </ul>
+          <div class="example-box">
+            <h4>නිදර්ශනය:</h4>
+            <p>අප දහඩිය දමන විට ශරීරය සිසිල් වන්නේ ජලය මඟින් තාපය පිටවන බැවිනි.</p>
+          </div>
+          <div class="memory-tip">
+            <p>මතක රැකීමට: "ජලය = ජීවයේ පදනම" (The foundation of life).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: Concept 7 - ඛනිජ ලවණ හා විටමින් (Mineral Salts & Vitamins) -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>💡 ඛනිජ ලවණ හා විටමින්</h2>
+        <div class="concept-box">
+          <h3>පැහැදිලි කිරීම:</h3>
+          <p>ශරීරයට ඉතා සුළු ප්‍රමාණවලින් අවශ්‍ය වුවද, ඛනිජ ලවණ (කැල්සියම්, යකඩ) හා විටමින් (A, B, C, D, E, K) අත්‍යවශ්‍ය පෝෂක වේ. මේවා ශරීරයේ සාමාන්‍ය ක්‍රියාකාරිත්වය, වර්ධනය, අස්ථි සෑදීම, රෝගවලින් ආරක්ෂාවීම වැනි බොහෝ කාර්යයන්ට දායක වේ.</p>
+          <h4>ප්‍රධාන ඛනිජ හා විටමින්:</h4>
+          <ul>
+            <li><i class="fas fa-bone"></i> <b>කැල්සියම්:</b> අස්ථි හා දත් වර්ධනයට, රුධිරය කැටි ගැසීමට. ඌනතාව: රිකට්සියාව, දත් දුර්වල වීම.</li>
+            <li><i class="fas fa-tint"></i> <b>යකඩ:</b> රක්තහීනතාවය වැළැක්වීමට (හිමොග්ලොබින් සංශ්ලේෂණයට). ඌනතාව: රක්තහීනතාවය, නිද්‍රාශීලිභාවය.</li>
+            <li><i class="fas fa-carrot"></i> <b>විටමින් A:</b> ඇස් පෙනීමට, සමේ නිරෝගී බවට. ඌනතාව: රාත්‍රී අන්ධතාව, සම වියළි වීම.</li>
+            <li><i class="fas fa-sun"></i> <b>විටමින් D:</b> කැල්සියම් හා පොස්ෆරස් අවශෝෂණයට. ඌනතාව: රිකට්සියාව, අස්ථි දුර්වල වීම.</li>
+            <li><i class="fas fa-lemon"></i> <b>විටමින් C:</b> විදුරුමස් නිරෝගී බවට, තුවාල සුව වීමට. ඌනතාව: ස්කර්වි, අභ්‍යන්තර රුධිර ගැලීම්.</li>
+          </ul>
+          <div class="example-box">
+            <h4>නිදර්ශනය:</h4>
+            <p>යකඩ අඩු වූ විට රක්තහීනතාවය (Anemia) ඇති වන අතර, විටමින් C අඩු වූ විට ස්කර්වි රෝගය හැදෙයි.</p>
+          </div>
+          <div class="memory-tip">
+            <p>මතක රැකීමට: "සුළු වුවත් - මහත් බලයක්!" (Small quantities, but powerful impact!).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Key Terms & Definitions (Glossary) -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>🔑 Key Terms & Definitions (පාරිභාෂික වචන)</h2>
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>වදන (Term)</th>
+                <th>අර්ථය (Definition)</th>
+                <th>සිංහල නම</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Biological molecules</td><td>Living organisms' essential organic compounds (Carbohydrates, Proteins, Lipids, Nucleic Acids).</td><td>ජෛව අණු</td></tr>
+              <tr><td>Enzymes</td><td>Proteins that act as catalysts to speed up biochemical reactions in living organisms.</td><td>එන්සයිම</td></tr>
+              <tr><td>Catalysts</td><td>Substances that increase the rate of a chemical reaction without themselves being consumed.</td><td>උත්ප්‍රේරක</td></tr>
+              <tr><td>Monosaccharide</td><td>The simplest form of carbohydrate, also known as simple sugar (e.g., glucose).</td><td>මොනොසැකරයිඩ</td></tr>
+              <tr><td>Disaccharide</td><td>A carbohydrate formed from two monosaccharide units (e.g., sucrose).</td><td>ඩයිසැකරයිඩ</td></tr>
+              <tr><td>Polysaccharide</td><td>A complex carbohydrate formed from many monosaccharide units (e.g., starch).</td><td>පොලිසැකරයිඩ</td></tr>
+              <tr><td>Amino Acids</td><td>The basic building blocks (monomers) of proteins.</td><td>ඇමයිනො අම්ල</td></tr>
+              <tr><td>Nucleic Acids</td><td>Biological macromolecules (DNA and RNA) that carry genetic information.</td><td>නියුක්ලෙයික් අම්ල</td></tr>
+              <tr><td>Dehydration Synthesis</td><td>A chemical reaction in which two molecules are bonded together with the removal of a water molecule.</td><td>ජල අණු පිටකිරීමෙන් සංයෝග වීම</td></tr>
+              <tr><td>Hydrolysis</td><td>A chemical reaction in which a molecule is broken down by reacting with water.</td><td>ජල විච්ඡේදනය</td></tr>
+              <tr><td>Trace Elements</td><td>Chemical elements that are needed in very small quantities for proper growth and development of an organism.</td><td>අංශුමාත්‍ර මූලද්‍රව්‍ය</td></tr>
+              <tr><td>Chlorosis</td><td>A condition in which leaves produce insufficient chlorophyll, making them appear pale, yellow, or yellowish-white.</td><td>හරිතක්ෂය</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: Comparison Table -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>📊 සංසන්දනාත්මක වගුව</h2>
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ලක්ෂණය (Feature)</th>
+                <th>කාබොහයිඩ්රේට (Carbohydrates)</th>
+                <th>ලිපිඩ (Lipids)</th>
+                <th>ප්‍රෝටීන් (Proteins)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>මූලික සංඝටක (Basic elements)</td><td>C, H, O (H:O = 2:1)</td><td>C, H, O (H:O > 2:1)</td><td>C, H, O, N (සමහරවිට S)</td></tr>
+              <tr><td>තැනුම් ඒකක (Building blocks)</td><td>මොනොසැකරයිඩ (Monosaccharides)</td><td>මේද අම්ල හා ග්ලිසරෝල් (Fatty acids & Glycerol)</td><td>ඇමයිනො අම්ල (Amino acids)</td></tr>
+              <tr><td>ජලයේ ද්‍රාව්‍යතාව (Solubility in water)</td><td>බොහෝමයක් ද්‍රාව්‍යයි (Most are soluble)</td><td>අද්‍රාව්‍යයි (Insoluble)</td><td>සමහර ඒවා ද්‍රාව්‍යයි (Some are soluble)</td></tr>
+              <tr><td>ප්‍රධාන කාර්යය (Main function)</td><td>ක්ෂණික ශක්තිය (Immediate energy)</td><td>ශක්ති ගබඩාව, ආරක්ෂාව (Energy storage, protection)</td><td>වර්ධනය, එන්සයිම, ව්‍යුහය (Growth, enzymes, structure)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: Mind Map Structure -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>🧠 Mind Map Structure</h2>
+        <div class="mind-map">
+            <div class="mind-map-node mind-map-center">ජීවයේ රසායනික පදනම</div>
+
+            <div class="mind-map-level mind-map-level-2">
+                <div class="mind-map-node">මූලික සංඝටක</div>
+                <div class="mind-map-node">ජෛව අණු</div>
+                <div class="mind-map-node">අත්‍යවශ්‍ය අකාබනික සංඝටක</div>
+            </div>
+
+            <div class="mind-map-level mind-map-level-3">
+                <div class="mind-map-node">මූලද්‍රව්‍ය (C,H,O,N, Ca,P,K..)</div>
+                <div class="mind-map-node">කාබනික vs. අකාබනික</div>
+
+                <div class="mind-map-node">කාබොහයිඩ්රේට (සරල, සංකීර්ණ, ශක්තිය)</div>
+                <div class="mind-map-node">ප්‍රෝටීන් (ඇමයිනො අම්ල, ව්‍යුහය, එන්සයිම)</div>
+                <div class="mind-map-node">ලිපිඩ (මේද අම්ල, ගබඩා, ආරක්ෂාව)</div>
+                <div class="mind-map-node">නියුක්ලෙයික් අම්ල (DNA, RNA, ප්‍රවේණික)</div>
+
+                <div class="mind-map-node">ජලය (ද්‍රාවකය, උෂ්ණත්වය, පරිවහනය)</div>
+                <div class="mind-map-node">ඛනිජ ලවණ (අධිමාත්‍ර, අංශුමාත්‍ර, ඌනතා)</div>
+                <div class="mind-map-node">විටමින් (මේදයේ/ජලයේ ද්‍රාව්‍ය, ඌනතා)</div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 13: Important Points & Exam Tips -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>⚠️ වැදගත් කරුණු සහ විභාග ඉඟි</h2>
+        <div class="important-points">
+            <div class="point"><i class="fas fa-gem"></i> ජීවීන්ගේ දේහය සෑදී ඇති ප්‍රධානම කාබනික සංයෝග වර්ග 4 වන්නේ කාබොහයිඩ්රේට, ප්‍රෝටීන්, ලිපිඩ සහ නියුක්ලෙයික් අම්ල වේ.</div>
+            <div class="point"><i class="fas fa-gem"></i> ජලය යනු ජීවීන්ගේ දේහයෙන් වැඩිම කොටසක් (60-70%) සමන්විත වන අකාබනික සංයෝගයක් වන අතර, එහි ඇති සුවිශේෂී ගුණ ජීවය පවත්වා ගැනීමට අත්‍යවශ්‍ය වේ.</div>
+            <div class="point"><i class="fas fa-gem"></i> ඛනිජ ලවණ සහ විටමින් ශරීරයට ඉතා සුළු ප්‍රමාණවලින් අවශ්‍ය වුවද, ඒවායේ ඌනතා නිසා බරපතල රෝගාබාධ ඇතිවිය හැක.</div>
+        </div>
+        <div class="connections-box">
+            <h3>🔗 සම්බන්ධිත පාඩම් හා විභාග ප්‍රශ්න වර්ග</h3>
+            <ul>
+                <li>**ආහාර සහ පෝෂණය:** ජෛව අණු වල පෝෂණ වැදගත්කම සහ සමබල ආහාර වේලක් සැලසුම් කිරීම.</li>
+                <li>**ප්‍රභාසංශ්ලේෂණය:** කාබොහයිඩ්රේට නිපදවෙන ආකාරය සහ එහි රසායනික ක්‍රියාවලිය.</li>
+                <li>**ශ්වසනය:** කාබොහයිඩ්රේට සහ ලිපිඩ බිඳ දමා ශක්තිය නිපදවන ක්‍රියාවලිය.</li>
+                <li>**සෛල:** සෛල ව්‍යුහය (සෛල පටලය, න්‍යෂ්ටිය) සහ කාර්යයන් සඳහා ජෛව අණු වල දායකත්වය.</li>
+                <li>**විභාග ප්‍රශ්න:** වර්ගීකරණය, ඌනතා රෝග, ජල ගුණ, ආහාර පරීක්ෂණ, රූප සටහන් විශ්ලේෂණය.</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 14: Quick Quiz Teaser -->
+    <div class="slide">
+      <div class="slide-content">
+        <h2>❓ Quick Quiz!</h2>
+        <div class="quiz-question" data-correct-answer="අර්තාපල්">
+          <p>1. පිෂ්ටය වඩාත් බහුල ව අඩංගු ආහාරයකි:</p>
+          <ul class="quiz-options">
+            <li data-option="අර්තාපල්">අර්තාපල්</li>
+            <li data-option="රටකජු">රටකජු</li>
+            <li data-option="පිපිඤ්ඤා">පිපිඤ්ඤා</li>
+            <li data-option="ගොටුකොළ">ගොටුකොළ</li>
+          </ul>
+          <div class="quiz-answer-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-correct-answer="විටමින් K">
+            <p>2. රුධිරය කැටිගැසීමේ ක්‍රියාවලියට දායක වන විටමිනයකි:</p>
+            <ul class="quiz-options">
+                <li data-option="විටමින් A">විටමින් A</li>
+                <li data-option="විටමින් D">විටමින් D</li>
+                <li data-option="විටමින් C">විටමින් C</li>
+                <li data-option="විටමින් K">විටමින් K</li>
+            </ul>
+            <div class="quiz-answer-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-correct-answer="ජලය">
+            <p>3. ජීවී දේහ තුළ ඇති කාබනික නොවන ප්‍රධාන සංඝටකයකි:</p>
+            <ul class="quiz-options">
+                <li data-option="ප්‍රෝටීන්">ප්‍රෝටීන්</li>
+                <li data-option="ජලය">ජලය</li>
+                <li data-option="කාබොහයිඩ්රේට">කාබොහයිඩ්රේට</li>
+                <li data-option="ලිපිඩ">ලිපිඩ</li>
+            </ul>
+            <div class="quiz-answer-feedback"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <button id="prevBtn" class="control-button"><i class="fas fa-chevron-left"></i> පෙර</button>
+    <button id="nextBtn" class="control-button">ඊළඟ <i class="fas fa-chevron-right"></i></button>
+  </div>
+
+  <div class="slide-counter" id="slideCounter"></div>
+  <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+  <button id="fullscreenToggle" class="fullscreen-toggle"><i class="fas fa-expand"></i></button>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    const progressBar = document.getElementById('progressBar');
+    const slideCounter = document.getElementById('slideCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const themeToggle = document.getElementById('themeToggle');
+    const fullscreenToggle = document.getElementById('fullscreenToggle');
+
+    function showSlide(index) {
+      if (index < 0 || index >= slides.length) return;
+
+      slides[currentSlide].classList.remove('active');
+      slides[currentSlide].classList.add('prev'); // Mark current as previous to allow smooth transition away
+
+      currentSlide = index;
+      slides[currentSlide].classList.remove('prev'); // Ensure new active slide doesn't have 'prev' class
+      slides[currentSlide].classList.add('active');
+
+      updateNavigation();
+      updateProgressBar();
+      updateSlideCounter();
+      handleSlideSpecificAnimations(currentSlide);
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    function updateNavigation() {
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+
+    function updateProgressBar() {
+      const progress = (currentSlide / (slides.length - 1)) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    function updateSlideCounter() {
+      slideCounter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+
+    function handleSlideSpecificAnimations(index) {
+        // Reset animations for all slides (important when navigating back/forth)
+        slides.forEach(slide => {
+            slide.querySelectorAll('.objective-list li').forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateX(-20px)';
+                item.style.animation = 'none'; // Clear existing animation
+            });
+            slide.querySelector('#title-slide h1')?.style.animation = 'none';
+            slide.querySelector('#title-slide p')?.style.animation = 'none';
+        });
+
+        // Apply animations for the active slide
+        if (index === 0) { // Title Slide
+            const title = slides[index].querySelector('#title-slide h1');
+            const subtitle = slides[index].querySelector('#title-slide p');
+            if (title) {
+                title.style.animation = 'titleEntrance 1s ease-out forwards';
+                title.style.opacity = 0; // Reset opacity before animating
+            }
+            if (subtitle) {
+                subtitle.style.animation = 'subtitleEntrance 1.2s ease-out 0.3s forwards';
+                subtitle.style.opacity = 0; // Reset opacity before animating
+            }
+        } else if (index === 1) { // Learning Objectives
+            slides[index].querySelectorAll('.objective-list li').forEach((item, i) => {
+                item.style.animation = `bulletEntrance 0.5s ease-out ${i * 0.1}s forwards`;
+            });
+        }
+        
+        // Quiz slide specific logic: reset quiz state on slide change
+        document.querySelectorAll('.quiz-question').forEach(questionDiv => {
+            questionDiv.querySelectorAll('.quiz-options li').forEach(li => {
+                li.classList.remove('correct', 'incorrect');
+            });
+            const feedbackDiv = questionDiv.querySelector('.quiz-answer-feedback');
+            if (feedbackDiv) {
+                feedbackDiv.style.display = 'none';
+                feedbackDiv.textContent = '';
+                feedbackDiv.classList.remove('correct-feedback', 'incorrect-feedback');
+            }
+        });
+    }
+
+
+    // Dark/Light Mode
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
+
+    // Fullscreen Toggle
+    fullscreenToggle.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    });
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+      themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    // Click navigation
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    
+    // Quiz logic
+    document.querySelectorAll('.quiz-question').forEach(questionDiv => {
+        const options = questionDiv.querySelectorAll('.quiz-options li');
+        const correctAnswer = questionDiv.dataset.correctAnswer;
+        const feedbackDiv = questionDiv.querySelector('.quiz-answer-feedback');
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                // Clear previous feedback for this question
+                options.forEach(o => o.classList.remove('correct', 'incorrect'));
+                feedbackDiv.style.display = 'none';
+                feedbackDiv.textContent = '';
+                feedbackDiv.classList.remove('correct-feedback', 'incorrect-feedback');
+
+
+                // Apply feedback
+                const selectedOption = option.dataset.option;
+                if (selectedOption === correctAnswer) {
+                    option.classList.add('correct');
+                    feedbackDiv.style.display = 'block';
+                    feedbackDiv.textContent = 'නිවැරදි පිළිතුර!';
+                    feedbackDiv.classList.add('correct-feedback');
+                } else {
+                    option.classList.add('incorrect');
+                    feedbackDiv.style.display = 'block';
+                    feedbackDiv.textContent = `වැරදි පිළිතුරයි. නිවැරදි පිළිතුර: ${correctAnswer}`;
+                    feedbackDiv.classList.add('incorrect-feedback');
+                    // Highlight correct answer too
+                    options.forEach(o => {
+                        if (o.dataset.option === correctAnswer) {
+                            o.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    });
+    
+    // Initial setup
+    showSlide(currentSlide);
+  </script>
+</body>
+</html>
+```
