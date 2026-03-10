@@ -1,127 +1,140 @@
-# 🎬 VIDEO SCRIPT: ජීවයේ රසායනික පදනම
-**Duration:** ~10 minutes | **Target:** Grade 10 Students
+Okay, here's the video script for your educational YouTube channel, optimized for Text-to-Speech, based on the provided PDF content and Smart Note.
+
+---
+
+# 🎬 VIDEO SCRIPT: ජීවයේ රසායනික පදනම (The Chemical Basis of Life)
+**Duration:** ~10-12 minutes | **Target:** Grade 10 Students
 
 ---
 
 ## [INTRO - 0:00 to 0:45]
 **[TTS Voice]:**
-"ආයුබෝවන් දුවේ පුතේ! අද අපි ජීව විද්‍යාවේ ඉතාමත් වැදගත් පාඩමක් ගැන කතා කරන්නයි සූදානම් වෙන්නේ... ඒ තමයි, 'ජීවයේ රසායනික පදනම'!"
+"ආයුබෝවන්! අද අපි Grade 10 ජීව විද්‍යාව විෂය යටතේ එන, ඉතාම වැදගත් පාඩමක් වන, 'ජීවයේ රසායනික පදනම' ගැන කතා කරමු. [PAUSE POINT]
+අපි ජීවත් වන මේ ලෝකයේ හැම ජීවියෙක්ම, අතිශය සංකීර්ණ රසායනික ද්‍රව්‍ය රැසකින් සෑදී ඇති බව ඔබ දන්නවාද? [PAUSE POINT]
+අද අපි බලමු, මේ ජීවී දේහ හැදිලා තියෙන්නේ මොන වගේ දේවල් වලින්ද? ඒවයේ වැදගත්කම මොකක්ද? [PAUSE POINT]
+මේ ගැන හොඳින් දැනගන්න ඕනෙනම්, video එක අවසාන දක්වාම බලන්න!"
 
-**[Screen Direction]:** [Title animation: "ජීවයේ රසායනික පදනම" in bold, with "Grade 10 Biology" below. Followed by an engaging visual of cells or a human body schematic.]
-
-**[TTS Voice]:**
-"අපේ ශරීරය හැදිලා තියෙන්නේ මොනවාගෙන්ද කියලා ඔයා කවදාවත් හිතුවද? ... ජීවීන්ගේ ක්‍රියාකාරිත්වයට අත්‍යවශ්‍ය මූලද්‍රව්‍ය, ... සහ ඒවා එකතු වෙලා හදන පුදුමසහගත ජෛව අණු ගැන දැනගන්න කැමති නම්, ... මේ video එක අවසාන දක්වාම බලන්න!"
-
-**[Screen Direction]:** [Quick montage of elements, water, and food items.]
+**[Screen Direction]:** [Title animation: "ජීවයේ රසායනික පදනම" with Grade 10 Biology logo. Display key learning objectives as bullet points briefly.]
 
 ---
 
-## [SECTION 1 - Concept Introduction - 0:45 to 3:00]
+## [SECTION 1 - Concept Introduction: ජෛව අණු (Biomolecules) - 0:45 to 4:00]
 **[TTS Voice]:**
-"මුලින්ම බලමු, ජීවී දේහයක් සෑදී ඇත්තේ මොනවාගෙන්ද කියලා. ... ජීවී දේහ විවිධ රසායනික මූලද්‍රව්‍යවලින් සෑදී ඇති අතර, ... කාබන්, හයිඩ්‍රජන්, ඔක්සිජන්, සහ නයිට්‍රජන් කියන මූලද්‍රව්‍ය හතර ප්‍රධානම ඒවා."
+"මුලින්ම අපි බලමු, ජීවීන්ගේ දේහයේ තියෙන ප්‍රධාන මූලද්‍රව්‍ය මොනවද කියලා. [PAUSE POINT]
+ඔබට පේනවා ඇති, අපේ ශරීරයේ වැඩිම ප්‍රමාණයක් තියෙන්නේ ඔක්සිජන්. ඒ කියන්නේ සියයට හැටපහක් (65%). [PAUSE POINT]
+ඊළඟට කාබන් සියයට දහඅටක් (18%), හයිඩ්‍රජන් සියයට දහයක් (10%), නයිට්‍රජන් සියයට තුනක් (3%) වගේ ප්‍රමාණ වලින් තියෙනවා. [PAUSE POINT]
+අනෙකුත් මූලද්‍රව්‍ය වන සල්ෆර්, පොස්ෆරස්, කැල්සියම්, මැග්නීසියම්, යකඩ වගේ දේවල් සියයට හතරක (4%) වගේ කුඩා ප්‍රමාණ වලින් තමයි අඩංගු වෙන්නේ. [PAUSE POINT]
 
-**[Screen Direction]:** [Display a visual of the human body and highlight C, H, O, N symbols. Show a pie chart (from PDF page 1) illustrating element percentages.]
+දැන් අපි බලමු මේ මූලද්‍රව්‍ය එකතු වෙලා හදන ප්‍රධාන ජෛව අණු මොනවද කියලා. [PAUSE POINT]
+ඒවා තමයි: කාබොහයිඩ්‍රේට, ප්‍රෝටීන්, ලිපිඩ, සහ නියුක්ලෙයික් අම්ල.
 
-**[TTS Voice]:**
-"ඔබ දන්නවද, අපේ ශරීරයේ ස්කන්ධයෙන් සියයට හැටපහක් (65%) පමණ ඔක්සිජන් වලින් සමන්විතයි. ... කාබන් සියයට දහඅටක් (18%) පමණ අඩංගු වෙනවා. ... මේ ප්‍රධාන මූලද්‍රව්‍ය වලට අමතරව, කැල්සියම්, පොස්ෆරස්, යකඩ වැනි මූලද්‍රව්‍ය කුඩා ප්‍රමාණයෙන්... එහෙමත් නැත්නම් 'අංශුමාත්‍ර' ලෙසත් අපේ ශරීරයට අත්‍යවශ්‍යයි."
+**1. කාබොහයිඩ්‍රේට (Carbohydrates):**
+මේවා ජීවී දේහ වලට ශක්තිය ලබා දෙන ප්‍රධානතම අණු වර්ගයයි. [PAUSE POINT]
+මේවා කාබන්, හයිඩ්‍රජන්, සහ ඔක්සිජන් වලින් සෑදී ඇති අතර, හයිඩ්‍රජන් සහ ඔක්සිජන් පවතින්නේ දෙකෙන් එකට (2:1) කියන අනුපාතයටයි. [PAUSE POINT]
+අපි දිනපතා ආහාරයට ගන්නා බත්, පාන්, අල, සීනි වැනි ආහාර වල වැඩිපුරම තියෙන්නේ කාබොහයිඩ්‍රේටයි. මේවා ශරීරයට ශක්තිය ලබා දෙනවා. [PAUSE POINT]
+මතක තියාගන්න: 'කාබොහයිඩ්‍රේට = C-H-O මිටිය, ශක්තිය ගෙනෙන නිදිය.' [PAUSE POINT]
 
-**[Screen Direction]:** [Zoom into specific body parts: bones for Calcium, blood for Iron.]
+කාබොහයිඩ්‍රේට වර්ග තුනකට බෙදෙනවා:
+*   **මොනොසැකරයිඩ (Monosaccharides):** මේවා තනි සීනි ඒකක, පැණි රසයි, ජලයේ හොඳින් දිය වෙනවා. ග්ලූකෝස්, ෆෲක්ටෝස් වගේ. [PAUSE POINT]
+*   **ඩයිසැකරයිඩ (Disaccharides):** සීනි ඒකක දෙකක් එකතු වෙලා හදනවා. උදාහරණ: සුක්‍රෝස් (අපේ සීනි), මෝල්ටෝස්. [PAUSE POINT]
+*   **පොලිසැකරයිඩ (Polysaccharides):** සීනි ඒකක ගොඩක් එකතු වෙලා හදන සංකීර්ණ කාබොහයිඩ්‍රේට. මේවා ජලයේ දිය වෙන්නේ නැහැ, රස රහිතයි. උදාහරණ: පිෂ්ටය, සෙලියුලෝස්. [PAUSE POINT]
 
-**[TTS Voice]:**
-"දැන් අපි බලමු, ජීවීන්ගේ පැවැත්මට අත්‍යවශ්‍යම අකාබනික සංයෝගය වන ජලය ගැන. ... අපේ ශරීරයේ බරෙන් තුනෙන් දෙකක් (2/3) පමණ ජලයයි. ... ජලය ඉතා හොඳ ද්‍රාවකයක් ලෙස ක්‍රියා කරනවා. ... ශරීර උෂ්ණත්වය පාලනය කරන්නත්... ඒ කියන්නේ, අපිට දහඩිය දානකොට ශරීරය සිසිල් වෙන්නේ මේ නිසයි... ජලය විශාල කාර්යභාරයක් ඉටුකරනවා."
+**2. ප්‍රෝටීන් (Proteins):**
+මේවා ජීවී දේහ වර්ධනයට, අලුත්වැඩියාවට සහ විවිධ ක්‍රියාකාරකම් සඳහා අත්‍යවශ්‍යයි. [PAUSE POINT]
+ප්‍රෝටීන් හැදිලා තියෙන්නේ 'ඇමයිනෝ අම්ල' කියන පොඩි ඒකක ගොඩක් එකතු වීමෙන්. [PAUSE POINT]
+මේවායේ කාබන්, හයිඩ්‍රජන්, ඔක්සිජන්, සහ නයිට්‍රජන් අඩංගු වන අතර, ඇතැම් විට සල්ෆර් ද අඩංගු වෙනවා. [PAUSE POINT]
+මස්, මාළු, බිත්තර, කඩල වැනි ආහාර වල ප්‍රෝටීන් බහුලව අඩංගුයි. අපේ මාංශ පේශි, කෙස්, නියපොතු වගේ දේවල් හැදිලා තියෙන්නේ ප්‍රෝටීන් වලින්. [PAUSE POINT]
+මතක තියාගන්න: 'ප්‍රෝටීන් = ඇමයිනෝ අම්ල ගොඩක්, ඇඟ හදන්න දෙන පොටක්.' [PAUSE POINT]
 
-**[Screen Direction]:** [Animation showing water dissolving a substance. Another animation showing sweat evaporation.]
+**3. ලිපිඩ (Lipids):**
+ශරීරයට ශක්තිය ලබා දෙන, තාපය රඳවා තබාගන්නා, සහ සමහර හෝමෝන සෑදීමට උපකාරී වන සංයෝග තමයි ලිපිඩ. [PAUSE POINT]
+මේවා හැදිලා තියෙන්නේ මේද අම්ල සහ ග්ලිසරෝල් වලින්. [PAUSE POINT]
+වැදගත්ම දේ තමයි, ලිපිඩ ජලයේ දිය වෙන්නේ නැහැ. [PAUSE POINT]
+පොල්තෙල්, රටකජු තෙල්, බටර් වැනි මේද සහිත ආහාර ලිපිඩ වලට උදාහරණ. [PAUSE POINT]
+සත්ත්ව ශරීරයේ සමට යටින් තියෙන මේද තට්ටුව සීතලෙන් ආරක්ෂා කරනවා. [PAUSE POINT]
+මතක තියාගන්න: 'ලිපිඩ = තෙල්-මේද වගේ, ඇඟට උණුසුම දේ.' [PAUSE POINT]
 
-**[PAUSE POINT]:** "ඉතින්, ජීවී දේහයේ මූලද්‍රව්‍ය සහ ජලය කියන්නේ, ජීවයේ පදනම හදන මූලිකම දේවල්."
+**4. නියුක්ලෙයික් අම්ල (Nucleic Acids - DNA & RNA):**
+මේවා ජීවී දේහ වල ප්‍රවේණික තොරතුරු ගබඩා කරගෙන යන සහ ප්‍රෝටීන් සංස්ලේෂණයට උපකාරී වන ඉතා වැදගත් අණු වර්ගයක්. [PAUSE POINT]
+ප්‍රධාන වශයෙන් DNA සහ RNA ලෙස ආකාර දෙකක් තියෙනවා. [PAUSE POINT]
+මේවා හැදිලා තියෙන්නේ නියුක්ලියෝටයිඩ (Nucleotides) කියන ඒකක වලින්. [PAUSE POINT]
+අපේ ශරීරයේ තියෙන හැම සෛලයකම DNA තියෙනවා. ඒ DNA එක තමයි අපි කවුද කියලා තීරණය කරන්නේ. [PAUSE POINT]
+මතක තියාගන්න: 'DNA/RNA = ජීවිතේ Blue Print, තොරතුරු රැගෙන යන පිට්.' [PAUSE POINT] "
+
+**[Screen Direction]:** [Display pie chart of elements from PDF page 1. Show simple diagrams/animations for each biomolecule (e.g., glucose structure, amino acid chain, fat molecule, DNA helix). Use the "Comparison Table" for carbohydrates. Briefly highlight mnemonics on screen.]
 
 ---
 
-## [SECTION 2 - Deep Dive - 3:00 to 6:00]
+## [SECTION 2 - Deep Dive: ජලය, ඛනිජ ලවණ, විටමින් සහ පරීක්ෂණ (Water, Minerals, Vitamins & Tests) - 4:00 to 9:00]
 **[TTS Voice]:**
-"හරි, දැන් අපි ජීවීන්ගේ ප්‍රධාන ජෛව අණු (Biomolecules) ගැන විස්තරාත්මකව බලමු. ... මේවාට කාබොහයිඩ්රේට, ප්‍රෝටීන්, ලිපිඩ, සහ නියුක්ලෙයික් අම්ල ඇතුළත් වෙනවා."
+"දැන් අපි බලමු ජෛව අණු වලට අමතරව ජීවී දේහයකට අත්‍යවශ්‍ය අනෙකුත් සංයෝග මොනවද කියලා. [PAUSE POINT]
 
-**[Screen Direction]:** [Display the four main biomolecule names: Carbohydrates, Proteins, Lipids, Nucleic Acids.]
+**1. ජලය (Water):**
+ජලය කියන්නේ අපේ ජීවී දේහයේ බරින් වැඩිම ප්‍රමාණය (තුනෙන් දෙකක් - 2/3ක් පමණ) අඩංගු වන, අකාබනික සංයෝගයක්. [PAUSE POINT]
+ජලය ඉතා හොඳ ද්‍රාවකයක් නිසා, සෛලීය ක්‍රියාවලීන්ට මාධ්‍යයක් ලෙසත්, ශරීර උෂ්ණත්වය පාලනයටත්, පෝෂක ද්‍රව්‍ය පරිවහනයටත් අත්‍යවශ්‍යයි. [PAUSE POINT]
+අපිට දවසට වතුර බොන්න කියලා කියන්නේ ඇයි? අපේ ශරීරයේ හැම ක්‍රියාවකටම වතුර අත්‍යවශ්‍යයි. [PAUSE POINT]
+ලේ වල තියෙන පෝෂ්‍ය පදාර්ථ ශරීරය පුරා ගෙනියන්න වතුර අවශ්‍යයි. [PAUSE POINT]
+මතක තියාගන්න: 'ජලය = ජීවිතේ පදනම, හැම දේටම දෙන උල්පත.' [PAUSE POINT]
 
-**[TTS Voice]:**
-"පළමුවෙන්, කාබොහයිඩ්රේට (Carbohydrates). ... මේවා ශරීරයට ශක්තිය සපයන ප්‍රධානතම ජෛව අණුයි. ... කාබන්, හයිඩ්‍රජන්, ඔක්සිජන් වලින් මේවා සෑදී ඇති අතර, ... හයිඩ්‍රජන් සහ ඔක්සිජන් දෙකයි එකයි (2:1) අනුපාතයට තියෙනවා."
+දැන් අපි බලමු ආහාර වල ජලය අඩංගුද කියලා බලන්න කරන පරීක්ෂණයක්. [PAUSE POINT]
+අපි මස්, බිත්තර කටු හෝ ශාක පත්‍ර වගේ දේවල් කුඩු කරලා, කෝවක දාලා රත් කරලා බලනවා. [PAUSE POINT]
+රත් කරද්දී කෝවට උඩින් වීදුරු තහඩුවක් ඇල්ලුවම, ඒ මත ජල බින්දු ඇතිවෙනවා. [PAUSE POINT]
+කොබෝල්ට් ක්ලෝරයිඩ් ද්‍රාවණයකින් මේ ජල බින්දු රෝස පැහැයට හැරෙනවා දැක්කොත්, ජලය අඩංගු බව තහවුරු වෙනවා. [PAUSE POINT]
 
-**[Screen Direction]:** [Show the general formula Cx(H₂O)y from PDF page 2. Then transition to the comparison table for carbohydrates (Monosaccharides, Disaccharides, Polysaccharides).]
+**2. ඛනිජ ලවණ (Minerals):**
+ඛනිජ ලවණ ජීවී දේහයකට ඉතා කුඩා ප්‍රමාණ වලින් අවශ්‍ය වුවත්, ඒවා නොමැතිව විවිධ ඌනතා ඇති වෙන්න පුළුවන්. [PAUSE POINT]
+උදාහරණයක් විදියට, කැල්සියම් දත් හා අස්ථි වර්ධනයට අත්‍යවශ්‍යයි. කැල්සියම් අඩු වුණොත් දත් දුර්වල වෙන්න පුළුවන්. [PAUSE POINT]
+යකඩ රතු රුධිරාණු වලට අත්‍යවශ්‍යයි. යකඩ අඩු වුණොත් රක්තහීනතාවය ඇති වෙනවා. [PAUSE POINT]
 
-**[TTS Voice]:**
-"කාබොහයිඩ්රේට ප්‍රධාන කොටස් තුනකට වර්ග කරනවා. ... ඒ තමයි මොනොසැකරයිඩ (Monosaccharides), ඩයිසැකරයිඩ (Disaccharides), සහ පොලිසැකරයිඩ (Polysaccharides). ... ග්ලූකෝස් සහ ෆෲක්ටෝස් මොනොසැකරයිඩ වලටත්, ... සුක්‍රෝස් සහ මෝල්ටෝස් ඩයිසැකරයිඩ වලටත්, ... පිෂ්ටය සහ සෙලියුලෝස් පොලිසැකරයිඩ වලටත් උදාහරණ."
+**3. විටමින් (Vitamins):**
+විටමින් කියන්නෙත් අපේ නිරෝගීබවට අත්‍යවශ්‍ය කාබනික සංයෝග. [PAUSE POINT]
+මේවා ජලයේ දියවන විටමින් (විටමින් B, C) සහ මේදයේ දියවන විටමින් (විටමින් A, D, E, K) කියලා ප්‍රධාන කොටස් දෙකකට බෙදෙනවා. [PAUSE POINT]
+විටමින් A අඩුවුණොත් රාත්‍රී අන්ධතාවය ඇති වෙන්න පුළුවන්. [PAUSE POINT]
+විටමින් C අඩුවුණොත් විදුරුමසින් ලේ ගලන 'ස්කර්වි' රෝගය ඇති වෙන්න පුළුවන්. [PAUSE POINT]
 
-**[Screen Direction]:** [Highlight examples in the comparison table.]
+දැන් අපි ඉක්මනටම ජෛව අණු හඳුනාගන්න කරන පරීක්ෂණ ටිකක් බලමු. [PAUSE POINT]
+*   **පිෂ්ටය හඳුනාගැනීම:** අයඩීන් ද්‍රාවණය එකතු කළාම නිල් පැහැයක් ගත්තොත් පිෂ්ටය තියෙනවා. [PAUSE POINT]
+*   **මොනොසැකරයිඩ/ඩයිසැකරයිඩ (සීනි) හඳුනාගැනීම:** බෙනඩික්ට් ද්‍රාවණය එකතු කර රත් කළාම නිල්, කොළ, කහ, තැඹිලි, ගඩොල් රතු පාටට හැරෙන්න පුළුවන්. [PAUSE POINT]
+*   **ප්‍රෝටීන් හඳුනාගැනීම:** බයියුරේට් පරීක්ෂණයේදී දම් පැහැයක් ඇති වෙනවා. [PAUSE POINT]
+*   **ලිපිඩ හඳුනාගැනීම:** සුඩාන් III පරීක්ෂණයේදී රතු පැහැයක් ඇති වෙනවා. [PAUSE POINT] "
 
-**[TTS Voice]:**
-"ඊළඟට ප්‍රෝටීන් (Proteins). ... මේවා ජීවී සෛලවල ව්‍යුහයට සහ ක්‍රියාකාරිත්වයට අත්‍යවශ්‍යයි. ... ප්‍රෝටීන් හැදිලා තියෙන්නේ ඇමයිනො අම්ල (Amino Acids) කියන පොඩි ඒකක බහු අවයවීකරණය වීමෙන්. ... මස්, මාළු, බිත්තර වගේ ආහාරවල ප්‍රෝටීන් බහුලව තියෙනවා. ... ප්‍රෝටීන් හඳුනාගන්න බයියුරේට් පරීක්ෂණය (Biuret test) කරනවා. ... දම්පාටට හැරෙනවා නම්, ප්‍රෝටීන් තියෙනවා."
-
-**[Screen Direction]:** [Show a diagram of an amino acid (from PDF page 7). Then a visual of Biuret test showing color change.]
-
-**[TTS Voice]:**
-"දැන් ලිපිඩ (Lipids) ගැන බලමු. ... ලිපිඩ කියන්නේ ශරීරයට ශක්තිය ගබඩා කරන්න, ... තාප පරිවරණයට, ... සහ අභ්‍යන්තර අවයව ආරක්ෂා කරන්න වැදගත් කාබනික සංයෝග. ... මේවා මේද අම්ල සහ ග්ලිසරෝල් එකතු වෙලා හැදෙනවා. ... ලිපිඩ ජලයේ දිය වෙන්නේ නැහැ. ... තෙල්, මේදය, මාගරින් ලිපිඩ වලට උදාහරණයි. ... ලිපිඩ හඳුනාගන්න සුඩාන් ත්‍රි (Sudan III) පරීක්ෂණයෙන් රතු පාටක් ලැබෙනවා."
-
-**[Screen Direction]:** [Image of oils/fats. Visual of Sudan III test with red color.]
-
-**[TTS Voice]:**
-"අවසානයට නියුක්ලෙයික් අම්ල (Nucleic Acids). ... මේවා ජීවීන්ගේ ප්‍රවේණික තොරතුරු ගබඩා කරන්න, ... පාලනය කරන්න, ... සහ පරම්පරාවෙන් පරම්පරාවට සම්ප්‍රේෂණය කරන්න අත්‍යවශ්‍යයි. ... නියුක්ලියෝටයිඩ (Nucleotides) කියන ඒකක වලින් මේවා හැදිලා තියෙනවා. ... ප්‍රධාන වර්ග දෙකක් තියෙනවා, ... ඒ තමයි DNA (Deoxyribonucleic Acid) සහ RNA (Ribonucleic Acid)."
-
-**[Screen Direction]:** [Show a diagram of a nucleotide (from PDF page 12). Then the DNA double helix structure (from PDF page 12). Transition to the comparison table for DNA/RNA.]
-
-**[TTS Voice]:**
-"DNA වල ද්විත්ව දාමයක් සහ ඩිඔක්සිරයිබෝස් සීනි තියෙනවා. ... RNA වල තනි දාමයක් සහ රයිබෝස් සීනි තියෙනවා. ... DNA ජානමය තොරතුරු ගබඩා කරන අතර, ... RNA ප්‍රෝටීන් සංස්ලේෂණයට උදව් කරනවා."
-
-**[Screen Direction]:** [Highlight differences in the comparison table.]
+**[Screen Direction]:** [Display chart of water importance. Show images of mineral/vitamin deficiency symptoms (e.g., Rickets, Anemia). Display simple animations/pictures of the identification tests: Iodine test (blue-black), Benedict's test (color change), Biuret test (purple), Sudan III test (red layer). Show a quick summary table of identification tests.]
 
 ---
 
-## [SECTION 3 - Key Points Summary - 6:00 to 9:00]
+## [SECTION 3 - Key Points Summary - 9:00 to 10:30]
 **[TTS Voice]:**
-"දැන් අපි ඉගෙනගත් ප්‍රධාන කරුණු ටික ඉක්මනින් මතක් කරගමු."
+"හරි, දැන් අපි අද ඉගෙනගත්තු ප්‍රධාන කරුණු නැවත මතක් කරගමු. [PAUSE POINT]
 
-**[Screen Direction]:** [Bullet point list animation starts.]
+*   ජීවීන්ගේ දේහයේ කාබන් (C), හයිඩ්‍රජන් (H), ඔක්සිජන් (O), සහ නයිට්‍රජන් (N) යන මූලද්‍රව්‍ය ප්‍රධාන වශයෙන් අඩංගු වෙනවා. [PAUSE POINT]
+*   එන්සයිම කියන්නේ ජීවී දේහවල ජෛව රසායනික ප්‍රතික්‍රියා වේගවත් කරන විශේෂිත ප්‍රෝටීන. [PAUSE POINT]
+*   ජලය, ඛනිජ ලවණ සහ විටමින් ශරීරයට කුඩා ප්‍රමාණවලින් අවශ්‍ය වුවත්, ඒවා නොමැතිව ජීවීන්ට විවිධ ඌනතා ලක්ෂණ ඇති වෙන්න පුළුවන්. [PAUSE POINT]
+*   ජෛව අණු, ජලය, ඛනිජ ලවණ සහ විටමින් කියන්නේ අපේ ජීවිතයට අත්‍යවශ්‍යම දේවල්."
 
-**[TTS Voice]:**
-"ඛනිජ ලවණ (Minerals) සහ විටමින් (Vitamins) කියන්නේ ජීවී ක්‍රියාකාරිත්වයට අත්‍යවශ්‍ය වන, ... නමුත් කුඩා ප්‍රමාණවලින් අවශ්‍ය වන සංයෝග. ... කැල්සියම්, යකඩ ඛනිජ ලවණ වලට උදාහරණයි. ... විටමින් A, D, E, K මේදයේ ද්‍රාව්‍ය වන අතර, ... විටමින් B සහ C ජලයේ ද්‍රාව්‍යයි."
-
-**[Screen Direction]:** [Display examples of mineral and vitamin-rich foods. Show images of deficiency symptoms (e.g., scurvy for Vit C, rickets for Vit D from PDF page 21).]
-
-**[TTS Voice]:**
-"මේවායේ ඌනතා නිසා ජීවීන්ට බරපතල රෝගී තත්ත්වයන් ඇතිවෙන්න පුළුවන්. ... උදාහරණයක් විදියට, විටමින් C ඌනතාවයෙන් ස්කර්වි රෝගය හැදෙනවා."
-
-**[Screen Direction]:** [Summary of "Important Points to Remember" from Smart Note, bullet by bullet, with accompanying icons.]
-
-**[TTS Voice]:**
-"මතක තියාගන්න! ... ජීවී දේහයක ස්කන්ධයෙන් වැඩිම ප්‍රතිශතයක් අඩංගු මූලද්‍රව්‍යය ඔක්සිජන් වේ. ... එන්සයිම කියන්නේ ජෛව රසායනික ප්‍රතික්‍රියා වේගවත් කරන විශේෂ ප්‍රෝටීන. ... ජලයෙහි අධික විශිෂ්ට තාප ධාරිතාව නිසා ශරීර උෂ්ණත්වය ස්ථාවරව පවත්වා ගැනීමට උපකාරී වෙනවා. ... ඛනිජ ලවණ හා විටමින් කුඩා ප්‍රමාණවලින් අවශ්‍ය වුවද, ඒවායේ ඌනතා නිසා ජීවීන්ට බරපතල රෝගී තත්ත්වයන් ඇතිවිය හැකියි. ... ඒ වගේම, කාබන් කියන්නේ සියලුම කාබනික සංයෝගවල ප්‍රධාන මූලද්‍රව්‍යයයි."
-
-**[Screen Direction]:** [Highlight each point as it's spoken.]
+**[Screen Direction]:** [Bullet point list of important points with clear animations. Highlight each point as TTS reads.]
 
 ---
 
-## [EXAM TIPS - 9:00 to 10:30]
+## [EXAM TIPS - 10:30 to 11:30]
 **[TTS Voice]:**
-"⭐ Exam එකට ගන්න! ⭐"
+"⭐ Exam එකට ගන්න! ⭐
+මේ පාඩම, 'සෛලය' සහ 'පෝෂණය' වගේ අනිත් පාඩම් එක්ක හොඳට සම්බන්ධ වෙනවා. [PAUSE POINT]
+විභාගයට ජෛව අණු වර්ගීකරණය, ඒවායේ කාර්යයන්, ඌනතා ලක්ෂණ, සහ හඳුනාගැනීමේ පරීක්ෂණ ගැන අනිවාර්යයෙන්ම ප්‍රශ්න එන්න පුළුවන්. [PAUSE POINT]
+ජලය, ඛනිජ ලවණ, සහ විටමින් වල වැදගත්කම විස්තර කරන්නත් ඔබ දැනගෙන ඉන්න ඕන. [PAUSE POINT]
+රූප සටහන් ඇසුරෙන් ප්‍රවේණික අණු වල ව්‍යුහය හඳුනාගැනීමත් වැදගත්. [PAUSE POINT]
+මේ කරුණු හොඳින් අධ්‍යයනය කරලා, මතක තියාගන්න. [PAUSE POINT]"
 
-**[Screen Direction]:** [Text overlay: "Exam Tips!" with a shining star icon.]
-
-**[TTS Voice]:**
-"ප්‍රශ්න පත්‍රයේදී, ජෛව අණු වල ව්‍යුහමය ඒකක ගැන අහන්න පුළුවන්. ... ඒ කියන්නේ, ප්‍රෝටීන් වලට ඇමයිනො අම්ල වගේ. ... ඒ වගේම, ජෛව අණු හඳුනාගන්න කරන පරීක්ෂණ (Biuret, Sudan III, අයඩින් පරීක්ෂණ) සහ ඒවායේ ප්‍රතිඵල හොඳින් මතක තබාගන්න. ... විටමින් සහ ඛනිජ ලවණ වල ප්‍රධාන කාර්යයන්, ... සහ ඒවායේ ඌනතා නිසා ඇතිවන රෝග ලක්ෂණ ගැනත් අවධානය යොමු කරන්න."
-
-**[Screen Direction]:** [Display a quick visual summary of the tests and expected results (e.g., starch-iodine, protein-biuret, lipid-sudan III). Then, show a side-by-side of a healthy plant/person vs. one with a deficiency.]
-
-**[TTS Voice]:**
-"බහුවරණ ප්‍රශ්න වලදී මූලද්‍රව්‍යවල සංයුතිය, ... සහ කෙටි පිළිතුරු වලදී ජලයෙහි වැදගත්කම වැනි දේවල් බලාපොරොත්තු වෙන්න පුළුවන්. ... DNA සහ RNA අතර වෙනස්කම් සංසන්දනාත්මක වගුවකින් ඉගෙන ගැනීමත් වැදගත්."
-
-**[Screen Direction]:** [Show the comparison table for DNA/RNA again, briefly highlighted.]
+**[Screen Direction]:** [Highlight "Exam Tips" section. Show key terms and concepts that are frequently tested. Briefly display examples of past exam question types (e.g., a blank diagram of DNA to label, a table to fill in functions).]
 
 ---
 
-## [OUTRO - 10:30 to 11:00]
+## [OUTRO - 11:30 to 12:00]
 **[TTS Voice]:**
-"ඉතින් දුවේ පුතේ, අද අපි ජීවයේ රසායනික පදනම ගැන ගොඩක් දේවල් ඉගෙන ගත්තා. ... ජීවී දේහවල අඩංගු මූලද්‍රව්‍ය, ... ප්‍රධාන ජෛව අණු, ... ජලය, ඛනිජ ලවණ, සහ විටමින් වල වැදගත්කම ගැන ඔයාලට පැහැදිලි අවබෝධයක් ලැබෙන්න ඇති කියලා හිතනවා."
+"ඉතින් අද අපි ජීවී දේහයක රසායනික සංයුතිය, ජෛව අණු, ජලය, ඛනිජ ලවණ සහ විටමින් වල වැදගත්කම ගැන ඉගෙනගත්තා. [PAUSE POINT]
+ඔබට කිසියම් ප්‍රශ්නයක් ඇත්නම් comment section එකේ ලියන්න. [PAUSE POINT]
+Like කරන්න, Subscribe කරන්න. [PAUSE POINT]
+ඊළඟ video එකෙන් තවත් වැදගත් පාඩමකින් හමුවෙමු! ඔබට සුභ දවසක්!"
 
-**[Screen Direction]:** [Subscribe animation, social media handles.]
+**[Screen Direction]:** [Subscribe animation, bell icon reminder. Display channel name and thank you message. Show preview of upcoming video.]
 
-**[TTS Voice]:**
-"ඔබට මේ පාඩම සම්බන්ධව ප්‍රශ්නයක් ඇත්නම්, comment section එකේ ලියන්න. ... මේ video එකට like කරන්න, ... අපේ channel එක subscribe කරන්න අමතක කරන්න එපා. ... ඊළඟ video එකෙන් තවත් වැදගත් පාඩමකින් හමුවෙමු! ඔබට සුබ දවසක්!"
-
-**[Screen Direction]:** [End screen with suggested next video preview.]
+---
