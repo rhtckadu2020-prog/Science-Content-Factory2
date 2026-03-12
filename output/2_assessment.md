@@ -11,148 +11,178 @@
 
 **[Knowledge Level - 5 questions]**
 
-Q1. මානව දේහයේ ස්කන්ධය අනුව වැඩිම ප්‍රතිශතයක් අඩංගු මූලද්‍රව්‍යය වන්නේ,
-A) කාබන්  B) හයිඩ්‍රජන්  C) ඔක්සිජන්  D) නයිට්‍රජන්
-✅ Answer: C | Explanation: මානව දේහයේ ස්කන්ධය අනුව 65%ක් ඔක්සිජන් වලින් සමන්විත වේ. (Page 1)
+Q1. මිනිස් සිරුරේ ස්කන්ධය අනුව වැඩිපුරම අඩංගු මූලද්‍රව්‍යය කුමක්ද?
+A) කාබන් (Carbon)
+B) හයිඩ්‍රජන් (Hydrogen)
+C) ඔක්සිජන් (Oxygen)
+D) නයිට්‍රජන් (Nitrogen)
+✅ Answer: C | Explanation: The pie chart on page 1 indicates Oxygen makes up 65% of the human body by mass.
 
-Q2. කාබොහයිඩ්රේටවල මූලික තැනුම් ඒකකය ලෙස සැලකෙන්නේ,
-A) ඩයිසැකරයිඩ  B) මොනොසැකරයිඩ  C) පොලිසැකරයිඩ  D) ඇමයිනො අම්ල
-✅ Answer: B | Explanation: මොනොසැකරයිඩ යනු කාබොහයිඩ්රේටවල තැනුම් ඒකකයයි. (Page 3)
+Q2. කාබොහයිඩ්රේටවල පොදු අණුක සූත්‍රය කුමක්ද?
+A) CnH2nOn
+B) Cx(H2O)y
+C) CnH2n+2On
+D) (C6H10O5)n
+✅ Answer: B | Explanation: The general molecular formula for carbohydrates is given as Cx(H2O)y on page 2.
 
-Q3. පිෂ්ටය හඳුනාගැනීමට භාවිතා කරන පරීක්ෂණය කුමක්ද?
-A) බයියුරේට් පරීක්ෂාව  B) බෙනඩික්ට් පරීක්ෂාව  C) අයඩීන් පරීක්ෂාව  D) සුඩාන් III පරීක්ෂාව
-✅ Answer: C | Explanation: පිෂ්ටය සඳහා අයඩීන් ද්‍රාවණය බිංදුවක් එකතු කිරීමෙන් දම්පාටට හුරු නිල් පාටක් ලැබේ. (Page 6)
+Q3. පහත සඳහන් මොනොසැකරයිඩ අතුරින් පැණි රසින් වැඩිම වර්ගය කුමක්ද?
+A) ග්ලූකෝස් (Glucose)
+B) ගැලැක්ටෝස් (Galactose)
+C) පෘක්ටෝස් (Fructose)
+D) මෝල්ටෝස් (Maltose)
+✅ Answer: C | Explanation: Page 3, Table 1.1 states that Fructose is the sweetest sugar type (පැණි රසින් වැඩි ම සීනි වර්ගය මෙයයි).
 
-Q4. ප්‍රෝටීනවල අත්‍යවශ්‍යයෙන්ම අඩංගු වන මූලද්‍රව්‍යය කුමක්ද?
-A) පොස්ෆරස්  B) සල්ෆර්  C) නයිට්‍රජන්  D) කැල්සියම්
-✅ Answer: C | Explanation: ප්‍රෝටීනවල සෑමවිට ම කාබන්, හයිඩ්‍රජන්, ඔක්සිජන් හා නයිට්‍රජන් අඩංගු වේ. (Page 7)
+Q4. ප්‍රෝටීන් හඳුනාගැනීම සඳහා වන බයියුරේට් පරීක්ෂණයේදී නිරීක්ෂණය කරන ලාක්ෂණික වර්ණ වෙනස කුමක්ද?
+A) නිල් සිට කොළ පැහැයට (Blue to green)
+B) රතු සිට කහ පැහැයට (Red to yellow)
+C) රෝස දම් හෝ තද දම් පැහැයක් (Pinkish violet or deep violet)
+D) දුඹුරු සිට කළු පැහැයට (Brown to black)
+✅ Answer: C | Explanation: The observation for the Biuret test for proteins is a pinkish violet or deep violet color (රෝස දම් හෝ තද දම් පැහැයට හැරෙයි) as per page 9.
 
-Q5. ජීවීන්ගේ ප්‍රවේණික තොරතුරු ගබඩා කර තබාගැනීමට වැදගත් වන ජෛව අණුව කුමක්ද?
-A) ප්‍රෝටීන්  B) ලිපිඩ  C) RNA  D) DNA
-✅ Answer: D | Explanation: න්‍යෂ්ටිය තුළ ඇති DNA අණුවෙ හි ප්‍රවේණික තොරතුරු ගබඩා වී ඇත. (Page 12)
+Q5. මිනිස් සිරුරේ තයිරොක්සින් හෝර්මෝනය නිෂ්පාදනය සඳහා අත්‍යවශ්‍ය ඛනිජ මූලද්‍රව්‍යය කුමක්ද?
+A) යකඩ (Iron)
+B) කැල්සියම් (Calcium)
+C) අයඩීන් (Iodine)
+D) මැග්නීසියම් (Magnesium)
+✅ Answer: C | Explanation: Page 17, Table 1.5 indicates that Iodine is essential for the production of thyroxine hormone (තයිරොක්සින් හොර්මෝනය නිෂ්පාදනය කිරීමට අත්‍යවශ්‍ය වේ).
 
 **[Comprehension Level - 3 questions]**
 
-Q6. මිනිස් සිරුර තුළ සෙලියුලෝස් ජීරණය නොවන නමුත් එහි පරිභෝජනය වැදගත් වන්නේ,
-A) එයින් ශක්තිය නිදහස් වන බැවින්  B) එය විටමින් සපයන බැවින්  C) එය මලබද්ධය වළක්වා ගැනීමට උපකාරී වන බැවින්  D) එය ප්‍රෝටීන් සංස්ලේෂණයට අවශ්‍ය බැවින්
-✅ Answer: C | Explanation: මිනිස් ජීරණ පද්ධතිය තුළ සෙලියුලෝස් ජීරණයට ලක් නොවන නමුත් මලබද්ධය වළක්වා ගැනීමට උදව් වෙයි. (Page 5)
+Q6. සෙලියුලෝස් ශාක සෛල බිත්තිවල ප්‍රධාන සංඝටකයක් වුවද, එය මිනිසුන්ට පෝෂණීය වටිනාකමක් නොමැති බව සැලකේ. එසේ වුවද, සෙලියුලෝස් සෞඛ්‍යයට ගුණදායක වන්නේ ඇයි?
+A) එය විෂ සහිත නමුත් විටමින් සපයයි.
+B) එය මිනිසුන්ට ජීර්ණය කළ නොහැකි නමුත් ආහාරමය තන්තු ලෙස ක්‍රියා කරයි.
+C) එය සුළු වශයෙන් පමණක් ශක්තිය සපයයි.
+D) එය බඩවැල්වල ඇති බැක්ටීරියා මගින් පමණක් ජීර්ණය කළ හැකිය.
+✅ Answer: B | Explanation: Page 5 explains that cellulose cannot be digested by humans (මිනිස් ජීරණ පද්ධතිය තුළ ජීරණයට ලක් නොවන බැවින් පෝෂණීය වටිනාකමක් නැත), but it helps prevent constipation (මලබද්ධය වළක්වා ගැනීමට උදව් වෙයි).
 
-Q7. එන්සයිම "ජෛව උත්ප්‍රේරක" ලෙස හඳුන්වන්නේ ඇයි?
-A) ඒවා ශරීරයේ ශක්තිය නිපදවන බැවින්  B) ඒවා ජෛව රසායනික ප්‍රතික්‍රියා උත්ප්‍රේරණය කරන බැවින්  C) ඒවා සෛල වර්ධනයට අවශ්‍ය බැවින්  D) ඒවා රෝගවලින් ආරක්ෂා කරන බැවින්
-✅ Answer: B | Explanation: එන්සයිම යනු ජීවීන් විසින් නිපදවනු ලබන විශේෂිත ප්‍රෝටීන් (කාබනික උත්ප්‍රේරක) වන අතර ඒවා ජෛව රසායනික ප්‍රතික්‍රියා උත්ප්‍රේරණය කිරීමේ කාර්යය ඉටුකරයි. (Page 9)
+Q7. ලිපිඩවල හයිඩ්‍රජන් හා ඔක්සිජන් පරමාණු අනුපාතය කාබොහයිඩ්රේටවලට සාපේක්ෂව කෙසේද?
+A) ලිපිඩවල අනුපාතය සෑම විටම 2:1 වන අතර එය කාබොහයිඩ්රේටවලට සමාන වේ.
+B) ලිපිඩවල අනුපාතය සෑම විටම 2:1 ට වඩා වැඩි වන අතර එය කාබොහයිඩ්රේටවලට වෙනස් වේ.
+C) ලිපිඩවල අනුපාතය සෑම විටම 2:1 ට වඩා අඩු වන අතර එය කාබොහයිඩ්රේටවලට වෙනස් වේ.
+D) අනුපාතය විචල්‍ය වන අතර සංසන්දනය කළ නොහැක.
+✅ Answer: B | Explanation: Page 10 states that for lipids, the H:O ratio is always greater than 2:1 (ලිපිඩ අණුවක ඇති හයිඩ්‍රජන් හා ඔක්සිජන් අතර අනුපාතය සෑම විට ම 2:1ට වඩා වැඩි වේ), whereas for carbohydrates it is 2:1.
 
-Q8. ජලයේ විශිෂ්ට තාප ධාරිතාව අධික වීම ජීවීන්ගේ පැවැත්මට වැදගත් වන්නේ,
-A) එය හොඳ ද්‍රාවකයක් වන බැවින්  B) එය සිරුරේ උෂ්ණත්වය යාමනය කරන බැවින්  C) එය ශ්වසන මාධ්‍යයක් වන බැවින්  D) එය පරිවහන මාධ්‍යයක් වන බැවින්
-✅ Answer: B | Explanation: ජලයේ විශිෂ්ට තාප ධාරිතාව අධික නිසා ශරීරයේ උෂ්ණත්වය පරිසරයේ උෂ්ණත්ව වෙනස්කම් අනුව ඉක්මණින් ඉහළ පහළ නොයයි. (Page 15)
+Q8. ජලය හඳුනාගැනීමේ පරීක්ෂණයකදී කොබෝල්ට් ක්ලෝරයිඩ් කඩදාසිය නිල් පැහැයේ සිට රෝස පැහැයට හැරෙන්නේ කුමක් පෙන්නුම් කිරීමටද?
+A) භෂ්මයක් පැවතීම.
+B) අම්ලයක් පැවතීම.
+C) කාබන් ඩයොක්සයිඩ් පැවතීම.
+D) ජලය පැවතීම.
+✅ Answer: D | Explanation: Page 13, Activity 02 mentions that Cobalt Chloride paper turns from blue to pink (එහි වර්ණය නිල් පැහැයේ සිට රෝස පැහැයට හැරේ) in the presence of water.
 
 **[Application Level - 2 questions]**
 
-Q9. පාසල් සිසුවියකට රාත්‍රී කාලයේදී පෙනීම දුර්වල වීම සහ සම වියළී යාමේ රෝග ලක්ෂණ දක්නට ලැබේ නම්, ඇයගේ ආහාර වේලෙහි ඌනතාවක් ඇති විටමිනය විය හැක්කේ,
-A) විටමින් B  B) විටමින් C  C) විටමින් A  D) විටමින් D
-✅ Answer: C | Explanation: රාත්‍රී අන්ධතාවය සහ සම වියළි බව විටමින් A ඌනතාවයේ ලක්ෂණ වේ. (Page 20)
+Q9. දරුවෙකුට රාත්‍රී අන්ධතාවය (night blindness) සහ වියළි සම (dry skin) වැනි රෝග ලක්ෂණ පෙන්නුම් කරයි. මෙම රෝග ලක්ෂණ ඇතිවීමට හේතු වූ විටමින් ඌනතාවය කුමක්ද?
+A) විටමින් B (Vitamin B)
+B) විටමින් C (Vitamin C)
+C) විටමින් D (Vitamin D)
+D) විටමින් A (Vitamin A)
+✅ Answer: D | Explanation: Page 20, Table 1.7 lists night blindness (රාත්‍රී අන්ධතාව) and dry skin (සමේ වියළි බව) as deficiency symptoms of Vitamin A.
 
-Q10. "ආහාර ස්වල්පයක් ගෙන පරික්ෂා නළයකට දමා ජලය සමඟ හොඳින් පොඩිකර මිශ්‍ර කරන්න. එයට බෙනඩික්ට් ද්‍රාවණය ස්වල්පයක් බැගින් එකතු කර ජල තාපකයක බහා ක්‍රමයෙන් රත් කරන්න. නිල් පැහැයේ සිට කොළ, කහ, තැඹිලි හෝ ගඩොල් රතු අවක්ෂේපයක් ලැබේ." මෙම පරීක්ෂණයෙන් හඳුනාගනු ලබන ජෛව අණුව කුමක්ද?
-A) පිෂ්ටය  B) සුක්‍රෝස්  C) ග්ලූකෝස්  D) ප්‍රෝටීන්
-✅ Answer: C | Explanation: මෙය මොනොසැකරයිඩ (නිදසුන්: ග්ලූකෝස්) සහ සමහර ඩයිසැකරයිඩ සඳහා සිදු කරන බෙනඩික්ට් පරීක්ෂණයයි. (Page 6)
+Q10. ආහාර සාම්පලයක පිෂ්ටය (starch) තිබීම තහවුරු කිරීමට ඔබට අවශ්‍ය නම්, ඔබ භාවිතා කරන ප්‍රතිකාරකය කුමක්ද සහ අපේක්ෂිත ධනාත්මක ප්‍රතිඵලය කුමක්ද?
+A) බෙනඩික්ට් ද්‍රාවණය; ගඩොල් රතු අවක්ෂේපයක්.
+B) අයඩීන් ද්‍රාවණය; නිල්-දම් පැහැයක්.
+C) සුඩාන් III; රතු තෙල් ස්තරයක්.
+D) බයියුරේට් ප්‍රතිකාරකය; දම් පැහැයක්.
+✅ Answer: B | Explanation: Page 6 describes the starch test using Iodine solution, resulting in a blue-violet or purplish-blue color (දම්පාටට හුරු නිල් පාටක් ලැබේ).
 
 ---
 
 ## PART B: Short Answer Questions — 20 Marks
 **(සෑම ප්‍රශ්නයකටම 4 marks. 3-5 sentences ලෙස පිළිතුරු ලියන්න.)**
 
-Q11. ජීවීන්ගේ දේහය තුළ ප්‍රෝටීනවල වැදගත්කම් දෙකක් පැහැදිලි කරන්න.
-**Model Answer:**
-ප්‍රෝටීන ශරීරයේ ශක්ති ප්‍රභවයක් ලෙස ක්‍රියා කරයි, කාබොහයිඩ්රේට හා මේද වලින් ශක්තිය නොලැබෙන විට ශක්තිය නිපදවයි. තවද, සෛල පටල වැනි ව්‍යුහාත්මක සංඝටක සෑදීම සඳහා ප්‍රෝටීන වැදගත් වන අතර, කෙස් හා පිහාටු වල අඩංගු කෙරටින් වැනි ප්‍රෝටීන දේහයේ ව්‍යුහය පවත්වා ගැනීමට උපකාරී වේ. එන්සයිම ලෙස ක්‍රියාකරමින් ජීව රසායනික ප්‍රතික්‍රියා උත්ප්‍රේරණය කිරීම සහ හෝර්මෝන ලෙස ක්‍රියාකරමින් ජීවීන්ගේ සමායෝජනයට හා සමස්ථිතියට දායක වීමද ප්‍රෝටීනවල තවත් වැදගත්කම් වේ.
+Q11. ජීවීන් සඳහා කාබොහයිඩ්රේට ශක්ති ප්‍රභවයක් ලෙස වැදගත් වන්නේ කෙසේදැයි පැහැදිලි කරන්න.
+**Model Answer:** Carbohydrates serve as the primary energy source for living organisms. Monosaccharides, particularly glucose, obtained from carbohydrate digestion, undergo oxidation within the cells during cellular respiration. This process effectively releases energy, which is then utilized to power various essential metabolic activities and bodily functions.
 **Marking Scheme:**
-- ශක්ති ප්‍රභවයක් ලෙස ක්‍රියා කිරීම පැහැදිලි කිරීමට — 2 marks
-- ව්‍යුහාත්මක සංඝටක සෑදීමට / එන්සයිම ලෙස ක්‍රියා කිරීමට / හෝර්මෝන ලෙස ක්‍රියා කිරීමට / ප්‍රතිදේහ ලෙස ක්‍රියා කිරීමට (ඕනෑම එකක්) පැහැදිලි කිරීමට — 2 marks
+- Identifies carbohydrates as primary energy source (1 mark)
+- Mentions oxidation of monosaccharides/glucose (1 mark)
+- States energy is released (1 mark)
+- States energy is used for cell activities (1 mark)
 
-Q12. සන්තෘප්ත මේද අම්ල සහ අසන්තෘප්ත මේද අම්ල අතර ඇති ප්‍රධාන වෙනස්කම් දෙකක් සඳහන් කරන්න.
-**Model Answer:**
-සන්තෘප්ත මේද අම්ලවල එක් එක් කාබන් පරමාණුවට උපරිම හයිඩ්‍රජන් පරමාණු සංඛ්‍යාව සම්බන්ධ වී ඇති අතර, ඒවා කාමර උෂ්ණත්වයේදී ඝන හෝ අර්ධ ඝන ලෙස පවතී. අසන්තෘප්ත මේද අම්ලවල එක් එක් කාබන් පරමාණුවට උපරිම හයිඩ්‍රජන් පරමාණු සංඛ්‍යාව සම්බන්ධ වී නොමැති අතර, ඒවා කාමර උෂ්ණත්වයේදී ද්‍රව ලෙස පවතී.
+Q12. මොනොසැකරයිඩ සහ ඩයිසැකරයිඩ ඒවායේ ව්‍යුහය හා ගුණාංග මත පදනම්ව සංසන්දනය කර වෙනස්කම් දක්වන්න.
+**Model Answer:** Monosaccharides are simple sugar units and are the basic building blocks of carbohydrates, typically with a formula like C6H12O6. They are crystalline, water-soluble, and sweet. Disaccharides are formed when two monosaccharide units join together, releasing a water molecule, and typically have a formula of C12H22O11. Like monosaccharides, they are also crystalline, water-soluble, and sweet. The main difference lies in disaccharides being composed of two sugar units, making them more complex than single-unit monosaccharides.
 **Marking Scheme:**
-- සන්තෘප්ත මේද අම්ලවල අණුක ව්‍යුහාත්මක වෙනස පැහැදිලි කිරීමට — 1 mark
-- අසන්තෘප්ත මේද අම්ලවල අණුක ව්‍යුහාත්මක වෙනස පැහැදිලි කිරීමට — 1 mark
-- සන්තෘප්ත මේද අම්ලවල කාමර උෂ්ණත්වයේදී පවතින ස්වභාවය — 1 mark
-- අසන්තෘප්ත මේද අම්ලවල කාමර උෂ්ණත්වයේදී පවතින ස්වභාවය — 1 mark
+- Monosaccharide structure/unit description (1 mark)
+- Disaccharide structure/unit description (1 mark)
+- Similarities (e.g., crystalline, water-soluble, sweet) (1 mark)
+- Difference (complexity/number of units) (1 mark)
 
-Q13. නියුක්ලෙයික් අම්ල ජීවීන්ගේ පැවැත්මට අත්‍යවශ්‍ය වන්නේ ඇයිද යන්න පැහැදිලි කරන්න.
-**Model Answer:**
-නියුක්ලෙයික් අම්ල, විශේෂයෙන් DNA, ජීවීන්ගේ ප්‍රවේණික තොරතුරු ගබඩා කිරීම සඳහා වැදගත් වේ. තවද, මෙම ප්‍රවේණික තොරතුරු පරම්පරාවෙන් පරම්පරාවට සම්ප්‍රේෂණය කිරීම සඳහාද නියුක්ලෙයික් අම්ල දායක වේ. RNA, ප්‍රෝටීන් සංස්ලේෂණ ක්‍රියාවලිය සඳහා වැදගත් කෘත්‍යයක් ඉටුකරන අතර, සෛලයේ සියලුම ජීව ක්‍රියාවලි පාලනය කිරීමේ තොරතුරු DNA තුළ අඩංගු වේ.
-**Marking Scheme:**
-- ප්‍රවේණික තොරතුරු ගබඩා කිරීම — 1 mark
-- ප්‍රවේණික තොරතුරු සම්ප්‍රේෂණය කිරීම — 1 mark
-- ප්‍රෝටීන් සංස්ලේෂණයට දායක වීම — 1 mark
-- සෛල ක්‍රියාවලි පාලනය කිරීම — 1 mark
+Q13. ජීවීන් තුළ ප්‍රෝටීනවල කාර්යයන් හතරක් ලැයිස්තුගත කරන්න.
+**Model Answer:** Proteins perform several vital functions in living organisms. Firstly, they act as structural components, forming parts of cell membranes, connective tissues (e.g., collagen), and hair/nails (e.g., keratin). Secondly, all enzymes, which are biological catalysts speeding up biochemical reactions, are proteins. Thirdly, some proteins function as hormones, such as insulin and growth hormone, regulating various physiological processes. Lastly, proteins form antibodies, crucial components of the immune system that defend against pathogens.
+**Marking Scheme:** (1 mark for each distinct function mentioned)
+- Structural component (e.g., cell membrane, collagen, keratin)
+- Enzymes (biological catalysts)
+- Hormones (e.g., insulin, growth hormone)
+- Antibodies (immune defense)
+- Energy source (when others are lacking)
 
-Q14. ශාකවල නයිට්‍රජන් ඌනතාවයකදී ඇතිවිය හැකි රෝග ලක්ෂණ දෙකක් සහ එහි වැදගත්කම සඳහන් කරන්න.
-**Model Answer:**
-ශාකවල නයිට්‍රජන් ඌනතාවයකදී වර්ධනය හීනවීම සහ පරිණත පත්‍රවල හරිතක්ෂය ඇතිවීම (කහ පැහැ ගැන්වීම) වැනි රෝග ලක්ෂණ ඇතිවේ. නයිට්‍රජන් යනු ඇමයිනො අම්ල, ප්‍රෝටීන්, නියුක්ලෙයික් අම්ල, එන්සයිම සහ හරිතප්‍රද වැනි අත්‍යවශ්‍ය ජෛව අණුවල සංඝටකයක් ලෙස ක්‍රියාකරන බැවින් ශාකවල වර්ධනයට හා පරිවෘත්තීය ක්‍රියාවලීන්ට අත්‍යවශ්‍ය වේ.
+Q14. ජීවීන් තුළ ජලය පරිවහන මාධ්‍යයක් ලෙස ක්‍රියා කරන්නේ කෙසේදැයි පැහැදිලි කරන්න.
+**Model Answer:** Water's excellent solvent properties make it an indispensable transport medium in living organisms. In animals, it constitutes the major portion of blood plasma, transporting dissolved nutrients, vitamins, hormones, respiratory gases, and metabolic waste products throughout the body. In plants, water is transported through the xylem, carrying water and minerals from the roots to the leaves. Additionally, sugars produced during photosynthesis are transported through the phloem, dissolved in water, to other parts of the plant.
 **Marking Scheme:**
-- රෝග ලක්ෂණ දෙකක් නිවැරදිව නම් කිරීමට — 2 marks (සෑම ලක්ෂණයකටම 1 mark)
-- නයිට්‍රජන්වල වැදගත්කම පැහැදිලි කිරීමට — 2 marks
+- Identifies water as a good solvent for transport (1 mark)
+- Explains transport in animals (e.g., blood, nutrients, waste) (1 mark)
+- Explains transport in plants (e.g., xylem, phloem, nutrients) (1 mark)
+- Mentions cohesive/adhesive forces (if applicable, or simply the role of water in carrying dissolved substances) (1 mark)
 
-Q15. ජලය "ඉතා හොඳ ද්‍රාවකයක්" ලෙස හඳුන්වන්නේ ඇයිද යන්නත්, ජීවීන්ගේ පැවැත්මට එහි ඇති වැදගත්කමකුත් පැහැදිලි කරන්න.
-**Model Answer:**
-ජලය ධ්‍රැවීය අණුවක් වන අතර, එයට වෙනත් බොහෝ ධ්‍රැවීය සංයෝග (උදා: ලවණ, සීනි) පහසුවෙන් දියකර හැරීමේ හැකියාව ඇත. එබැවින් එය "ඉතා හොඳ ද්‍රාවකයක්" ලෙස හැඳින්වේ. ජීවීන්ගේ පැවැත්මට මෙය අත්‍යවශ්‍ය වන්නේ, සෛල තුළ සිදුවන සියලුම ජෛව රසායනික ප්‍රතික්‍රියා සඳහා ජලය මාධ්‍යයක් ලෙස ක්‍රියා කරන බැවිනි. තවද, පෝෂක ද්‍රව්‍ය හා අපද්‍රව්‍ය පරිවහනය කිරීමටද ජලය අත්‍යවශ්‍ය වේ.
+Q15. පිෂ්ටය සඳහා වන අයඩීන් පරීක්ෂණය, ප්‍රතිකාරක සහ අපේක්ෂිත නිරීක්ෂණය ද ඇතුළුව, විස්තර කරන්න.
+**Model Answer:** The Iodine test is a method used to detect the presence of starch in a food sample. To conduct the test, a small amount of the food sample is initially prepared and mixed with water in a test tube. Then, a few drops of Iodine solution are carefully added to this mixture. If starch is present in the sample, the solution will exhibit a distinctive blue-violet or purplish-blue color, indicating a positive result for starch.
 **Marking Scheme:**
-- ජලය හොඳ ද්‍රාවකයක් වීමට හේතුව (ධ්‍රැවීය ස්වභාවය) — 2 marks
-- ජීවීන්ගේ පැවැත්මට ඇති වැදගත්කම (ජෛව රසායනික ප්‍රතික්‍රියා මාධ්‍ය, පරිවහනය) — 2 marks
+- States purpose: detects starch (1 mark)
+- Mentions Iodine solution as reagent (1 mark)
+- Describes procedure (adding Iodine to sample) (1 mark)
+- Describes positive observation: blue-violet/purplish-blue color (1 mark)
 
 ---
 
 ## PART C: Structured Essay Question — 10 Marks
 
-Q16. කාබොහයිඩ්රේට යනු ජීවීන්ගේ පැවැත්මට අත්‍යවශ්‍ය ජෛව අණුවකි.
-**(a) කාබොහයිඩ්රේට වර්ග තුන නම් කර, ඒ එක් එක් වර්ගයට නිදසුනක් බැගින් දෙන්න. - 3 marks**
-**(b) ඩයිසැකරයිඩයක් සෑදීමේදී සිදුවන රසායනික ක්‍රියාවලිය කෙටියෙන් පැහැදිලි කරන්න. - 3 marks**
-**(c) ජීවීන්ගේ දේහය තුළ කාබොහයිඩ්රේටවල කෘත්‍යයන් දෙකක් පැහැදිලි කරන්න. - 4 marks**
+Q16. ඛනිජ මූලද්‍රව්‍ය ජීවීන්ගේ නිසි ක්‍රියාකාරිත්වය සඳහා අත්‍යවශ්‍ය වේ.
+**(a) මිනිස් සිරුරට අවශ්‍ය ප්‍රධාන මූලද්‍රව්‍ය (macroelements) දෙකක් සහ අංශුමාත්‍ර මූලද්‍රව්‍ය (trace elements) දෙකක් නම් කරන්න. - 2 marks**
+**(b) මිනිස් සිරුරේ කැල්සියම් (Calcium) සහ යකඩ (Iron) වල එක් කාර්යභාරය බැගින් විස්තර කරන්න. - 4 marks**
+**(c) ශාකවල නයිට්‍රජන් (Nitrogen) ඌනතාවය සහ මිනිසුන්ගේ අයඩීන් (Iodine) ඌනතාවය සඳහා එක් රෝග ලක්ෂණයක් බැගින් පැහැදිලි කරන්න. - 4 marks**
 
 **Model Answer:**
-**(a)** කාබොහයිඩ්රේට ප්‍රධාන වශයෙන් වර්ග තුනකට බෙදා දැක්විය හැක:
-1.  **මොනොසැකරයිඩ:** ග්ලූකෝස් (Glucose), පෘක්ටෝස් (Fructose)
-2.  **ඩයිසැකරයිඩ:** සුක්‍රෝස් (Sucrose), ලැක්ටෝස් (Lactose), මෝල්ටෝස් (Maltose)
-3.  **පොලිසැකරයිඩ:** පිෂ්ටය (Starch), සෙලියුලෝස් (Cellulose), ග්ලයිකොජන් (Glycogen)
+**(a)** මිනිස් සිරුරට අවශ්‍ය ප්‍රධාන මූලද්‍රව්‍ය දෙකක් නම් කැල්සියම් (Calcium) සහ පොස්ෆරස් (Phosphorus) වේ.
+මිනිස් සිරුරට අවශ්‍ය අංශුමාත්‍ර මූලද්‍රව්‍ය දෙකක් නම් යකඩ (Iron) සහ අයඩීන් (Iodine) වේ.
 
-**(b)** ඩයිසැකරයිඩයක් සෑදීමේදී මොනොසැකරයිඩ අණු දෙකක් එකිනෙක සමඟ සංයෝජනය වේ. මෙම ක්‍රියාවලියේදී ජල අණුවක් (H₂O) පිටවීම සිදුවේ. මෙය විජලන සංස්ලේෂණයක් ලෙස හැඳින්වේ. උදාහරණයක් ලෙස, ග්ලූකෝස් අණුවක් සහ පෘක්ටෝස් අණුවක් සංයෝජනය වීමෙන් සුක්‍රෝස් අණුවක් සහ ජලය අණුවක් සෑදේ.
-(ග්ලූකෝස් + පෘක්ටෝස් → සුක්‍රෝස් + ජලය)
+**(b)** කැල්සියම් දත් හා අස්ථි වර්ධනයට අත්‍යවශ්‍ය වේ. එය රුධිරය කැටි ගැසීමේදී හා ස්නායු පද්ධතියේ නිසි ක්‍රියාකාරිත්වය සඳහා ද වැදගත් වේ.
+යකඩ හිමොග්ලොබින් සංශ්ලේෂණයට අත්‍යවශ්‍ය වේ. එය රුධිරයේ ඔක්සිජන් ප්‍රවාහනය සඳහා මෙන්ම මාංශ පේශිවල ඔක්සිජන් ගබඩා කිරීමට සහ ඇතැම් එන්සයිමවල සංඝටකයක් ලෙස ද ක්‍රියා කරයි.
 
-**(c)** ජීවීන්ගේ දේහය තුළ කාබොහයිඩ්රේටවල කෘත්‍යයන් දෙකක් පහත පරිදි වේ:
-1.  **ශක්ති ප්‍රභවයක් ලෙස:** ජීවීන්ගේ ක්‍රියාකාරකම් සඳහා අවශ්‍ය ශක්තිය ලබා ගන්නා ප්‍රධාන ප්‍රභවය වන්නේ කාබොහයිඩ්රේටයි. ඒවා ජීරණය වීමෙන් සෑදෙන ග්ලූකෝස් සෛල තුළ ඔක්සිකරණය වී ශක්තිය මුදාහරී. (උදා: ග්ලූකෝස්)
-2.  **සංචිත ආහාරයක් ලෙස:** ශාකවල පිෂ්ටය ලෙසත්, සතුන්ගේ ග්ලයිකොජන් ලෙසත් අතිරික්ත කාබොහයිඩ්රේට ගබඩා කරනු ලැබේ. අවශ්‍ය වූ විට මෙම සංචිත ශක්තිය නිපදවීමට යොදා ගනී.
-3.  **ව්‍යුහ සංඝටකයක් ලෙස:** ශාක සෛල බිත්තිවල සෙලියුලෝස් අඩංගු වන අතර එය ශාකවලට ශක්තිය හා ආධාරකයක් සපයයි. කෘමීන්ගේ බාහිර සැකිලිවල චිටින් වැනි කාබොහයිඩ්රේට පවතී.
-(ඕනෑම කෘත්‍යයන් දෙකක් පැහැදිලි කළ යුතුය)
+**(c)** ශාකවල නයිට්‍රජන් ඌනතාවයේ ප්‍රධාන රෝග ලක්ෂණයක් වන්නේ වර්ධනය හීනවීමයි (stunted growth). තවද, පරිණත පත්‍රවල හරිතක්ෂය ඇතිවේ, එනම් පත්‍ර කහ පැහැයට හැරේ.
+මිනිසුන්ගේ අයඩීන් ඌනතාවයේ ප්‍රධාන රෝග ලක්ෂණයක් වන්නේ බුද්ධි සංවර්ධනයට බාධා ඇතිවීම සහ ඉගෙනීමට මැළිකමක් දැක්වීමයි. තවද, ශරීරයේ උස යාම සීමා වීමක් ද නිරීක්ෂණය කළ හැකිය.
 
 **Marking Scheme:**
 **(a)**
-- වර්ග තුන නම් කිරීමට — 1.5 marks (එක් වර්ගයකට 0.5 marks)
-- නිදසුන් තුනක් දීමට — 1.5 marks (එක් නිදසුනකට 0.5 marks)
+- එක් ප්‍රධාන මූලද්‍රව්‍යයක් නම් කිරීම — 0.5 mark
+- දෙවන ප්‍රධාන මූලද්‍රව්‍යය නම් කිරීම — 0.5 mark
+- එක් අංශුමාත්‍ර මූලද්‍රව්‍යයක් නම් කිරීම — 0.5 mark
+- දෙවන අංශුමාත්‍ර මූලද්‍රව්‍යය නම් කිරීම — 0.5 mark (Total 2 marks)
+
 **(b)**
-- මොනොසැකරයිඩ දෙකක් සම්බන්ධ වීම — 1 mark
-- ජල අණුවක් පිටවීම — 1 mark
-- ක්‍රියාවලිය විජලන සංස්ලේෂණය ලෙස හැඳින්වීම — 1 mark
+- කැල්සියම් වල එක් නිවැරදි කාර්යභාරයක් විස්තර කිරීම (උදා: අස්ථි/දත්, රුධිර කැටි ගැසීම, ස්නායු ක්‍රියාකාරිත්වය) — 2 marks
+- යකඩ වල එක් නිවැරදි කාර්යභාරයක් විස්තර කිරීම (උදා: හිමොග්ලොබින් සංශ්ලේෂණය, ඔක්සිජන් ප්‍රවාහනය, එන්සයිම සංඝටකය) — 2 marks (Total 4 marks)
+
 **(c)**
-- කෘත්‍යයන් දෙකක් නිවැරදිව නම් කිරීමට — 2 marks (එක් කෘත්‍යයකට 1 mark)
-- එක් එක් කෘත්‍යය පැහැදිලි කිරීමට — 2 marks (එක් කෘත්‍යයකට 1 mark)
+- ශාකවල නයිට්‍රජන් ඌනතාවය සඳහා එක් නිවැරදි රෝග ලක්ෂණයක් පැහැදිලි කිරීම (උදා: වර්ධනය හීනවීම, පරිණත පත්‍රවල හරිතක්ෂය) — 2 marks
+- මිනිසුන්ගේ අයඩීන් ඌනතාවය සඳහා එක් නිවැරදි රෝග ලක්ෂණයක් පැහැදිලි කිරීම (උදා: බුද්ධි සංවර්ධනයට බාධා, ඉගෙනීමට මැළිකම, උස යාම සීමා වීම) — 2 marks (Total 4 marks)
 
 ---
 
 ## 📊 DIFFICULTY ANALYSIS:
 | Level | Questions | Marks |
-|-------|-----------|-------|
-| Knowledge (දැනීම) | Q1-Q5 (MCQ) | 10 |
-| Comprehension (අවබෝධය) | Q6-Q8 (MCQ), Q11, Q12 (SAQ) | 14 |
-| Application (යෙදීම) | Q9-Q10 (MCQ), Q13, Q14, Q15 (SAQ), Q16 (SEQ) | 26 |
+|---|---|---|
+| Knowledge (දැනීම) | Part A (Q1-Q5), Part C (Q16a) | 12 |
+| Comprehension (අවබෝධය) | Part A (Q6-Q8), Part B (Q11, Q12, Q15) | 18 |
+| Application (යෙදීම) | Part A (Q9-Q10), Part B (Q13, Q14), Part C (Q16b, Q16c) | 20 |
 | **Total** | **16** | **50** |
 
 ---
 
 ## 🎯 COMMON MISTAKES TO AVOID:
-1.  **ජෛව අණු වර්ගීකරණය මිශ්‍ර කිරීම:** මොනොසැකරයිඩ, ඩයිසැකරයිඩ සහ පොලිසැකරයිඩ අතර වෙනස්කම් සහ නිදසුන් නිවැරදිව හඳුනා නොගැනීම.
-2.  **පරීක්ෂණ ප්‍රතිඵල අර්ථකථනය වැරදි වීම:** පිෂ්ටය, සීනි සහ ප්‍රෝටීන් සඳහා වන ජෛව රසායනික පරීක්ෂණවල වර්ණ වෙනස්වීම් සහ ඒවායේ අර්ථයන් නිවැරදිව හඳුනා නොගැනීම.
-3.  **විටමින් හා ඛනිජ ඌනතා රෝග ලක්ෂණ ව්‍යාකූල වීම:** නිශ්චිත විටමින් හෝ ඛනිජ ඌනතාවලට අදාළ රෝග ලක්ෂණ නිවැරදිව සම්බන්ධ කිරීමට අපොහොසත් වීම.
-4.  **ජලයේ අද්විතීය ගුණාංග නොදැනීම:** ජලයේ ඉහළ විශිෂ්ට තාප ධාරිතාව, හොඳ ද්‍රාවක ස්වභාවය වැනි ගුණාංග ජීවීන්ට වැදගත් වන්නේ කෙසේද යන්න පැහැදිලි කිරීමට අපොහොසත් වීම.
-5.  **ප්‍රෝටීන්, කාබොහයිඩ්රේට සහ ලිපිඩ වල කාර්යයන් පටලවා ගැනීම:** එක් එක් ජෛව අණුවට අදාළ නිශ්චිත කාර්යයන් නිවැරදිව සඳහන් කිරීමට අපොහොසත් වීම.
+1.  **පරීක්ෂණ වැරදීම:** විවිධ ජෛව අණු සඳහා වන පරීක්ෂණ (උදා: පිෂ්ටය සඳහා බෙනඩික්ට්, ප්‍රෝටීන් සඳහා අයඩීන්) එකිනෙක පටලවා ගැනීම.
+2.  **ඌනතා ලක්ෂණ වැරදීම:** විවිධ විටමින් හෝ ඛනිජ ලවණ ඌනතා සඳහා වන රෝග ලක්ෂණ නිවැරදිව සම්බන්ධ කිරීමට අපොහොසත් වීම (උදා: විටමින් A ඌනතාවය නිසා ස්කර්වි රෝගය ඇතිවන බව පැවසීම).
+3.  **අණුක සූත්‍ර වැරදීම:** කාබොහයිඩ්රේට, ප්‍රෝටීන් හෝ නියුක්ලෙයික් අම්ලවල පොදු අණුක සූත්‍ර හෝ මූලික සංඝටක වැරදි ලෙස සඳහන් කිරීම.
+4.  **ප්‍රධාන හා අංශුමාත්‍ර මූලද්‍රව්‍ය ව්‍යාකූල කිරීම:** ප්‍රධාන මූලද්‍රව්‍ය සහ අංශුමාත්‍ර මූලද්‍රව්‍ය අතර වෙනස වටහා නොගැනීම.
+5.  **පැහැදිලි කිරීම් අසම්පූර්ණ වීම:** යම් සංසිද්ධියක් පිටුපස ඇති *හේතුව* පැහැදිලි කිරීමට අපොහොසත් වීම (උදා: ජලය හොඳ උෂ්ණත්ව නියාමකයකු වන්නේ *ඇයිද* යන්න පැහැදිලි නොකර, එය එසේ වන බව පමණක් සඳහන් කිරීම).
 
 ---
 
