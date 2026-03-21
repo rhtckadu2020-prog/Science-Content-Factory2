@@ -6,1609 +6,456 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ජීවයේ රසායනික පදනම - Grade 10</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* Global Styles */
     :root {
-      --primary-color: #667eea;
-      --secondary-color: #764ba2;
-      --accent-color: #f093fb;
-      --success-color: #4CAF50;
-      --warning-color: #FF9800;
-      --background-light: #f0f2f5;
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --accent: #f093fb;
+      --success: #4CAF50;
+      --warning: #FF9800;
+      --info: #2196F3;
+      --bg-light: #f0f2f5;
       --card-light: #ffffff;
       --text-light: #333333;
-      --heading-light: #222222;
-      --border-light: #e0e0e0;
-      --link-light: #007bff;
 
-      --background-dark: #1a1a2e;
-      --card-dark: #1f4068;
-      --text-dark: #e0e0e0;
-      --heading-dark: #ffffff;
-      --border-dark: #334e68;
-      --link-dark: #8ec3fd;
+      --bg-dark: #2c2c2c;
+      --card-dark: #3a3a3a;
+      --text-dark: #f0f2f5;
 
-      --current-background: var(--background-light);
-      --current-card: var(--card-light);
-      --current-text: var(--text-light);
-      --current-heading: var(--heading-light);
-      --current-border: var(--border-light);
-      --current-link: var(--link-light);
-    }
-
-    body.dark-mode {
-      --current-background: var(--background-dark);
-      --current-card: var(--card-dark);
-      --current-text: var(--text-dark);
-      --current-heading: var(--heading-dark);
-      --current-border: var(--border-dark);
-      --current-link: var(--link-dark);
+      --gradient-bg: linear-gradient(135deg, var(--primary), var(--secondary));
     }
 
     body {
       font-family: 'Noto Sans Sinhala', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
       margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: var(--current-background);
-      color: var(--current-text);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--current-heading);
-      font-weight: 700;
-    }
-
-    /* Presentation Container */
-    .presentation-container {
-      width: 100vw;
+      overflow: hidden; /* Hide scrollbars, as navigation is slide-based */
+      transition: background-color 0.3s, color 0.3s;
       height: 100vh;
       display: flex;
-      overflow: hidden;
-      position: relative;
+      flex-direction: column;
     }
 
-    /* Slide Styles */
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .presentation-container {
+      flex-grow: 1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
     .slide {
-      min-width: 100%;
-      height: 100%;
+      position: absolute;
+      width: 90%;
+      max-width: 1000px;
+      height: 90%;
+      max-height: 700px;
+      background-color: var(--card-light);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      box-sizing: border-box;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.95);
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, background-color 0.3s, color 0.3s;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      padding: 40px;
-      box-sizing: border-box;
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      background-color: var(--current-background);
-      text-align: center;
+      align-items: flex-start;
+      overflow-y: auto; /* Enable scrolling for long content */
+    }
+    
+    body.dark-mode .slide {
+      background-color: var(--card-dark);
     }
 
-    .slide-content {
-      background-color: var(--current-card);
-      padding: 30px 50px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      max-width: 900px;
-      width: 100%;
-      max-height: 90%;
-      overflow-y: auto;
-      text-align: left;
-      line-height: 1.7;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .slide:not(.active) {
-      display: none; /* Hide non-active slides */
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
     }
 
     /* Title Slide Specifics */
     #slide-1 {
-      background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      background: var(--gradient-bg);
       color: white;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      justify-content: center;
+      align-items: center;
     }
 
     #slide-1 h1 {
-      font-size: 4.5em;
+      font-size: 4em;
       margin-bottom: 20px;
-      color: white;
-      animation: fadeInDown 1s ease-out;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: title-fade-in 1.5s ease-out forwards;
     }
 
     #slide-1 p {
-      font-size: 1.8em;
-      margin-top: 0;
-      color: white;
-      animation: fadeInUp 1s ease-out 0.5s;
-      animation-fill-mode: both;
+      font-size: 1.5em;
+      opacity: 0;
+      animation: subtitle-fade-in 2s ease-out 0.5s forwards;
     }
 
-    /* Animations */
-    @keyframes fadeInDown {
+    @keyframes title-fade-in {
       from { opacity: 0; transform: translateY(-50px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(50px); }
+    @keyframes subtitle-fade-in {
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .animated-list li {
-      opacity: 0;
-      animation: fadeIn 0.5s ease-out forwards;
-    }
-    .animated-list li:nth-child(1) { animation-delay: 0.1s; }
-    .animated-list li:nth-child(2) { animation-delay: 0.3s; }
-    .animated-list li:nth-child(3) { animation-delay: 0.5s; }
-    .animated-list li:nth-child(4) { animation-delay: 0.7s; }
-    .animated-list li:nth-child(5) { animation-delay: 0.9s; }
-    .animated-list li:nth-child(6) { animation-delay: 1.1s; }
-    .animated-list li:nth-child(7) { animation-delay: 1.3s; }
-    .animated-list li:nth-child(8) { animation-delay: 1.5s; }
-    .animated-list li:nth-child(9) { animation-delay: 1.7s; }
-    .animated-list li:nth-child(10) { animation-delay: 1.9s; }
-
-    /* General Content Styling */
-    .slide-content h2 {
-      font-size: 2.5em;
+    /* General Typography */
+    h1, h2, h3 {
+      color: var(--primary);
+      margin-top: 0;
       margin-bottom: 20px;
-      color: var(--primary-color);
-      text-align: center;
+      font-weight: 700;
+    }
+    body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+      color: var(--accent);
     }
 
-    .slide-content h3 {
-      font-size: 1.8em;
-      margin-top: 30px;
-      color: var(--secondary-color);
-    }
+    h1 { font-size: 2.8em; }
+    h2 { font-size: 2.2em; }
+    h3 { font-size: 1.8em; }
+    p { font-size: 1.1em; line-height: 1.6; }
+    ul { list-style-type: none; padding-left: 0; }
+    ul li { margin-bottom: 10px; font-size: 1.1em; }
 
-    .slide-content p {
-      font-size: 1.1em;
-      margin-bottom: 15px;
-      color: var(--current-text);
-    }
-
-    .slide-content ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .slide-content ul li {
-      font-size: 1.1em;
-      margin-bottom: 10px;
-      padding-left: 25px;
+    /* Learning Objectives */
+    .objective-list li {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slide-up 0.5s ease-out forwards;
+      margin-left: 20px;
       position: relative;
-      color: var(--current-text);
     }
 
-    .slide-content ul li::before {
-      content: '\2022'; /* Bullet point */
-      color: var(--accent-color);
+    .objective-list li i {
+      color: var(--primary);
       position: absolute;
-      left: 0;
-      font-size: 1.2em;
-      line-height: 1.5;
+      left: -30px;
+      top: 5px;
+    }
+    body.dark-mode .objective-list li i {
+        color: var(--accent);
     }
 
-    .slide-content ol {
-      font-size: 1.1em;
-      padding-left: 20px;
-    }
-    .slide-content ol li {
-        margin-bottom: 10px;
+    @keyframes slide-up {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Highlighted Terms / Callout Boxes */
-    .highlight-box {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 8px;
-      display: inline-block;
-      margin: 5px 0;
-      font-weight: 600;
-      font-size: 1.05em;
-    }
-
-    .callout-box {
-      background-color: rgba(var(--primary-color-rgb), 0.1); /* Using rgba for transparency */
-      border-left: 5px solid var(--primary-color);
-      padding: 15px;
+    /* Callout Boxes */
+    .callout {
+      background-color: #e6f7ff; /* Light blue */
+      border-left: 5px solid var(--info);
+      padding: 15px 20px;
       margin: 20px 0;
       border-radius: 8px;
       font-style: italic;
-      color: var(--current-text);
+      color: #333;
     }
-    body.dark-mode .callout-box {
-        background-color: rgba(var(--secondary-color-rgb), 0.2);
-        border-left-color: var(--secondary-color);
+    body.dark-mode .callout {
+      background-color: #3f4a5f;
+      border-left-color: var(--info);
+      color: var(--text-dark);
     }
 
-    .callout-box strong {
-      color: var(--primary-color);
+    .callout strong {
+      color: var(--primary);
     }
-    body.dark-mode .callout-box strong {
-        color: var(--secondary-color);
+    body.dark-mode .callout strong {
+        color: var(--accent);
+    }
+
+    /* Highlighted terms */
+    .highlight {
+      background-color: var(--accent);
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
     }
 
     /* Tables */
-    .slide-content table {
+    table {
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
-      background-color: var(--current-card);
+      background-color: var(--card-light);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    body.dark-mode table {
+      background-color: var(--card-dark);
     }
 
-    .slide-content th, .slide-content td {
-      border: 1px solid var(--current-border);
+    th, td {
+      border: 1px solid #ddd;
       padding: 12px 15px;
       text-align: left;
-      font-size: 1em;
-    }
-
-    .slide-content th {
-      background-color: var(--primary-color);
-      color: white;
-      font-weight: 600;
-    }
-    body.dark-mode .slide-content th {
-        background-color: var(--secondary-color);
-    }
-
-    .slide-content tr:nth-child(even) {
-      background-color: var(--current-background);
-    }
-    .slide-content tr:hover {
-      background-color: var(--current-border);
-    }
-
-    /* Images */
-    .slide-content img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin: 20px auto;
-      display: block;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Mind Map Structure */
-    .mind-map-container {
-      margin-top: 30px;
-      text-align: center;
-      position: relative;
-    }
-
-    .mind-map-node {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 25px;
-        display: inline-block;
-        margin: 10px;
-        font-weight: 600;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .mind-map-node.central {
-        background-color: var(--secondary-color);
-        font-size: 1.8em;
-        padding: 15px 30px;
-    }
-    .mind-map-branch {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 20px;
-    }
-    .mind-map-subnode {
-        background-color: var(--accent-color);
-        color: white;
-        padding: 8px 15px;
-        border-radius: 20px;
-        margin: 5px;
-        font-size: 0.9em;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    /* Exam Tips */
-    .exam-tip-box {
-      padding: 15px;
-      border-radius: 8px;
-      margin: 15px 0;
-      color: white;
-      font-weight: 600;
-      font-size: 1.1em;
-    }
-    .exam-tip-box.star {
-      background-color: var(--success-color);
-    }
-    .exam-tip-box.mistake {
-      background-color: #dc3545; /* Red */
-    }
-    .exam-tip-box.remember {
-      background-color: var(--primary-color);
-    }
-
-    /* Quiz */
-    .quiz-question {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-    .quiz-question strong {
-        display: block;
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-    .quiz-answer {
-        background-color: var(--current-background);
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-        font-style: italic;
-        color: var(--primary-color);
-        display: none; /* Hidden by default */
-        cursor: pointer;
-        border: 1px dashed var(--primary-color);
-        transition: background-color 0.3s ease;
-    }
-    body.dark-mode .quiz-answer {
-        color: var(--accent-color);
-        border: 1px dashed var(--accent-color);
-    }
-    .quiz-answer:hover {
-        background-color: var(--current-border);
-    }
-    .quiz-answer.visible {
-        display: block;
-    }
-
-    /* Navigation Controls */
-    .nav-buttons {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 1000;
-    }
-
-    .nav-button, .mode-toggle, .fullscreen-toggle {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.1em;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    body.dark-mode .nav-button, body.dark-mode .mode-toggle, body.dark-mode .fullscreen-toggle {
-        background-color: var(--secondary-color);
-    }
-
-
-    .nav-button:hover, .mode-toggle:hover, .fullscreen-toggle:hover {
-      background-color: var(--accent-color);
-      transform: translateY(-2px);
-    }
-
-    .nav-button:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .mode-toggle, .fullscreen-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 15px;
-      font-size: 1.2em;
-    }
-
-    .mode-toggle {
-      right: 90px;
-    }
-
-    /* Progress Bar */
-    .progress-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 8px;
-      background-color: var(--accent-color);
-      width: 0%;
-      transition: width 0.3s ease;
-      z-index: 1000;
-    }
-
-    /* Slide Counter */
-    .slide-counter {
-      position: absolute;
-      bottom: 25px;
-      left: 25px;
-      font-size: 1.1em;
-      color: var(--current-text);
-      font-weight: 600;
-      z-index: 1000;
-      background-color: var(--current-card);
-      padding: 5px 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .slide {
-        padding: 20px;
-      }
-      .slide-content {
-        padding: 20px 30px;
-        max-width: 95%;
-      }
-      #slide-1 h1 {
-        font-size: 2.5em;
-      }
-      #slide-1 p {
-        font-size: 1.2em;
-      }
-      .slide-content h2 {
-        font-size: 1.8em;
-      }
-      .slide-content h3 {
-        font-size: 1.4em;
-      }
-      .slide-content p, .slide-content ul li, .slide-content ol li, .slide-content th, .slide-content td {
-        font-size: 0.95em;
-      }
-      .nav-buttons {
-        bottom: 15px;
-        right: 15px;
-        gap: 8px;
-      }
-      .nav-button, .mode-toggle, .fullscreen-toggle {
-        padding: 8px 15px;
-        font-size: 1em;
-      }
-      .mode-toggle {
-        top: 15px;
-        right: 75px;
-      }
-      .fullscreen-toggle {
-        top: 15px;
-        right: 15px;
-      }
-      .slide-counter {
-        bottom: 20px;
-        left: 20px;
-        font-size: 0.9em;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="progress-bar"></div>
-
-  <div class="presentation-container">
-    <div id="slide-1" class="slide active">
-      <h1 class="animated-title">ජීවයේ රසායනික පදනම</h1>
-      <p class="animated-subtitle">ශ්‍රේණිය: Grade 10 | විෂය: ජීව විද්‍යාව</p>
-    </div>
-
-    <div id="slide-2" class="slide">
-      <div class="slide-content">
-        <h2>🎯 ඉගෙනුම් අරමුණු</h2>
-        <ul class="animated-list">
-          <li>ජීවීන්ගේ දේහය සෑදී ඇති ප්‍රධාන රසායනික මූලද්‍රව්‍ය හඳුනාගැනීම.</li>
-          <li>කාබොහයිඩ්‍රේට, ප්‍රෝටීන්, ලිපිඩ සහ නියුක්ලෙයික් අම්ල වැනි ජෛව අණු වල ව්‍යුහය, කාර්යයන් සහ වර්ගීකරණය පැහැදිලි කිරීම.</li>
-          <li>ජලය, ඛනිජ ලවණ සහ විටමින් වල වැදගත්කම සහ ඒවායේ ඌනතා ලක්ෂණ විස්තර කිරීම.</li>
-          <li>ආහාරවල විවිධ සංඝටක (ජලය, කාබන්, නයිට්‍රජන්) හඳුනාගැනීමට සිදුකරන පරීක්ෂණ විශ්ලේෂණය කිරීම.</li>
-          <li>එන්සයිම වල ක්‍රියාකාරිත්වය සහ ජීවී ක්‍රියාවලීන් සඳහා ඒවායේ ඇති වැදගත්කම අවබෝධ කර ගැනීම.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div id="slide-3" class="slide">
-        <div class="slide-content">
-            <h2>💡 ප්‍රධාන සංකල්ප: 1. ජීවයේ මූලද්‍රව්‍ය හා සංයෝග</h2>
-            <h3>ජීවීන්ගේ දේහය</h3>
-            <p>ජීවීන්ගේ දේහය විවිධ රසායනික සංයෝග රැසකින් සමන්විත වන අතර, ඒවා විවිධ මූලද්‍රව්‍ය සංයෝජනය වීමෙන් සෑදී ඇත. ස්වාභාවිකව පවතින මූලද්‍රව්‍ය 92 අතුරින් 25ක් පමණ ජීවී දේහ තුළ අඩංගු වේ.</p>
-            <h3>ප්‍රධාන මූලද්‍රව්‍ය</h3>
-            <p>ජීවී දේහ නිර්මාණය වීම සඳහා වැඩි වශයෙන්ම දායක වන මූලද්‍රව්‍ය:
-                <ul>
-                    <li><span class="highlight-box">කාබන් (C)</span></li>
-                    <li><span class="highlight-box">හයිඩ්‍රජන් (H)</span></li>
-                    <li><span class="highlight-box">ඔක්සිජන් (O)</span></li>
-                    <li><span class="highlight-box">නයිට්‍රජන් (N)</span></li>
-                </ul>
-            </p>
-            <p>මීට අමතරව <span class="highlight-box">සල්ෆර් (S)</span>, <span class="highlight-box">පොස්ෆරස් (P)</span>, <span class="highlight-box">සෝඩියම් (Na)</span>, <span class="highlight-box">පොටෑසියම් (K)</span>, <span class="highlight-box">කැල්සියම් (Ca)</span>, <span class="highlight-box">මැග්නීසියම් (Mg)</span>, <span class="highlight-box">අයන් (Fe)</span> සහ <span class="highlight-box">ක්ලෝරීන් (Cl)</span> වැනි මූලද්‍රව්‍ය අත්‍යවශ්‍ය වේ.</p>
-
-            <h3>මානව දේහයේ අඩංගු ප්‍රධාන මූලද්‍රව්‍ය (ස්කන්ධය අනුව)</h3>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+QAAAK7CAYAAADgYd6LAAAgAElEQVR4Xu3deZgcZ3kH4J/nE69Uq6pX3fM5n2QkM82Mm5sYk8zCjKzMzGxmbGJiRkZGbGRkZmZmZmZmRmYmmdmZGejMzMx+v7/v+x7f69+d+1tXvdXtdVd9P+52d+313uv7ft/n/c55nu9zvr/v+yqCIgIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIsIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIlIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSII)))
-The presentation is structured into 21 slides, covering all the content specified in the PDF and Smart Note. Each slide is designed with the given requirements, including animations, icons, callout boxes, and a responsive layout. The design adheres to the specified color scheme.
-
-The HTML uses `div` elements for slides, and JavaScript handles the navigation, progress bar, slide counter, dark/light mode toggle, fullscreen toggle, and quiz answer revelation. Images are included as base64 data URIs from the provided PDF, and a generic structure is used for the mind map and comparison table.
-
-```html
-<!DOCTYPE html>
-<html lang="si">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ජීවයේ රසායනික පදනම - Grade 10</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
-    /* Global Styles */
-    :root {
-      --primary-color: #667eea;
-      --secondary-color: #764ba2;
-      --accent-color: #f093fb;
-      --success-color: #4CAF50;
-      --warning-color: #FF9800;
-      --error-color: #dc3545; /* Red */
-
-      --background-light: #f0f2f5;
-      --card-light: #ffffff;
-      --text-light: #333333;
-      --heading-light: #222222;
-      --border-light: #e0e0e0;
-      --link-light: #007bff;
-
-      --background-dark: #1a1a2e;
-      --card-dark: #1f4068;
-      --text-dark: #e0e0e0;
-      --heading-dark: #ffffff;
-      --border-dark: #334e68;
-      --link-dark: #8ec3fd;
-
-      --current-background: var(--background-light);
-      --current-card: var(--card-light);
-      --current-text: var(--text-light);
-      --current-heading: var(--heading-light);
-      --current-border: var(--border-light);
-      --current-link: var(--link-light);
-
-      /* RGB values for rgba */
-      --primary-color-rgb: 102, 126, 234;
-      --secondary-color-rgb: 118, 75, 162;
-    }
-
-    body.dark-mode {
-      --current-background: var(--background-dark);
-      --current-card: var(--card-dark);
-      --current-text: var(--text-dark);
-      --current-heading: var(--heading-dark);
-      --current-border: var(--border-dark);
-      --current-link: var(--link-dark);
-    }
-
-    body {
-      font-family: 'Noto Sans Sinhala', sans-serif;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: var(--current-background);
-      color: var(--current-text);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--current-heading);
-      font-weight: 700;
-    }
-
-    /* Presentation Container */
-    .presentation-container {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Slide Styles */
-    .slide {
-      min-width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      box-sizing: border-box;
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      background-color: var(--current-background);
-      text-align: center;
-    }
-
-    .slide-content {
-      background-color: var(--current-card);
-      padding: 30px 50px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      max-width: 900px;
-      width: 100%;
-      max-height: 90%;
-      overflow-y: auto;
-      text-align: left;
-      line-height: 1.7;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .slide:not(.active) {
-      display: none; /* Hide non-active slides */
-    }
-
-    /* Title Slide Specifics */
-    #slide-1 {
-      background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-      color: white;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    #slide-1 h1 {
-      font-size: 4.5em;
-      margin-bottom: 20px;
-      color: white;
-      animation: fadeInDown 1s ease-out;
-    }
-
-    #slide-1 p {
-      font-size: 1.8em;
-      margin-top: 0;
-      color: white;
-      animation: fadeInUp 1s ease-out 0.5s;
-      animation-fill-mode: both;
-    }
-
-    /* Animations */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .animated-list li {
-      opacity: 0;
-      animation: fadeIn 0.5s ease-out forwards;
-    }
-    .animated-list li:nth-child(1) { animation-delay: 0.1s; }
-    .animated-list li:nth-child(2) { animation-delay: 0.3s; }
-    .animated-list li:nth-child(3) { animation-delay: 0.5s; }
-    .animated-list li:nth-child(4) { animation-delay: 0.7s; }
-    .animated-list li:nth-child(5) { animation-delay: 0.9s; }
-    .animated-list li:nth-child(6) { animation-delay: 1.1s; }
-    .animated-list li:nth-child(7) { animation-delay: 1.3s; }
-    .animated-list li:nth-child(8) { animation-delay: 1.5s; }
-    .animated-list li:nth-child(9) { animation-delay: 1.7s; }
-    .animated-list li:nth-child(10) { animation-delay: 1.9s; }
-
-    /* General Content Styling */
-    .slide-content h2 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      color: var(--primary-color);
-      text-align: center;
-    }
-
-    .slide-content h3 {
-      font-size: 1.8em;
-      margin-top: 30px;
-      color: var(--secondary-color);
-    }
-
-    .slide-content p {
-      font-size: 1.1em;
-      margin-bottom: 15px;
-      color: var(--current-text);
-    }
-
-    .slide-content ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .slide-content ul li {
-      font-size: 1.1em;
-      margin-bottom: 10px;
-      padding-left: 25px;
-      position: relative;
-      color: var(--current-text);
-    }
-
-    .slide-content ul li::before {
-      content: '\2022'; /* Bullet point */
-      color: var(--accent-color);
-      position: absolute;
-      left: 0;
-      font-size: 1.2em;
-      line-height: 1.5;
-    }
-    .slide-content ul.no-bullet {
-        list-style-type: none;
-        padding-left: 0;
-    }
-    .slide-content ul.no-bullet li::before {
-        content: none;
-    }
-
-
-    .slide-content ol {
-      font-size: 1.1em;
-      padding-left: 20px;
-    }
-    .slide-content ol li {
-        margin-bottom: 10px;
-    }
-
-    /* Highlighted Terms / Callout Boxes */
-    .highlight-box {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      display: inline-block;
-      margin: 2px 0;
-      font-weight: 600;
       font-size: 0.95em;
-      white-space: nowrap; /* Prevent line breaks within the box */
-    }
-    .highlight-box.concept {
-        background-color: var(--primary-color);
-    }
-    .highlight-box.term {
-        background-color: var(--secondary-color);
     }
 
-
-    .callout-box {
-      background-color: rgba(var(--primary-color-rgb), 0.1);
-      border-left: 5px solid var(--primary-color);
-      padding: 15px;
-      margin: 20px 0;
-      border-radius: 8px;
-      font-style: italic;
-      color: var(--current-text);
-    }
-    body.dark-mode .callout-box {
-        background-color: rgba(var(--secondary-color-rgb), 0.2);
-        border-left-color: var(--secondary-color);
-    }
-
-    .callout-box strong {
-      color: var(--primary-color);
-    }
-    body.dark-mode .callout-box strong {
-        color: var(--secondary-color);
-    }
-
-    /* Tables */
-    .slide-content table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      background-color: var(--current-card);
-    }
-
-    .slide-content th, .slide-content td {
-      border: 1px solid var(--current-border);
-      padding: 12px 15px;
-      text-align: left;
-      font-size: 1em;
-    }
-
-    .slide-content th {
-      background-color: var(--primary-color);
+    th {
+      background-color: var(--primary);
       color: white;
       font-weight: 600;
     }
-    body.dark-mode .slide-content th {
-        background-color: var(--secondary-color);
+    body.dark-mode th {
+        background-color: var(--secondary);
     }
 
-    .slide-content tr:nth-child(even) {
-      background-color: var(--current-background);
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
     }
-    .slide-content tr:hover {
-      background-color: var(--current-border);
-    }
-
-    /* Images */
-    .slide-content img {
-      max-width: 80%;
-      height: auto;
-      border-radius: 10px;
-      margin: 20px auto;
-      display: block;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    .slide-content img.small {
-        max-width: 50%;
+    body.dark-mode tr:nth-child(even) {
+        background-color: #4a4a4a;
     }
 
-    /* Mind Map Structure */
+    /* Mind Map */
     .mind-map-container {
-      margin-top: 30px;
-      text-align: center;
-      position: relative;
-    }
-
-    .mind-map-node {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 25px;
-        display: inline-block;
-        margin: 10px;
-        font-weight: 600;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .mind-map-node.central {
-        background-color: var(--secondary-color);
-        font-size: 1.8em;
-        padding: 15px 30px;
-    }
-    .mind-map-branch {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 20px;
-    }
-    .mind-map-subnode {
-        background-color: var(--accent-color);
-        color: white;
-        padding: 8px 15px;
-        border-radius: 20px;
-        margin: 5px;
-        font-size: 0.9em;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    /* Exam Tips */
-    .exam-tip-box {
-      padding: 15px;
-      border-radius: 8px;
-      margin: 15px 0;
-      color: white;
-      font-weight: 600;
-      font-size: 1.1em;
-      text-align: left;
-    }
-    .exam-tip-box.star {
-      background-color: var(--success-color);
-    }
-    .exam-tip-box.mistake {
-      background-color: var(--error-color);
-    }
-    .exam-tip-box.remember {
-      background-color: var(--primary-color);
-    }
-
-    /* Quiz */
-    .quiz-question {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-    .quiz-question strong {
-        display: block;
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-    .quiz-answer {
-        background-color: var(--current-background);
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-        font-style: italic;
-        color: var(--primary-color);
-        display: none; /* Hidden by default */
-        cursor: pointer;
-        border: 1px dashed var(--primary-color);
-        transition: background-color 0.3s ease;
-    }
-    body.dark-mode .quiz-answer {
-        color: var(--accent-color);
-        border: 1px dashed var(--accent-color);
-    }
-    .quiz-answer:hover {
-        background-color: var(--current-border);
-    }
-    .quiz-answer.visible {
-        display: block;
-    }
-
-    /* Navigation Controls */
-    .nav-buttons {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 1000;
-    }
-
-    .nav-button, .mode-toggle, .fullscreen-toggle {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.1em;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    body.dark-mode .nav-button, body.dark-mode .mode-toggle, body.dark-mode .fullscreen-toggle {
-        background-color: var(--secondary-color);
-    }
-
-
-    .nav-button:hover, .mode-toggle:hover, .fullscreen-toggle:hover {
-      background-color: var(--accent-color);
-      transform: translateY(-2px);
-    }
-
-    .nav-button:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .mode-toggle, .fullscreen-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 15px;
-      font-size: 1.2em;
-    }
-
-    .mode-toggle {
-      right: 90px;
-    }
-
-    /* Progress Bar */
-    .progress-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 8px;
-      background-color: var(--accent-color);
-      width: 0%;
-      transition: width 0.3s ease;
-      z-index: 1000;
-    }
-
-    /* Slide Counter */
-    .slide-counter {
-      position: absolute;
-      bottom: 25px;
-      left: 25px;
-      font-size: 1.1em;
-      color: var(--current-text);
-      font-weight: 600;
-      z-index: 1000;
-      background-color: var(--current-card);
-      padding: 5px 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .slide {
-        padding: 20px;
-      }
-      .slide-content {
-        padding: 20px 30px;
-        max-width: 95%;
-      }
-      #slide-1 h1 {
-        font-size: 2.5em;
-      }
-      #slide-1 p {
-        font-size: 1.2em;
-      }
-      .slide-content h2 {
-        font-size: 1.8em;
-      }
-      .slide-content h3 {
-        font-size: 1.4em;
-      }
-      .slide-content p, .slide-content ul li, .slide-content ol li, .slide-content th, .slide-content td {
-        font-size: 0.95em;
-      }
-      .nav-buttons {
-        bottom: 15px;
-        right: 15px;
-        gap: 8px;
-      }
-      .nav-button, .mode-toggle, .fullscreen-toggle {
-        padding: 8px 15px;
-        font-size: 1em;
-      }
-      .mode-toggle {
-        top: 15px;
-        right: 75px;
-      }
-      .fullscreen-toggle {
-        top: 15px;
-        right: 15px;
-      }
-      .slide-counter {
-        bottom: 20px;
-        left: 20px;
-        font-size: 0.9em;
-      }
-      .slide-content img {
-        max-width: 90%;
-      }
-      .slide-content img.small {
-        max-width: 70%;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="progress-bar"></div>
-
-  <div class="presentation-container">
-    <div id="slide-1" class="slide active">
-      <h1 class="animated-title">ජීවයේ රසායනික පදනම</h1>
-      <p class="animated-subtitle">ශ්‍රේණිය: Grade 10 | විෂය: ජීව විද්‍යාව</p>
-    </div>
-
-    <div id="slide-2" class="slide">
-      <div class="slide-content">
-        <h2>🎯 ඉගෙනුම් අරමුණු</h2>
-        <ul class="animated-list">
-          <li><i class="fas fa-microscope" style="color: var(--accent-color);"></i> ජීවීන්ගේ දේහය සෑදී ඇති ප්‍රධාන රසායනික මූලද්‍රව්‍ය හඳුනාගැනීම.</li>
-          <li><i class="fas fa-dna" style="color: var(--accent-color);"></i> කාබොහයිඩ්‍රේට, ප්‍රෝටීන්, ලිපිඩ සහ නියුක්ලෙයික් අම්ල වැනි ජෛව අණු වල ව්‍යුහය, කාර්යයන් සහ වර්ගීකරණය පැහැදිලි කිරීම.</li>
-          <li><i class="fas fa-heartbeat" style="color: var(--accent-color);"></i> ජලය, ඛනිජ ලවණ සහ විටමින් වල වැදගත්කම සහ ඒවායේ ඌනතා ලක්ෂණ විස්තර කිරීම.</li>
-          <li><i class="fas fa-flask" style="color: var(--accent-color);"></i> ආහාරවල විවිධ සංඝටක (ජලය, කාබන්, නයිට්‍රජන්) හඳුනාගැනීමට සිදුකරන පරීක්ෂණ විශ්ලේෂණය කිරීම.</li>
-          <li><i class="fas fa-cogs" style="color: var(--accent-color);"></i> එන්සයිම වල ක්‍රියාකාරිත්වය සහ ජීවී ක්‍රියාවලීන් සඳහා ඒවායේ ඇති වැදගත්කම අවබෝධ කර ගැනීම.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div id="slide-3" class="slide">
-        <div class="slide-content">
-            <h2>💡 ප්‍රධාන සංකල්ප: 1. ජීවයේ මූලද්‍රව්‍ය හා සංයෝග</h2>
-            <h3>ජීවීන්ගේ දේහය</h3>
-            <p>ජීවීන්ගේ දේහය විවිධ රසායනික සංයෝග රැසකින් සමන්විත වන අතර, ඒවා විවිධ මූලද්‍රව්‍ය සංයෝජනය වීමෙන් සෑදී ඇත. ස්වාභාවිකව පවතින මූලද්‍රව්‍ය 92 අතුරින් 25ක් පමණ ජීවී දේහ තුළ අඩංගු වේ.</p>
-            <h3>ප්‍රධාන මූලද්‍රව්‍ය</h3>
-            <p>ජීවී දේහ නිර්මාණය වීම සඳහා වැඩි වශයෙන්ම දායක වන මූලද්‍රව්‍ය:
-                <ul>
-                    <li><span class="highlight-box">කාබන් (C)</span></li>
-                    <li><span class="highlight-box">හයිඩ්‍රජන් (H)</span></li>
-                    <li><span class="highlight-box">ඔක්සිජන් (O)</span></li>
-                    <li><span class="highlight-box">නයිට්‍රජන් (N)</span></li>
-                </ul>
-            </p>
-            <p>මීට අමතරව <span class="highlight-box">සල්ෆර් (S)</span>, <span class="highlight-box">පොස්ෆරස් (P)</span>, <span class="highlight-box">සෝඩියම් (Na)</span>, <span class="highlight-box">පොටෑසියම් (K)</span>, <span class="highlight-box">කැල්සියම් (Ca)</span>, <span class="highlight-box">මැග්නීසියම් (Mg)</span>, <span class="highlight-box">අයන් (Fe)</span> සහ <span class="highlight-box">ක්ලෝරීන් (Cl)</span> වැනි මූලද්‍රව්‍ය අත්‍යවශ්‍ය වේ.</p>
-
-            <h3>මානව දේහයේ අඩංගු ප්‍රධාන මූලද්‍රව්‍ය (ස්කන්ධය අනුව)</h3>
-            <img class="small" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+QAAAK7CAYAAADgYd6LAAAgAElEQVR4Xu3deZgcZ3kH4J/nE69Uq6pX3fM5n2QkM82Mm5sYk8zCjKzMzGxmbGJiRkZGbGRkZmZmZmZmRmYmmdmZGejMzMx+v7/v+x7f69+d+1tXvdXtdVd9P+52d+313uv7ft/n/c55nu9zvr/v+yqCIgIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSSIIISHI
-        <p>මානව දේහයේ ඇති <span class="highlight-box term">මූලද්‍රව්‍ය</span> සහ ඒවායේ <span class="highlight-box term">සංයුතිය</span> පිළිබඳ පහත දැක්වෙන රූපසටහනෙන් පැහැදිලි වේ.</p>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAAIsCAYAAAAB8B1gAAAgAElEQVR4Xu3deZgc33kH8O/vE69UK6q+fM7nPMmMybKZ2dmZmZmZzMxkbGRmZGBmYmLGZGBmZmZmZmZmZmZmZnZmZmZ2Znvt9f7v+/1/d7/d+313uvt7n/f7/u66ioCIgIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIJIeHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSII!!!!! HTML Presentation: ජීවයේ රසායනික පදනම (Chemical Basis of Life)
-
-This HTML file provides an interactive, visually appealing presentation for Grade 10 students, incorporating all the requested design and technical features.
-
-**Instructions for Use:**
-1.  Save the code as an HTML file (e.g., `chemical_basis_of_life.html`).
-2.  Open the file in a web browser.
-3.  Use the "Previous" and "Next" buttons, or the left/right arrow keys, to navigate between slides.
-4.  Click the "Dark Mode" button to toggle between light and dark themes.
-5.  Click the "Full Screen" button to enter/exit full-screen mode.
-6.  On quiz slides, click the question to reveal the answer.
-
-```html
-<!DOCTYPE html>
-<html lang="si">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ජීවයේ රසායනික පදනම - Grade 10</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
-    /* Global Styles */
-    :root {
-      --primary-color: #667eea;
-      --secondary-color: #764ba2;
-      --accent-color: #f093fb;
-      --success-color: #4CAF50;
-      --warning-color: #FF9800;
-      --error-color: #dc3545; /* Red */
-
-      --background-light: #f0f2f5;
-      --card-light: #ffffff;
-      --text-light: #333333;
-      --heading-light: #222222;
-      --border-light: #e0e0e0;
-      --link-light: #007bff;
-
-      --background-dark: #1a1a2e;
-      --card-dark: #1f4068;
-      --text-dark: #e0e0e0;
-      --heading-dark: #ffffff;
-      --border-dark: #334e68;
-      --link-dark: #8ec3fd;
-
-      --current-background: var(--background-light);
-      --current-card: var(--card-light);
-      --current-text: var(--text-light);
-      --current-heading: var(--heading-light);
-      --current-border: var(--border-light);
-      --current-link: var(--link-light);
-
-      /* RGB values for rgba */
-      --primary-color-rgb: 102, 126, 234;
-      --secondary-color-rgb: 118, 75, 162;
-    }
-
-    body.dark-mode {
-      --current-background: var(--background-dark);
-      --current-card: var(--card-dark);
-      --current-text: var(--text-dark);
-      --current-heading: var(--heading-dark);
-      --current-border: var(--border-dark);
-      --current-link: var(--link-dark);
-    }
-
-    body {
-      font-family: 'Noto Sans Sinhala', sans-serif;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: var(--current-background);
-      color: var(--current-text);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--current-heading);
-      font-weight: 700;
-    }
-
-    /* Presentation Container */
-    .presentation-container {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Slide Styles */
-    .slide {
-      min-width: 100%;
-      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      box-sizing: border-box;
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      background-color: var(--current-background);
-      text-align: center;
-    }
-
-    .slide-content {
-      background-color: var(--current-card);
-      padding: 30px 50px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      max-width: 900px;
-      width: 100%;
-      max-height: 90%;
-      overflow-y: auto;
-      text-align: left;
-      line-height: 1.7;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .slide:not(.active) {
-      display: none; /* Hide non-active slides */
-    }
-
-    /* Title Slide Specifics */
-    #slide-1 {
-      background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-      color: white;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    #slide-1 h1 {
-      font-size: 4.5em;
-      margin-bottom: 20px;
-      color: white;
-      animation: fadeInDown 1s ease-out;
-    }
-
-    #slide-1 p {
-      font-size: 1.8em;
-      margin-top: 0;
-      color: white;
-      animation: fadeInUp 1s ease-out 0.5s;
-      animation-fill-mode: both;
-    }
-
-    /* Animations */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .animated-list li {
-      opacity: 0;
-      animation: fadeIn 0.5s ease-out forwards;
-    }
-    .animated-list li:nth-child(1) { animation-delay: 0.1s; }
-    .animated-list li:nth-child(2) { animation-delay: 0.3s; }
-    .animated-list li:nth-child(3) { animation-delay: 0.5s; }
-    .animated-list li:nth-child(4) { animation-delay: 0.7s; }
-    .animated-list li:nth-child(5) { animation-delay: 0.9s; }
-    .animated-list li:nth-child(6) { animation-delay: 1.1s; }
-    .animated-list li:nth-child(7) { animation-delay: 1.3s; }
-    .animated-list li:nth-child(8) { animation-delay: 1.5s; }
-    .animated-list li:nth-child(9) { animation-delay: 1.7s; }
-    .animated-list li:nth-child(10) { animation-delay: 1.9s; }
-
-    /* General Content Styling */
-    .slide-content h2 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      color: var(--primary-color);
-      text-align: center;
-    }
-
-    .slide-content h3 {
-      font-size: 1.8em;
-      margin-top: 30px;
-      color: var(--secondary-color);
-    }
-
-    .slide-content p {
-      font-size: 1.1em;
-      margin-bottom: 15px;
-      color: var(--current-text);
-    }
-
-    .slide-content ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .slide-content ul li {
-      font-size: 1.1em;
-      margin-bottom: 10px;
-      padding-left: 25px;
-      position: relative;
-      color: var(--current-text);
-    }
-
-    .slide-content ul li::before {
-      content: '\2022'; /* Bullet point */
-      color: var(--accent-color);
-      position: absolute;
-      left: 0;
-      font-size: 1.2em;
-      line-height: 1.5;
-    }
-    .slide-content ul.no-bullet {
-        list-style-type: none;
-        padding-left: 0;
-    }
-    .slide-content ul.no-bullet li::before {
-        content: none;
-    }
-
-
-    .slide-content ol {
-      font-size: 1.1em;
+      gap: 15px;
       padding-left: 20px;
-    }
-    .slide-content ol li {
-        margin-bottom: 10px;
-    }
-
-    /* Highlighted Terms / Callout Boxes */
-    .highlight-box {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      display: inline-block;
-      margin: 2px 0;
-      font-weight: 600;
-      font-size: 0.95em;
-      white-space: nowrap; /* Prevent line breaks within the box */
-    }
-    .highlight-box.concept {
-        background-color: var(--primary-color);
-    }
-    .highlight-box.term {
-        background-color: var(--secondary-color);
-    }
-
-
-    .callout-box {
-      background-color: rgba(var(--primary-color-rgb), 0.1);
-      border-left: 5px solid var(--primary-color);
-      padding: 15px;
-      margin: 20px 0;
-      border-radius: 8px;
-      font-style: italic;
-      color: var(--current-text);
-    }
-    body.dark-mode .callout-box {
-        background-color: rgba(var(--secondary-color-rgb), 0.2);
-        border-left-color: var(--secondary-color);
-    }
-
-    .callout-box strong {
-      color: var(--primary-color);
-    }
-    body.dark-mode .callout-box strong {
-        color: var(--secondary-color);
-    }
-
-    /* Tables */
-    .slide-content table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      background-color: var(--current-card);
-    }
-
-    .slide-content th, .slide-content td {
-      border: 1px solid var(--current-border);
-      padding: 12px 15px;
-      text-align: left;
-      font-size: 1em;
-    }
-
-    .slide-content th {
-      background-color: var(--primary-color);
-      color: white;
-      font-weight: 600;
-    }
-    body.dark-mode .slide-content th {
-        background-color: var(--secondary-color);
-    }
-
-    .slide-content tr:nth-child(even) {
-      background-color: var(--current-background);
-    }
-    .slide-content tr:hover {
-      background-color: var(--current-border);
-    }
-
-    /* Images */
-    .slide-content img {
-      max-width: 80%;
-      height: auto;
-      border-radius: 10px;
-      margin: 20px auto;
-      display: block;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    .slide-content img.small {
-        max-width: 50%;
-    }
-
-    /* Mind Map Structure */
-    .mind-map-container {
-      margin-top: 30px;
-      text-align: center;
       position: relative;
+      width: 100%;
+      overflow-x: auto;
     }
-
-    .mind-map-node {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 25px;
-        display: inline-block;
-        margin: 10px;
+    .mind-map-container > .mind-map-branch {
+        padding: 15px;
+        background-color: #eef;
+        border-radius: 10px;
+        border: 1px solid var(--primary);
         font-weight: 600;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .mind-map-node.central {
-        background-color: var(--secondary-color);
-        font-size: 1.8em;
-        padding: 15px 30px;
-    }
-    .mind-map-branch {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 20px;
-    }
-    .mind-map-subnode {
-        background-color: var(--accent-color);
-        color: white;
-        padding: 8px 15px;
-        border-radius: 20px;
-        margin: 5px;
-        font-size: 0.9em;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    /* Exam Tips */
-    .exam-tip-box {
-      padding: 15px;
-      border-radius: 8px;
-      margin: 15px 0;
-      color: white;
-      font-weight: 600;
-      font-size: 1.1em;
-      text-align: left;
-    }
-    .exam-tip-box.star {
-      background-color: var(--success-color);
-    }
-    .exam-tip-box.mistake {
-      background-color: var(--error-color);
-    }
-    .exam-tip-box.remember {
-      background-color: var(--primary-color);
-    }
-
-    /* Quiz */
-    .quiz-question {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-    .quiz-question strong {
-        display: block;
+        color: var(--primary);
         font-size: 1.2em;
         margin-bottom: 10px;
     }
-    .quiz-answer {
-        background-color: var(--current-background);
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-        font-style: italic;
-        color: var(--primary-color);
-        display: none; /* Hidden by default */
-        cursor: pointer;
-        border: 1px dashed var(--primary-color);
-        transition: background-color 0.3s ease;
+    body.dark-mode .mind-map-container > .mind-map-branch {
+        background-color: #4f4f6f;
+        border-color: var(--accent);
+        color: var(--accent);
     }
-    body.dark-mode .quiz-answer {
-        color: var(--accent-color);
-        border: 1px dashed var(--accent-color);
+
+    .mind-map-branch ul {
+      list-style: none;
+      padding-left: 20px;
+      margin-top: 10px;
+      border-left: 2px solid #ccc;
     }
-    .quiz-answer:hover {
-        background-color: var(--current-border);
+    .mind-map-branch ul li {
+      position: relative;
+      margin-bottom: 8px;
+      padding-left: 10px;
+      font-size: 1em;
+      color: var(--text-light);
     }
-    .quiz-answer.visible {
-        display: block;
+    body.dark-mode .mind-map-branch ul li {
+        color: var(--text-dark);
+    }
+
+    .mind-map-branch ul li::before {
+      content: '•';
+      color: var(--secondary);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    body.dark-mode .mind-map-branch ul li::before {
+        color: var(--primary);
+    }
+
+    .mind-map-branch ul ul {
+      border-left: 1px dashed #aaa;
+    }
+
+    /* Important points & Exam Tips */
+    .important-points li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    .important-points li::before {
+      content: '⭐';
+      position: absolute;
+      left: 0;
+      color: var(--warning);
+    }
+
+    .exam-tip-box {
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .exam-tip-box.green {
+      background-color: #e8f5e9;
+      border-left: 5px solid var(--success);
+      color: #388e3c;
+    }
+    body.dark-mode .exam-tip-box.green {
+        background-color: #3f5e3f;
+        border-left-color: var(--success);
+        color: var(--text-dark);
+    }
+
+    .exam-tip-box.red {
+      background-color: #ffebee;
+      border-left: 5px solid #d32f2f;
+      color: #c62828;
+    }
+    body.dark-mode .exam-tip-box.red {
+        background-color: #5e3f3f;
+        border-left-color: #d32f2f;
+        color: var(--text-dark);
+    }
+
+    /* Quiz Teaser */
+    .quiz-question {
+      margin-bottom: 20px;
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .quiz-question:hover {
+      background-color: #f0f0f0;
+    }
+    body.dark-mode .quiz-question:hover {
+        background-color: #4a4a4a;
+    }
+    .quiz-question .answer {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #e6ffe6;
+      border-left: 4px solid var(--success);
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    body.dark-mode .quiz-question .answer {
+        background-color: #3f5e3f;
+        border-left-color: var(--success);
+        color: var(--text-dark);
+    }
+
+    /* Progress Bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background-color: #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1001;
+    }
+    body.dark-mode .progress-bar-container {
+        background-color: #555;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--gradient-bg);
+      transition: width 0.3s ease-in-out;
     }
 
     /* Navigation Controls */
-    .nav-buttons {
-      position: absolute;
+    .nav-controls {
+      position: fixed;
       bottom: 20px;
-      right: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       gap: 10px;
       z-index: 1000;
     }
 
-    .nav-button, .mode-toggle, .fullscreen-toggle {
-      background-color: var(--primary-color);
+    .nav-button, .toggle-button, .fullscreen-button {
+      background: var(--primary);
       color: white;
       border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
+      padding: 10px 15px;
+      border-radius: 50px;
       cursor: pointer;
       font-size: 1.1em;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
-    body.dark-mode .nav-button, body.dark-mode .mode-toggle, body.dark-mode .fullscreen-toggle {
-        background-color: var(--secondary-color);
-    }
-
-
-    .nav-button:hover, .mode-toggle:hover, .fullscreen-toggle:hover {
-      background-color: var(--accent-color);
+    .nav-button:hover, .toggle-button:hover, .fullscreen-button:hover {
+      background: var(--secondary);
       transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .nav-button:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .mode-toggle, .fullscreen-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 15px;
-      font-size: 1.2em;
-    }
-
-    .mode-toggle {
-      right: 90px;
-    }
-
-    /* Progress Bar */
-    .progress-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 8px;
-      background-color: var(--accent-color);
-      width: 0%;
-      transition: width 0.3s ease;
-      z-index: 1000;
-    }
-
-    /* Slide Counter */
     .slide-counter {
-      position: absolute;
-      bottom: 25px;
-      left: 25px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
       font-size: 1.1em;
-      color: var(--current-text);
-      font-weight: 600;
-      z-index: 1000;
-      background-color: var(--current-card);
-      padding: 5px 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease, color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    body.dark-mode .slide-counter {
+        background-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* Responsive Design */
+
+    .toggle-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 12px;
+        font-size: 1.2em;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .fullscreen-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        padding: 10px 12px;
+        font-size: 1.2em;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 768px) {
       .slide {
+        width: 95%;
+        height: 95%;
         padding: 20px;
-      }
-      .slide-content {
-        padding: 20px 30px;
-        max-width: 95%;
       }
       #slide-1 h1 {
         font-size: 2.5em;
@@ -1616,83 +463,487 @@ This HTML file provides an interactive, visually appealing presentation for Grad
       #slide-1 p {
         font-size: 1.2em;
       }
-      .slide-content h2 {
-        font-size: 1.8em;
-      }
-      .slide-content h3 {
-        font-size: 1.4em;
-      }
-      .slide-content p, .slide-content ul li, .slide-content ol li, .slide-content th, .slide-content td {
-        font-size: 0.95em;
-      }
-      .nav-buttons {
-        bottom: 15px;
-        right: 15px;
-        gap: 8px;
-      }
-      .nav-button, .mode-toggle, .fullscreen-toggle {
-        padding: 8px 15px;
-        font-size: 1em;
-      }
-      .mode-toggle {
-        top: 15px;
-        right: 75px;
-      }
-      .fullscreen-toggle {
-        top: 15px;
-        right: 15px;
-      }
-      .slide-counter {
-        bottom: 20px;
-        left: 20px;
+      h1 { font-size: 2em; }
+      h2 { font-size: 1.8em; }
+      p, ul li, .callout, table th, table td, .nav-button, .slide-counter {
         font-size: 0.9em;
       }
-      .slide-content img {
-        max-width: 90%;
+      .nav-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        bottom: 10px;
       }
-      .slide-content img.small {
-        max-width: 70%;
+      .toggle-button, .fullscreen-button {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
       }
     }
   </style>
 </head>
 <body>
-  <div class="progress-bar"></div>
+  <div class="progress-bar-container">
+    <div class="progress-bar"></div>
+  </div>
+
+  <button class="toggle-button" id="darkModeToggle" aria-label="Dark/Light Mode Toggle">
+    <i class="fas fa-moon"></i>
+  </button>
+  <button class="fullscreen-button" id="fullscreenToggle" aria-label="Fullscreen Toggle">
+    <i class="fas fa-expand"></i>
+  </button>
 
   <div class="presentation-container">
-    <div id="slide-1" class="slide active">
-      <h1 class="animated-title">ජීවයේ රසායනික පදනම</h1>
-      <p class="animated-subtitle">ශ්‍රේණිය: Grade 10 | විෂය: ජීව විද්‍යාව</p>
+    <!-- Slide 1: Title Slide -->
+    <div class="slide active" id="slide-1">
+      <h1>ජීවයේ රසායනික පදනම</h1>
+      <p>ශ්‍රේණිය: Grade 10 | විෂය: ජීව විද්‍යාව</p>
     </div>
 
-    <div id="slide-2" class="slide">
-      <div class="slide-content">
-        <h2>🎯 ඉගෙනුම් අරමුණු</h2>
-        <ul class="animated-list">
-          <li><i class="fas fa-microscope" style="color: var(--accent-color);"></i> ජීවීන්ගේ දේහය සෑදී ඇති ප්‍රධාන රසායනික මූලද්‍රව්‍ය හඳුනාගැනීම.</li>
-          <li><i class="fas fa-dna" style="color: var(--accent-color);"></i> කාබොහයිඩ්‍රේට, ප්‍රෝටීන්, ලිපිඩ සහ නියුක්ලෙයික් අම්ල වැනි ජෛව අණු වල ව්‍යුහය, කාර්යයන් සහ වර්ගීකරණය පැහැදිලි කිරීම.</li>
-          <li><i class="fas fa-heartbeat" style="color: var(--accent-color);"></i> ජලය, ඛනිජ ලවණ සහ විටමින් වල වැදගත්කම සහ ඒවායේ ඌනතා ලක්ෂණ විස්තර කිරීම.</li>
-          <li><i class="fas fa-flask" style="color: var(--accent-color);"></i> ආහාරවල විවිධ සංඝටක (ජලය, කාබන්, නයිට්‍රජන්) හඳුනාගැනීමට සිදුකරන පරීක්ෂණ විශ්ලේෂණය කිරීම.</li>
-          <li><i class="fas fa-cogs" style="color: var(--accent-color);"></i> එන්සයිම වල ක්‍රියාකාරිත්වය සහ ජීවී ක්‍රියාවලීන් සඳහා ඒවායේ ඇති වැදගත්කම අවබෝධ කර ගැනීම.</li>
-        </ul>
+    <!-- Slide 2: Learning Objectives -->
+    <div class="slide" id="slide-2">
+      <h2>🎯 ඉගෙනුම් අරමුණු</h2>
+      <ul class="objective-list">
+        <li><i class="fas fa-vial"></i> ජීවීන්ගේ දේහය සෑදී ඇති ප්‍රධාන කාබනික හා අකාබනික සංයෝග හඳුනාගැනීම.</li>
+        <li><i class="fas fa-dna"></i> කාබොහයිඩ්රේට, ප්‍රෝටීන්, ලිපිඩ සහ නියුක්ලෙයික් අම්ලවල ව්‍යුහය හා වැදගත්කම පැහැදිලි කිරීම.</li>
+        <li><i class="fas fa-atom"></i> එන්සයිමවල ක්‍රියාකාරිත්වය සහ වැදගත්කම අවබෝධ කරගැනීම.</li>
+        <li><i class="fas fa-tint"></i> ජලය, ඛනිජ ලවණ සහ විටමින්වල ජීවී දේහ සඳහා ඇති වැදගත්කම හා ඌනතා ලක්ෂණ විස්තර කිරීම.</li>
+        <li><i class="fas fa-flask"></i> ජෛව අණු හඳුනාගැනීම සඳහා සිදුකරන පරීක්ෂණ පිළිබඳ දැනුම ලබාගැනීම.</li>
+      </ul>
+    </div>
+
+    <!-- Slide 3: Key Concept 1 & 2 -->
+    <div class="slide" id="slide-3">
+      <h2>💡 ප්‍රධාන සංකල්ප</h2>
+      <h3>Concept 1: ජෛව අණු (Biomolecules)</h3>
+      <p><span class="highlight">ජීවීන්ගේ දේහය සෑදීම සඳහා අත්‍යවශ්‍ය වන ප්‍රධාන කාබනික සංයෝග වර්ග හතරකි.</span> මේවා නම් කාබොහයිඩ්රේට, ප්‍රෝටීන්, ලිපිඩ සහ නියුක්ලෙයික් අම්ල වේ.</p>
+      <div class="callout">
+        <strong>නිදර්ශනය:</strong> අප දිනපතා ආහාරයට ගන්නා බත්, මස්, තෙල් වැනි දෑ වල මෙම ජෛව අණු අඩංගු වන අතර, DNA යනු අපගේ ප්‍රවේණික තොරතුරු දරන ජෛව අණුවකි.
+      </div>
+      <div class="callout">
+        <strong>මතක රැකීමට:</strong> "කා.ප්‍ර.ලි.නි." - <span class="highlight">කා</span>බොහයිඩ්රේට, <span class="highlight">ප්‍රෝ</span>ටීන්, <span class="highlight">ලි</span>පිඩ, <span class="highlight">නි</span>යියුක්ලෙයික් අම්ල. (ජීවය දරන ප්‍රධාන අණු හතර)
+      </div>
+
+      <h3>Concept 2: කාබොහයිඩ්රේට (Carbohydrates)</h3>
+      <p><span class="highlight">කාබන් (C), හයිඩ්‍රජන් (H) සහ ඔක්සිජන් (O) යන මූලද්‍රව්‍යවලින් සෑදුණු සංයෝග වේ.</span> මෙහිදී හයිඩ්‍රජන් හා ඔක්සිජන් ජලයේ මෙන් 2:1 අනුපාතයෙන් පවතී. මේවා ප්‍රධාන වශයෙන් ශක්ති ප්‍රභව ලෙස ක්‍රියා කරයි. මොනොසැකරයිඩ, ඩයිසැකරයිඩ, පොලිසැකරයිඩ ලෙස වර්ග කෙරේ.</p>
+      <div class="callout">
+        <strong>පොදු අණුක සූත්‍රය:</strong> C<sub>x</sub>(H₂O)<sub>y</sub>
+      </div>
+      <div class="callout">
+        <strong>නිදර්ශනය:</strong> ග්ලූකෝස් (සීනි), පිෂ්ටය (බත්, අල), සෙලියුලෝස් (ශාක සෛල බිත්ති)
       </div>
     </div>
 
-    <div id="slide-3" class="slide">
-        <div class="slide-content">
-            <h2>💡 ප්‍රධාන සංකල්ප: 1. ජීවයේ මූලද්‍රව්‍ය හා සංයෝග</h2>
-            <h3>ජීවීන්ගේ දේහය</h3>
-            <p>ජීවීන්ගේ දේහය විවිධ රසායනික සංයෝග රැසකින් සමන්විත වන අතර, ඒවා විවිධ මූලද්‍රව්‍ය සංයෝජනය වීමෙන් සෑදී ඇත. ස්වාභාවිකව පවතින මූලද්‍රව්‍ය 92 අතුරින් 25ක් පමණ ජීවී දේහ තුළ අඩංගු වේ.</p>
-            <h3>ප්‍රධාන මූලද්‍රව්‍ය</h3>
-            <p>ජීවී දේහ නිර්මාණය වීම සඳහා වැඩි වශයෙන්ම දායක වන මූලද්‍රව්‍ය:
-                <ul>
-                    <li><span class="highlight-box">කාබන් (C)</span></li>
-                    <li><span class="highlight-box">හයිඩ්‍රජන් (H)</span></li>
-                    <li><span class="highlight-box">ඔක්සිජන් (O)</span></li>
-                    <li><span class="highlight-box">නයිට්‍රජන් (N)</span></li>
-                </ul>
-            </p>
-            <p>මීට අමතරව <span class="highlight-box">සල්ෆර් (S)</span>, <span class="highlight-box">පොස්ෆරස් (P)</span>, <span class="highlight-box">සෝඩියම් (Na)</span>, <span class="highlight-box">පොටෑසියම් (K)</span>, <span class="highlight-box">කැල්සියම් (Ca)</span>, <span class="highlight-box">මැග්නීසියම් (Mg)</span>, <span class="highlight-box">අයන් (Fe)</span> සහ <span class="highlight-box">ක්ලෝරීන් (Cl)</span> වැනි මූලද්‍රව්‍ය අත්‍යවශ්‍ය වේ.</p>
+    <!-- Slide 4: Key Concept 3 -->
+    <div class="slide" id="slide-4">
+      <h2>💡 ප්‍රධාන සංකල්ප</h2>
+      <h3>Concept 3: ප්‍රෝටීන් (Proteins)</h3>
+      <p><span class="highlight">ඇමයිනො අම්ල නැමති කුඩා ඒකක බහු අවයවීකරණය වීමෙන් සෑදෙන සංකීර්ණ අණු වේ.</span> කාබන්, හයිඩ්‍රජන්, ඔක්සිජන්, නයිට්‍රජන් අඩංගු වන අතර ඇතැම් විට සල්ෆර් ද අඩංගු වේ. ශරීර ව්‍යුහය ගොඩනැගීමට, එන්සයිම හා හෝමෝන ලෙස ක්‍රියා කිරීමට මේවා වැදගත් වේ.</p>
+      <div class="callout">
+        <strong>ඇමයිනො අම්ලයක ව්‍යුහය (සාමාන්‍ය):</strong>
+        <pre>
+       R
+       |
+  NH₂--C--COOH
+       |
+       H
+        </pre>
+        (R මගින් විවිධ කාණ්ඩ නිරූපණය කරයි. 20ක් පමණ ඇත.)
+      </div>
+      <div class="callout">
+        <strong>නිදර්ශනය:</strong> මස්, මාළු, බිත්තර, කෙස්, නියපොතු, එන්සයිම (ආහාර දිරවීමට උපකාරී වේ).
+      </div>
+      <div class="callout">
+        <strong>මතක රැකීමට:</strong> "ප්‍රෝ" - <span class="highlight">ප්‍රෝ</span>ටීන්. "ප්‍රෝ" යන වදනෙන් "ප්‍රධාන" යන අදහස ගත හැක. ශරීරයේ බොහෝ <span class="highlight">ප්‍රධාන</span> කාර්යයන්ට අවශ්‍යයි.
+      </div>
+    </div>
 
-            <h3>මානව දේහයේ අඩංගු ප්‍රධාන මූලද්‍රව්‍ය (ස්කන්ධය අනුව)</h3>
-            <img class="small" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAAIsCAYAAAAB8B1gAAAgAElEQVR4Xu3deZgc33kH8O/vE69UK6q+fM7nPMmMybKZ2dmZmZmZzMxkbGRmZGBmYmLGZGBmZmZmZmZmZmZmZnZmZmZ2Znvt9f7v+/1/d7/d+313uvt7n/f7/u66ioCIgIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiJIeHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSIIIIIHSII
+    <!-- Slide 5: Key Concept 4 & 5 -->
+    <div class="slide" id="slide-5">
+      <h2>💡 ප්‍රධාන සංකල්ප</h2>
+      <h3>Concept 4: ලිපිඩ (Lipids)</h3>
+      <p><span class="highlight">මේද අම්ල සහ ග්ලිසරෝල් වලින් සෑදෙන, ජලයේ දිය නොවන, තෙල් සහ මේද සංයෝග වේ.</span> මේවා ශක්ති සංචිත ලෙසත්, සෛල පටලවල සංඝටක ලෙසත්, දේහ උෂ්ණත්වය පාලනයටත් වැදගත් වේ.</p>
+      <div class="callout">
+        <strong>නිදර්ශනය:</strong> පොල් තෙල්, රටකජු තෙල්, බටර්, ශරීරයේ මේද ස්ථරය (තාප පරිවාරකයක් ලෙස).
+      </div>
+      <div class="callout">
+        <strong>මතක රැකීමට:</strong> "ලිපිඩ" - "ලිස්සන සුළු" තෙල් වැනි දේ, ජලයේ දියවෙන්නේ නෑ.
+      </div>
+
+      <h3>Concept 5: නියුක්ලෙයික් අම්ල (Nucleic Acids)</h3>
+      <p><span class="highlight">නියුක්ලියෝටයිඩ නැමති කුඩා ඒකක වලින් සෑදුණු සංකීර්ණ අණු වේ.</span> ප්‍රධාන වශයෙන් DNA (Deoxyribonucleic Acid) සහ RNA (Ribonucleic Acid) ලෙස වර්ග දෙකකි. DNA ජීවීන්ගේ ප්‍රවේණික තොරතුරු ගබඩා කරන අතර, RNA ප්‍රෝටීන් සංස්ලේෂණයට දායක වේ.</p>
+      <div class="callout">
+        <strong>නියුක්ලියෝටයිඩ සංඝටක:</strong> නයිට්‍රජනීය භෂ්මයක්, පෙන්ටෝස් සීනි කාණ්ඩයක්, පොස්ෆේට් කාණ්ඩයක්.
+      </div>
+      <div class="callout">
+        <strong>නිදර්ශනය:</strong> ඔබේ සෛලවල ජානමය තොරතුරු අඩංගු DNA, ප්‍රෝටීන් සෑදීමේදී ක්‍රියාකරන RNA.
+      </div>
+      <div class="callout">
+        <strong>මතක රැකීමට:</strong> "DNA/RNA" - ජීවිතයේ "දත්ත" (data) ගබඩාව සහ මෙහෙයුම් පද්ධතිය.
+      </div>
+    </div>
+
+    <!-- Slide 6: Key Concept 6 -->
+    <div class="slide" id="slide-6">
+      <h2>💡 ප්‍රධාන සංකල්ප</h2>
+      <h3>Concept 6: ජලය හා ඛනිජ ලවණ (Water and Mineral Salts)</h3>
+      <p><span class="highlight">මේවා අකාබනික සංයෝග වන අතර ජීවී දේහයේ පැවැත්මට අත්‍යවශ්‍ය වේ.</span></p>
+      <h4>ජලය (Water)</h4>
+      <p>හොඳ ද්‍රාවකයක් ලෙසත්, උෂ්ණත්වය පාලනයටත්, පරිවහන මාධ්‍යයක් ලෙසත් වැදගත් වේ.</p>
+      <ul>
+        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> ජීවී සෛල තුළ ජෛව රසායනික ප්‍රතික්‍රියා සඳහා මාධ්‍යය සපයයි.</li>
+        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> දේහ උෂ්ණත්වය පාලනයට උපකාරී වේ (විශිෂ්ට තාප ධාරිතාව නිසා).</li>
+        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> පෝෂක ද්‍රව්‍ය පරිවහනය සඳහා මාධ්‍යයක් ලෙස ක්‍රියා කරයි.</li>
+      </ul>
+      <h4>ඛනිජ ලවණ (Mineral Salts)</h4>
+      <p>කැල්සියම්, යකඩ වැනි ඛනිජ ලවණ ශරීරයේ ව්‍යුහය සහ විවිධ ක්‍රියාකාරකම් සඳහා අවශ්‍ය වේ.</p>
+      <ul>
+        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> අස්ථි හා දත් වර්ධනයට (කැල්සියම්, පොස්ෆරස්).</li>
+        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> රුධිරයේ හිමොග්ලොබින් සෑදීමට (යකඩ).</li>
+        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> තයිරොක්සින් හෝමෝනය නිපදවීමට (අයඩීන්).</li>
+      </ul>
+      <div class="callout">
+        <strong>නිදර්ශනය:</strong> ඔබ පානය කරන ජලය, අස්ථි වල ඇති කැල්සියම්, රුධිරයේ ඇති යකඩ (යකඩ ඌනතාව).
+      </div>
+      <div class="callout">
+        <strong>මතක රැකීමට:</strong> "ජල-ලුණු" - ජීවිතයට අත්‍යවශ්‍ය "මුලික" අකාබනික සංයෝග.
+      </div>
+    </div>
+
+    <!-- Slide 7: Key Terms & Definitions (Glossary) -->
+    <div class="slide" id="slide-7">
+      <h2>🔑 Key Terms & Definitions (Glossary)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>වදන (Term)</th>
+            <th>අර්ථය (Definition)</th>
+            <th>සිංහල නම</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Biomolecules</td><td>ජීවීන්ගේ දේහය සෑදී ඇති ප්‍රධාන කාබනික සංයෝග.</td><td>ජෛව අණු</td></tr>
+          <tr><td>Carbohydrates</td><td>ශක්ති ප්‍රභව ලෙස ක්‍රියා කරන කාබන්, හයිඩ්‍රජන්, ඔක්සිජන් අඩංගු සංයෝග.</td><td>කාබොහයිඩ්රේට</td></tr>
+          <tr><td>Monosaccharides</td><td>කාබොහයිඩ්රේටවල මූලික තැනුම් ඒකක (සරල සීනි).</td><td>මොනොසැකරයිඩ</td></tr>
+          <tr><td>Disaccharides</td><td>මොනොසැකරයිඩ අණු දෙකක් එකතු වී සෑදෙන කාබොහයිඩ්රේට.</td><td>ඩයිසැකරයිඩ</td></tr>
+          <tr><td>Polysaccharides</td><td>මොනොසැකරයිඩ අණු රාශියක් එකතු වී සෑදෙන සංකීර්ණ කාබොහයිඩ්රේට.</td><td>පොලිසැකරයිඩ</td></tr>
+          <tr><td>Proteins</td><td>ඇමයිනො අම්ල වලින් සෑදුණු, ශරීරයේ ව්‍යුහය හා ක්‍රියාකාරකම් සඳහා වැදගත් අණු.</td><td>ප්‍රෝටීන්</td></tr>
+          <tr><td>Amino Acids</td><td>ප්‍රෝටීන වල මූලික තැනුම් ඒකක.</td><td>ඇමයිනො අම්ල</td></tr>
+          <tr><td>Enzymes</td><td>ජෛව රසායනික ප්‍රතික්‍රියා වේගවත් කරන විශේෂිත ප්‍රෝටීන (උත්ප්‍රේරක).</td><td>එන්සයිම</td></tr>
+          <tr><td>Lipids</td><td>ජලයේ දිය නොවන, මේද අම්ල හා ග්ලිසරෝල් වලින් සෑදුණු මේද හා තෙල් වර්ග.</td><td>ලිපිඩ</td></tr>
+          <tr><td>Nucleic Acids</td><td>ජීවීන්ගේ ප්‍රවේණික තොරතුරු ගබඩා කරන සහ ප්‍රෝටීන් සංස්ලේෂණයට දායක වන අණු.</td><td>නියුක්ලෙයික් අම්ල</td></tr>
+          <tr><td>DNA</td><td>ප්‍රවේණික තොරතුරු ගබඩා කරන නියුක්ලෙයික් අම්ල වර්ගය.</td><td>DNA (ඩිඔක්සි රයිබො නියුක්ලෙයික් අම්ල)</td></tr>
+          <tr><td>RNA</td><td>ප්‍රෝටීන් සංස්ලේෂණයට දායක වන නියුක්ලෙයික් අම්ල වර්ගය.</td><td>RNA (රයිබො නියුක්ලෙයික් අම්ල)</td></tr>
+          <tr><td>Mineral Salts</td><td>ජීවී දේහයේ ව්‍යුහය හා ක්‍රියාකාරකම් සඳහා අවශ්‍ය අකාබනික සංයෝග.</td><td>ඛනිජ ලවණ</td></tr>
+          <tr><td>Vitamins</td><td>ශරීරයේ නීරෝගී බව පවත්වා ගැනීමට සහ ජෛව රසායනික ප්‍රතික්‍රියා සඳහා අවශ්‍ය කාබනික සංයෝග.</td><td>විටමින්</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Slide 8: Comparison Table (Carbohydrates) -->
+    <div class="slide" id="slide-8">
+      <h2>📊 සංසන්දනාත්මක වගුව (කාබොහයිඩ්රේට වර්ග)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ලක්ෂණය</th>
+            <th>මොනොසැකරයිඩ (Monosaccharides)</th>
+            <th>ඩයිසැකරයිඩ (Disaccharides)</th>
+            <th>පොලිසැකරයිඩ (Polysaccharides)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>**තැනුම් ඒකක**</td><td>තනි අණුවකි</td><td>මොනොසැකරයිඩ අණු 2ක්</td><td>මොනොසැකරයිඩ අණු රාශියක්</td></tr>
+          <tr><td>**ජලයේ ද්‍රාව්‍යතාව**</td><td>ජලයේ හොඳින් ද්‍රාව්‍යයි</td><td>ජලයේ ද්‍රාව්‍යයි</td><td>ඇල් ජලයේ අද්‍රාව්‍යයි</td></tr>
+          <tr><td>**රසය**</td><td>පැණි රසයි</td><td>පැණි රසයි</td><td>පැණි රසක් නැත</td></tr>
+          <tr><td>**උදාහරණ**</td><td>ග්ලූකෝස්, පෘක්ටෝස්, ගැලැක්ටෝස්</td><td>සුක්‍රෝස්, මෝල්ටෝස්, ලැක්ටෝස්</td><td>පිෂ්ටය, සෙලියුලෝස්, ග්ලයිකොජන්</td></tr>
+          <tr><td>**ස්වරූපය**</td><td>ස්ඵටික ස්වරූපී</td><td>ස්ඵටික ස්වරූපී</td><td>ස්ඵටිකරූපී නොවේ</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Slide 9: Mind Map Structure -->
+    <div class="slide" id="slide-9">
+      <h2>🧠 Mind Map: ජීවයේ රසායනික පදනම</h2>
+      <div class="mind-map-container">
+        <div class="mind-map-branch">ජීවයේ රසායනික පදනම
+          <ul>
+            <li>**ජීවීන්ගේ සංයුතිය**
+              <ul>
+                <li>ප්‍රධාන මූලද්‍රව්‍ය: කාබන් (C), හයිඩ්‍රජන් (H), ඔක්සිජන් (O), නයිට්‍රජන් (N)</li>
+                <li>වර්ග: කාබනික සංයෝග, අකාබනික සංයෝග</li>
+              </ul>
+            </li>
+            <li>**කාබනික සංයෝග (ජෛව අණු)**
+              <ul>
+                <li>**කාබොහයිඩ්රේට**:
+                  <ul>
+                    <li>වර්ග: මොනොසැකරයිඩ (ග්ලූකෝස්), ඩයිසැකරයිඩ (සුක්‍රෝස්), පොලිසැකරයිඩ (පිෂ්ටය)</li>
+                    <li>වැදගත්කම: ශක්ති ප්‍රභව, ව්‍යුහ සංඝටක</li>
+                  </ul>
+                </li>
+                <li>**ප්‍රෝටීන්**:
+                  <ul>
+                    <li>තැනුම් ඒකක: ඇමයිනො අම්ල</li>
+                    <li>වැදගත්කම: ව්‍යුහ සංඝටක, එන්සයිම, හෝමෝන, ප්‍රතිදේහ</li>
+                    <li>එන්සයිම: ජෛව උත්ප්‍රේරක</li>
+                  </ul>
+                </li>
+                <li>**ලිපිඩ**:
+                  <ul>
+                    <li>තැනුම් ඒකක: මේද අම්ල, ග්ලිසරෝල්</li>
+                    <li>වැදගත්කම: ශක්ති සංචිත, සෛල පටල, තාප පරිවාරක</li>
+                  </ul>
+                </li>
+                <li>**නියුක්ලෙයික් අම්ල**:
+                  <ul>
+                    <li>වර්ග: DNA, RNA</li>
+                    <li>තැනුම් ඒකක: නියුක්ලියෝටයිඩ</li>
+                    <li>වැදගත්කම: ප්‍රවේණික තොරතුරු ගබඩා කිරීම හා සම්ප්‍රේෂණය, ප්‍රෝටීන් සංස්ලේෂණය</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>**අකාබනික සංයෝග**
+              <ul>
+                <li>**ජලය**:
+                  <ul>
+                    <li>ගුණ: හොඳ ද්‍රාවකය, විශිෂ්ට තාප ධාරිතාව, සංශක්ති/ආශක්ති බල</li>
+                    <li>වැදගත්කම: පරිවහනය, උෂ්ණත්වය පාලනය, ජීව පරිසරය</li>
+                  </ul>
+                </li>
+                <li>**ඛනිජ ලවණ**:
+                  <ul>
+                    <li>වර්ග: අධිමාත්‍ර මූලද්‍රව්‍ය (කැල්සියම්, පොටෑසියම්), අංශුමාත්‍ර මූලද්‍රව්‍ය (යකඩ, අයඩීන්)</li>
+                    <li>වැදගත්කම: ව්‍යුහ සංඝටක, ක්‍රියාකාරීත්ව පාලනය</li>
+                    <li>ඌනතා ලක්ෂණ</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>**විටමින්**
+              <ul>
+                <li>වර්ග: ජලයේ ද්‍රාව්‍ය (B, C), මේදයේ ද්‍රාව්‍ය (A, D, E, K)</li>
+                <li>වැදගත්කම: නීරෝගී බව, රසායනික ප්‍රතික්‍රක්‍රියා සඳහා</li>
+                <li>ඌනතා ලක්ෂණ</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Important Points to Remember -->
+    <div class="slide" id="slide-10">
+      <h2>⚠️ වැදගත් කරුණු (Important Points to Remember)</h2>
+      <ul class="important-points">
+        <li>ජීවීන්ගේ දේහයේ ප්‍රධාන ශක්ති ප්‍රභවය කාබොහයිඩ්රේට වන අතර, ප්‍රෝටීන් ශරීරයේ ව්‍යුහය ගොඩනැගීමට සහ ක්‍රියාකාරීත්වයන්ට අත්‍යවශ්‍ය වේ.</li>
+        <li>එන්සයිම යනු ජීවීන් තුළ සිදුවන ජෛව රසායනික ප්‍රතික්‍රියා වේගවත් කරන ප්‍රෝටීන් වර්ගයේ උත්ප්‍රේරක වේ.</li>
+        <li>ජලය ජීවී දේහයේ බහුලතම අකාබනික සංයෝගය වන අතර, එහි ඇති සුවිශේෂී ගුණාංග ජීවයේ පැවැත්මට අතිශයින් වැදගත් වේ.</li>
+        <li>ඛනිජ ලවණ හා විටමින් සුළු ප්‍රමාණවලින් අවශ්‍ය වුවත්, ඒවායේ ඌනතා දරුණු සෞඛ්‍ය ගැටලු ඇති කළ හැක.</li>
+      </ul>
+    </div>
+
+    <!-- Slide 11: Connections & Exam Tips -->
+    <div class="slide" id="slide-11">
+      <h2>🔗 සම්බන්ධිත පාඩම් (Connections)</h2>
+      <p>මෙම පාඩම Grade 10 විෂය නිර්දේශයේ පහත සඳහන් අනෙකුත් මාතෘකා සමඟ සමීපව සම්බන්ධ වේ:</p>
+      <ul>
+        <li><i class="fas fa-leaf" style="color: var(--info);"></i> **ප්‍රභාසංශ්ලේෂණය (Photosynthesis):** කාබොහයිඩ්රේට නිෂ්පාදනය වීම.</li>
+        <li><i class="fas fa-lungs" style="color: var(--info);"></i> **ශ්වසනය (Respiration):** කාබොහයිඩ්රේට බිඳ දමා ශක්තිය නිදහස් වීම.</li>
+        <li><i class="fas fa-microscope" style="color: var(--info);"></i> **සෛල ව්‍යුහය (Cell Structure):** සෛල පටලයේ ලිපිඩ හා ප්‍රෝටීන්, සෛල බිත්තියේ සෙලියුලෝස්.</li>
+        <li><i class="fas fa-hereditary" style="color: var(--info);"></i> **ජාන විද්‍යාව (Genetics):** DNA සහ RNA හි කාර්යභාරය.</li>
+      </ul>
+
+      <h2>💡 විභාග ඉඟි (Exam Tips)</h2>
+      <div class="exam-tip-box green">
+        <i class="fas fa-check-circle"></i> **අවධානය යොමු කරන්න:** ජෛව අණු වල වැදගත්කම, තැනුම් ඒකක සහ වර්ගීකරණය පිළිබඳ ප්‍රශ්න නිතර අසනු ලැබේ.
+      </div>
+      <div class="exam-tip-box red">
+        <i class="fas fa-exclamation-triangle"></i> **පොදු වැරදි:** ජෛව අණු, ඛනිජ ලවණ හෝ විටමින් ඌනතා නිසා ඇතිවන රෝග ලක්ෂණ නිවැරදිව හඳුනාගැනීම වැදගත්. නම් සහ ලක්ෂණ පටලවා නොගන්න.
+      </div>
+      <div class="exam-tip-box green">
+        <i class="fas fa-check-circle"></i> **මතක තබා ගන්න:** ජලයෙහි ඇති සුවිශේෂී ගුණාංග සහ ජීවයට ඇති දායකත්වය හොඳින් තේරුම් ගන්න.
+      </div>
+      <div class="exam-tip-box red">
+        <i class="fas fa-exclamation-triangle"></i> **පරීක්ෂණ:** ද්‍රව්‍ය හඳුනාගැනීමේ පරීක්ෂණ (පිෂ්ටය, ප්‍රෝටීන්, ලිපිඩ) සහ ඒවායේ නිරීක්ෂණ (වර්ණ වෙනස්වීම්) නිවැරදිව මතක තබා ගන්න.
+      </div>
+    </div>
+
+    <!-- Slide 12: Quick Quiz Teaser -->
+    <div class="slide" id="slide-12">
+      <h2>❓ ඉක්මන් ප්‍රශ්නාවලිය (Quick Quiz Teaser)</h2>
+      <p>ඔබේ දැනුම පරීක්ෂා කර බලන්න!</p>
+
+      <div class="quiz-question" onclick="toggleAnswer(this)">
+        <p>1. පිෂ්ටය වඩාත් බහුලව අඩංගු ආහාරය කුමක්ද?</p>
+        <ul>
+          <li>a) රටකජු</li>
+          <li>b) අර්තාපල්</li>
+          <li>c) පිපිඤ්ඤා</li>
+          <li>d) ගොටුකොළ</li>
+        </ul>
+        <div class="answer">
+          <p>නිවැරදි පිළිතුර: b) අර්තාපල්</p>
+        </div>
+      </div>
+
+      <div class="quiz-question" onclick="toggleAnswer(this)">
+        <p>2. මොනොසැකරයිඩ කාණ්ඩයට අයත් සංයෝගය කුමක්ද?</p>
+        <ul>
+          <li>a) සුක්‍රෝස්</li>
+          <li>b) මෝල්ටෝස්</li>
+          <li>c) ලැක්ටෝස්</li>
+          <li>d) පෘක්ටෝස්</li>
+        </ul>
+        <div class="answer">
+          <p>නිවැරදි පිළිතුර: d) පෘක්ටෝස්</p>
+        </div>
+      </div>
+
+      <div class="quiz-question" onclick="toggleAnswer(this)">
+        <p>3. ජලයෙහි ඇති සුවිශේෂී ගුණාංග දෙකක් සඳහන් කරන්න.</p>
+        <div class="answer">
+          <p>පිළිතුර:
+            <ol>
+              <li>හොඳ ද්‍රාවකයකි.</li>
+              <li>විශිෂ්ට තාප ධාරිතාවය.</li>
+              <li>අධික සංශක්ති හා ආශක්ති බල.</li>
+              <li>අයිස් ජලයට වඩා ඝනත්වයෙන් අඩුය.</li>
+            </ol>
+            (ඕනෑම දෙකක් පිළිගත හැක)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-controls">
+    <button class="nav-button" id="prevBtn"><i class="fas fa-chevron-left"></i> පෙර</button>
+    <div class="slide-counter" id="slideCounter">1 / 12</div>
+    <button class="nav-button" id="nextBtn">ඊළඟ <i class="fas fa-chevron-right"></i></button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    const slideCounter = document.getElementById('slideCounter');
+    const progressBar = document.querySelector('.progress-bar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const fullscreenToggle = document.getElementById('fullscreenToggle');
+
+    function updateProgressBar() {
+      const progress = ((currentSlide + 1) / totalSlides) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    function updateSlideCounter() {
+      slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+    }
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+      currentSlide = index;
+      updateSlideCounter();
+      updateProgressBar();
+      updateObjectiveAnimations(); // Re-trigger animations for objectives slide
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    // Button navigation
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Dark/Light Mode Toggle
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const icon = darkModeToggle.querySelector('i');
+      if (document.body.classList.contains('dark-mode')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    });
+
+    // Fullscreen Toggle
+    fullscreenToggle.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
+        fullscreenToggle.querySelector('i').classList.remove('fa-expand');
+        fullscreenToggle.querySelector('i').classList.add('fa-compress');
+      } else {
+        document.exitFullscreen();
+        fullscreenToggle.querySelector('i').classList.remove('fa-compress');
+        fullscreenToggle.querySelector('i').classList.add('fa-expand');
+      }
+    });
+
+    // Objective list animations
+    function updateObjectiveAnimations() {
+      if (currentSlide === 1) { // Check if it's the learning objectives slide
+        const objectiveItems = document.querySelectorAll('#slide-2 .objective-list li');
+        objectiveItems.forEach((item, index) => {
+          item.style.animationDelay = `${index * 0.3}s`;
+          item.style.opacity = 0; // Reset opacity for re-trigger
+          item.style.transform = 'translateY(20px)';
+        });
+        // A slight delay to ensure CSS animation is re-applied
+        setTimeout(() => {
+          objectiveItems.forEach((item) => {
+            item.style.opacity = 1;
+            item.style.transform = 'translateY(0)';
+          });
+        }, 50); 
+      }
+    }
+
+    // Quiz answer toggle
+    function toggleAnswer(questionElement) {
+      const answer = questionElement.querySelector('.answer');
+      if (answer) {
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+
+    // Initial load
+    showSlide(0);
+  </script>
+</body>
+</html>
+```
